@@ -1,0 +1,26 @@
+html,
+body {
+  margin: 0px;
+  height: 100%;
+  width: 100vw;
+}
+
+.main-conatainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: bisque;
+}
+
+.input-group-text {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-control-lg {
+  width: 100%;
+}
