@@ -1,0 +1,33 @@
+html,
+body {
+  margin: 0px;
+  height: 100%;
+  width: 100vw;
+}
+
+.header-container {
+  background-color: rgb(245, 207, 207);
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.main-conatainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: bisque;
+}
+
+.input-group-text {
+  width:150px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-control-lg {
+  width: 100%;
+}

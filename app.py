@@ -1,4 +1,5 @@
-from flask import Flask, render_template, jsonify, request
+
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 import requests
 app = Flask(__name__)
 
@@ -6,14 +7,32 @@ from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 db = client.dbsparta
 
+import jwt, datetime, hashlib
 
-app = Flask(__name__)
+SECRET_KEY = 'okay'
+
 
 #멀티 페이지 url
 @app.route('/')
-def main():
+def home():
+  
     exhibition = list(db.exhibition.find({}, {'_id':False}))
     return render_template("index.html", exhibition=exhibition)
+  
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"user_id": payload['id']})
+        return render_template('index.html', user_id=user_info["user_id"])
+    except jwt.ExpiredSignatureError:
+        return render_template("login.html", msg="다시 로그인 해주세요!")
+        # return redirect(url_for("login", msg="다시 로그인"))
+
+        # 예제에서는 위 방식으로 되는데 나는 안된다. 왜지????????
+    except jwt.exceptions.DecodeError:
+        return render_template("login.html", msg="로그인 정보 없음!")
+        # return redirect(url_for("login", msg="로그인 정보 없음"))
+
 
 @app.route('/exhibition/<keyword>')
 def detail(keyword):
@@ -27,6 +46,73 @@ def login():
 @app.route('/register')
 def register():
     return render_template("register.html")
+
+# 회원가입 API
+@app.route('/api/register', methods=['POST'])
+def api_register():
+    id_receive = request.form['user_id']
+    pw_receive = request.form['user_pw']
+    gender_receive = request.form['user_gender']
+    pwchk_receive = request.form['pw_check']
+
+    if pwchk_receive == 'yes' and id_receive != '':
+        pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
+
+        db.user.insert_one({'user_id': id_receive, 'user_pw': pw_hash, 'user_gender': gender_receive})
+
+        return jsonify({'result': 'success'})
+    elif id_receive == '':
+        return jsonify({'msg': '아이디를 입력해주세요!'})
+    elif pwchk_receive != 'yes':
+        return jsonify({'msg':'비밀번호를 확인해주세요!'})
+    elif gender_receive == 'no':
+        return jsonify({'msg': '성별을 선택해주세요!'})
+
+
+# 로그인 API
+@app.route('/api/login', methods=['POST'])
+def api_login():
+    id_receive = request.form['user_id']
+    pw_receive = request.form['user_pw']
+
+    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
+
+    result = db.user.find_one({'user_id': id_receive, 'user_pw': pw_hash})
+    result_id = db.user.find_one({'user_id': id_receive})
+
+    if result is not None:
+        payload = {
+            'id': id_receive,
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=3)
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+
+        return jsonify({'result': 'success', 'token': token})
+    elif result_id is None:
+        return jsonify({'result': 'fail', 'msg': '아이디가 존재하지 않습니다!'})
+    else:
+        return jsonify({'result': 'fail', 'msg': '비밀번호를 확인해주세요!'})
+
+# 유저 정보 확인 API
+@app.route('/api/user', methods=['GET'])
+def api_valid():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        userinfo = db.user.find_one({'user_id': payload['id']}, {'_id': 0})
+
+        return jsonify({'result': 'success', 'id': userinfo['user_id'], 'gender': userinfo['user_gender']})
+    except jwt.ExpiredSignatureError:
+        return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
+    except jwt.exceptions.DecodeError:
+        return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+
+# 아이디 중복 확인
+@app.route('/sign_up/check_dup', methods=['POST'])
+def check_dup():
+    username_receive = request.form['username_give']
+    exists = bool(db.users.find_one({"user_id": username_receive}))
+    return jsonify({'result': 'success', 'exists': exists})
 
 
 if __name__ == '__main__':
