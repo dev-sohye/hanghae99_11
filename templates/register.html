@@ -71,24 +71,40 @@
           <input
             id="userpw"
             type="password"
-            class="form-control form-control-lg"
+            class="form-control form-control-lg pw"
             aria-label="Default"
             aria-describedby="inputGroup-sizing-default"
           />
         </div>
-          <div class="input-group mb-3 d-flex">
+        <div class="input-group mb-3 d-flex">
           <div class="input-group-prepend">
             <span class="input-group-text" id="">Password Check</span>
           </div>
           <input
             id="pwchk"
             type="password"
-            class="form-control form-control-lg"
+            class="form-control form-control-lg pw"
             aria-label="Default"
             aria-describedby="inputGroup-sizing-default"
           />
         </div>
-          <div><span id="pwchk"></span></div>
+        <span
+          id="alert-success"
+          class="pwchk-str"
+          style="display: none; margin-bottom: 10px; margin-top: 5px"
+          >비밀번호가 일치합니다.</span
+        >
+        <span
+          id="alert-danger"
+          class="pwchk-str"
+          style="
+            display: none;
+            color: red;
+            margin-bottom: 10px;
+            margin-top: 5px;
+          "
+          >비밀번호가 일치하지 않습니다.</span
+        >
         <form>
           <input
             type="radio"
