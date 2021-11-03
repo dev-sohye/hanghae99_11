@@ -1,15 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <!-- Webpage Title -->
+    <title>회원가입 페이지</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Bulma CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <!-- Cookie -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <!--------------CSS---------------->
+    <link rel="stylesheet" href="../static/login.css" />
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
   </head>
+
   <body>
     <!---------페이지 전환 링크------------>
-    <a href="/exhibition"> 상세 페이지로 이동</a>
-    <a href="/login">로그인 페이지로 이동</a>
-    <a href="/">메인 페이지로 이동</a>
+    <div class="header-container">
+      <a href="/exhibition"> 상세 페이지로 이동</a>
+      <a href="/login">로그인 페이지로 이동</a>
+      <a href="/">메인 페이지로 이동</a>
+    </div>
+    <!-----------회원가입------------->
+    <div class="main-conatainer d-flex">
+      <div class="login-container">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >ID</span
+            >
+          </div>
+          <input
+            id="userid"
+            type="text"
+            class="form-control form-control-lg"
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+          />
+        </div>
+        <div class="input-group mb-3 d-flex">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="">Password</span>
+          </div>
+          <input
+            id="userpw"
+            type="password"
+            class="form-control form-control-lg"
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+          />
+        </div>
+        <form>
+          <input
+            type="radio"
+            id="male"
+            name="gender"
+            value="male"
+            class="usergender"
+          />
+          <label for="male">Male</label><br />
+          <input
+            type="radio"
+            id="female"
+            name="gender"
+            value="female"
+            class="usergender"
+          />
+          <label for="female">Female</label><br />
+          <input
+            type="radio"
+            id="other"
+            name="gender"
+            value="other"
+            class="usergender"
+          />
+          <label for="other">Other</label>
+        </form>
+        <button class="button is-primary" onclick="register()">회원가입</button>
+      </div>
+    </div>
+    <script type="text/javascript" src="../static/register.js"></script>
   </body>
 </html>
