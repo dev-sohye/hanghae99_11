@@ -10,7 +10,6 @@ import jwt, datetime, hashlib
 
 SECRET_KEY = 'okay'
 
-
 #멀티 페이지 url
 @app.route('/')
 def home():
