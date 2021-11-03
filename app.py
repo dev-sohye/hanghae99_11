@@ -15,10 +15,7 @@ SECRET_KEY = 'okay'
 #멀티 페이지 url
 @app.route('/')
 def home():
-  
-    exhibition = list(db.exhibition.find({}, {'_id':False}))
-    return render_template("index.html", exhibition=exhibition)
-  
+
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -27,11 +24,12 @@ def home():
     except jwt.ExpiredSignatureError:
         return render_template("login.html", msg="다시 로그인 해주세요!")
         # return redirect(url_for("login", msg="다시 로그인"))
-
-        # 예제에서는 위 방식으로 되는데 나는 안된다. 왜지????????
     except jwt.exceptions.DecodeError:
         return render_template("login.html", msg="로그인 정보 없음!")
         # return redirect(url_for("login", msg="로그인 정보 없음"))
+
+    exhibition = list(db.exhibition.find({}, {'_id': False}))
+    return render_template("index.html", exhibition=exhibition)
 
 
 @app.route('/exhibition/<keyword>')
