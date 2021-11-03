@@ -18,11 +18,15 @@ def home():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"user_id": payload['id']})
-        return render_template('index.html', myid=user_info["user_id"])
+        return render_template('index.html', user_id=user_info["user_id"])
     except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인을 다시 해주세요."))
+        return render_template("login.html", msg="다시 로그인 해주세요!")
+        # return redirect(url_for("login", msg="다시 로그인"))
+
+        # 예제에서는 위 방식으로 되는데 나는 안된다. 왜지????????
     except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+        return render_template("login.html", msg="로그인 정보 없음!")
+        # return redirect(url_for("login", msg="로그인 정보 없음"))
 
 @app.route('/exhibition')
 def exhibition():
@@ -72,7 +76,7 @@ def api_login():
     if result is not None:
         payload = {
             'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60*60)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=3)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 

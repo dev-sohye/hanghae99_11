@@ -1,11 +1,13 @@
-//회원가입 요청
+// 회원가입 요청
 
 function register() {
 
+// 비밀번호 결과 변수에 지정
   if (pwchk == true && userpwLength == true) {
     pwchkResult = "yes";
   } else pwchkResult = "no";
 
+// 회원가입 요청 API
   $.ajax({
     type: "POST",
     url: "/api/register",
@@ -31,7 +33,7 @@ let pwchkResult;
 let userpwLength;
 let pwLength = $("#userpw").val().length;
 
-// 비밀번호 확인
+// 비밀번호 일치 여부 확인
 
 $(".pw").focusout(function () {
   let pw1 = $("#userpw").val();
@@ -55,10 +57,6 @@ $(".pw").focusout(function () {
     }
   }
 });
-
-// 비밀번호 결과 변수에 지정
-
-
 
 // 비밀번호 길이 설정
 $("#userpw").focusout(function () {
