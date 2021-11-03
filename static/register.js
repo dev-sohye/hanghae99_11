@@ -8,6 +8,7 @@ function register() {
       user_id: $("#userid").val(),
       user_pw: $("#userpw").val(),
       user_gender: $(".usergender").val(),
+      pw_check: pwchk,
     },
     success: function (response) {
       if (response["result"] == "success") {
@@ -21,29 +22,34 @@ function register() {
 }
 
 // 비밀번호 확인
-function pwchk() {
-  $(".pw").focusout(function () {
-    let pw1 = $("#userpw").val();
-    let pw2 = $("#pwchk").val();
 
-    if (pw1 == "") {
-      $("#alert-success").css("display", "none");
+$(".pw").focusout(function () {
+  let pw1 = $("#userpw").val();
+  let pw2 = $("#pwchk").val();
+
+  if (pw1 == "") {
+    $("#alert-success").css("display", "none");
+    $("#alert-danger").css("display", "none");
+  } else if (pw2 == "") {
+    $("#alert-success").css("display", "none");
+    $("#alert-danger").css("display", "none");
+  } else if (pw1 != "" && pw2 != "") {
+    if (pw1 == pw2) {
+      $("#alert-success").css("display", "block");
       $("#alert-danger").css("display", "none");
-    } else if (pw2 == "") {
+      return (pwchk = true);
+    } else {
       $("#alert-success").css("display", "none");
-      $("#alert-danger").css("display", "none");
-    } else if (pw1 != "" && pw2 != "") {
-      if (pw1 == pw2) {
-        $("#alert-success").css("display", "block");
-        $("#alert-danger").css("display", "none");
-        return true;
-      } else {
-        $("#alert-success").css("display", "none");
-        $("#alert-danger").css("display", "block");
-        return false;
-      }
+      $("#alert-danger").css("display", "block");
+      return (pwchk = false);
     }
-  });
+  }
+});
+
+function check() {
+  if (pwchk == false) {
+    console.log("오호");
+  } else console.log("아직");
 }
 
 //성별 데이터 전송
