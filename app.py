@@ -1,10 +1,11 @@
-from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for
+import requests
 app = Flask(__name__)
 
 from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
-db = client.exhibition
+db = client.dbsparta
 
 import jwt, datetime, hashlib
 
@@ -14,6 +15,10 @@ SECRET_KEY = 'okay'
 #멀티 페이지 url
 @app.route('/')
 def home():
+  
+    exhibition = list(db.exhibition.find({}, {'_id':False}))
+    return render_template("index.html", exhibition=exhibition)
+  
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -28,9 +33,11 @@ def home():
         return render_template("login.html", msg="로그인 정보 없음!")
         # return redirect(url_for("login", msg="로그인 정보 없음"))
 
-@app.route('/exhibition')
-def exhibition():
-    return render_template("exhibition_view.html")
+
+@app.route('/exhibition/<keyword>')
+def detail(keyword):
+    contents = list(db.exhibition.find({}))
+    return render_template("exhibition_view.html", contents=contents, word=keyword)
 
 @app.route('/login')
 def login():

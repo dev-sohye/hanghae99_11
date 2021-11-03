@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Webpage Title -->
@@ -38,14 +38,124 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-  </head>
-  <body>
-    <!---------페이지 전환 링크------------>
-    <a href="/exhibition"> 전시 페이지로 이동</a>
-    <a href="/login">로그인 페이지로 이동</a>
-    <a href="/register">회원가입 페이지로 이동</a>
+    
+    
+    
+    <style>
+        *{
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+        h1,
+        form{
+            text-align: center;
+            margin: 60px 0;
+            border: 0;
+            outline: none;
+        }
+        input{
+            border: 1px solid #888;
+            outline: none;
+            padding: 5px 10px;
+        }
 
+        button {
+            border: 0;
+            outline: none;
+            cursor: pointer;
+        }
+
+        #close-exhi {
+            width: 700px;
+            height: 200px;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        .close-exhi-inner{
+            width:800px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr)
+        }
+
+        #card-box{
+            width: 700px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr)
+        }
+
+
+    </style>
+        <script>
+
+            $(document).ready(function () {
+                filter();
+            })
+
+            //검색
+            function filter() {
+                let value = $('#value').val();
+                let listInner = document.getElementsByClassName("search-card");
+                if (value == " ") {
+                    return window.location.href =`/`;
+                }
+
+                for (let i = 0; i < listInner.length; i++) {
+                    let title = listInner[i].getAttribute('id')
+                    if (title.indexOf(value) > -1) {
+                        listInner[i].style.display = 'flex';
+                    } else {
+                        listInner[i].style.display = 'none';
+                    }
+
+                    }
+                }
+
+        </script>
+
+</head>
+
+<body>
     <button onclick="logout()">로그아웃</button>
+    <h1>전시 뭐하니?</h1>
+    {# 종료임박 전시 card carousel  - start #}
+    <div id="close-exhi">
+       <ul class="close-exhi-inner">
+        {% for exhi in exhibition %}
+          {% if exhi.period == "2021.10.10" %}
+            <li class="close-exhi-card card">
+                <a href="{{  exhi.title }}">
+                    <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
+                </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+    {# 종료임박 전시 card carousel  - end #}
+
+    {# 검색 input  - start #}
+    <form>
+        <input type="text" id="value" onkeyup="filter()" placeholder="전시회명을 검색해주세요" style="width:18rem" />
+    </form>
+    {# 검색 input  - end #}
+
+    {# 전체 전시  - start #}
+    <div id="card-box">
+        {% for exhi in exhibition %}
+            <div class="card search-card" id="{{ exhi.title }}">
+                <a href="/exhibition/{{ exhi.title }}">
+                    <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card image cap" />
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    {# 전체 전시  - end #}
+
+
     <script type="text/javascript" src="../static/index.js"></script>
-  </body>
+    
+    </body>
+  
 </html>
+
