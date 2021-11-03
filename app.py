@@ -44,14 +44,19 @@ def api_register():
     gender_receive = request.form['user_gender']
     pwchk_receive = request.form['pw_check']
 
-    if pwchk_receive == 'yes':
+    if pwchk_receive == 'yes' and id_receive != '':
         pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
 
         db.user.insert_one({'user_id': id_receive, 'user_pw': pw_hash, 'user_gender': gender_receive})
 
         return jsonify({'result': 'success'})
-    else:
+    elif id_receive == '':
+        return jsonify({'msg': '아이디를 입력해주세요!'})
+    elif pwchk_receive != 'yes':
         return jsonify({'msg':'비밀번호를 확인해주세요!'})
+    elif gender_receive == 'no':
+        return jsonify({'msg': '성별을 선택해주세요!'})
+
 
 # 로그인 API
 @app.route('/api/login', methods=['POST'])
@@ -90,6 +95,13 @@ def api_valid():
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+
+# 아이디 중복 확인
+@app.route('/sign_up/check_dup', methods=['POST'])
+def check_dup():
+    username_receive = request.form['username_give']
+    exists = bool(db.users.find_one({"user_id": username_receive}))
+    return jsonify({'result': 'success', 'exists': exists})
 
 
 if __name__ == '__main__':

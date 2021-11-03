@@ -64,6 +64,20 @@
             aria-describedby="inputGroup-sizing-default"
           />
         </div>
+        <div>
+          <button
+            style="margin-top: 1px; margin-bottom: 15px"
+            onclick="idcheck()"
+          >
+            중복확인
+          </button>
+          <span
+            id="id-check"
+            class="pwchk-str"
+            style="display: none; margin-bottom: 10px; margin-top: 5px"
+            >아이디를 사용하실 수 있습니다! 🥳</span
+          >
+        </div>
         <div class="input-group mb-3 d-flex">
           <div class="input-group-prepend">
             <span class="input-group-text" id="">Password</span>
@@ -106,7 +120,13 @@
           >비밀번호가 일치하지 않습니다.</span
         >
         <form>
-          <input type="radio" name="gender" value="male" class="usergender" />
+          <input
+            type="radio"
+            name="gender"
+            value="male"
+            class="usergender"
+            checked
+          />
           <label for="male">Male</label><br />
           <input
             type="radio"
