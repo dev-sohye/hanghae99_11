@@ -7,8 +7,8 @@ function register() {
     data: {
       user_id: $("#userid").val(),
       user_pw: $("#userpw").val(),
-      user_gender: $(".usergender").val(),
-      pw_check: pwchk,
+      user_gender: $("input[name='gender']:checked").val(),
+      pw_check: pwchkResult,
     },
     success: function (response) {
       if (response["result"] == "success") {
@@ -22,6 +22,9 @@ function register() {
 }
 
 // 비밀번호 확인
+
+let pwchk;
+let pwchkResult;
 
 $(".pw").focusout(function () {
   let pw1 = $("#userpw").val();
@@ -46,10 +49,10 @@ $(".pw").focusout(function () {
   }
 });
 
-function check() {
-  if (pwchk == false) {
-    console.log("오호");
-  } else console.log("아직");
-}
+// 비밀번호 결과 변수에 지정
 
-//성별 데이터 전송
+$(".pw").focusout(function () {
+  if (pwchk == true) {
+    pwchkResult = "yes";
+  } else pwchkResult = "no";
+});

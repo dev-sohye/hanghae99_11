@@ -42,12 +42,16 @@ def api_register():
     id_receive = request.form['user_id']
     pw_receive = request.form['user_pw']
     gender_receive = request.form['user_gender']
+    pwchk_receive = request.form['pw_check']
 
-    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
+    if pwchk_receive == 'yes':
+        pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
 
-    db.user.insert_one({'user_id': id_receive, 'user_pw': pw_hash, 'user_gender' : gender_receive})
+        db.user.insert_one({'user_id': id_receive, 'user_pw': pw_hash, 'user_gender': gender_receive})
 
-    return jsonify({'result': 'success'})
+        return jsonify({'result': 'success'})
+    else:
+        return jsonify({'msg':'비밀번호를 확인해주세요!'})
 
 # 로그인 API
 @app.route('/api/login', methods=['POST'])
