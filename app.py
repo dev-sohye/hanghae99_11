@@ -1,4 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify, request
+import requests
+app = Flask(__name__)
+
+from pymongo import MongoClient
+client = MongoClient('localhost', 27017)
+db = client.dbsparta
 
 
 app = Flask(__name__)
@@ -6,7 +12,9 @@ app = Flask(__name__)
 #멀티 페이지 url
 @app.route('/')
 def main():
-    return render_template("index.html")
+    exhibition = list(db.exhibition.find({}, {'_id':False}))
+    return render_template("index.html", exhibition=exhibition)
+
 
 @app.route('/exhibition')
 def exhibition():
