@@ -36,7 +36,6 @@ def detail(keyword):
     contents = list(db.exhibition.find({}))
     return render_template("exhibition_view.html", contents=contents, word=keyword)
 
-    # return render_template('review.html')
 @app.route('/login')
 def login():
     return render_template("login.html")
@@ -44,6 +43,10 @@ def login():
 @app.route('/register')
 def register():
     return render_template("register.html")
+
+@app.route('/review')
+def review():
+    return render_template('review.html')
 
 # 회원가입 API
 @app.route('/api/register', methods=['POST'])
