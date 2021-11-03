@@ -1,6 +1,11 @@
 //회원가입 요청
 
 function register() {
+
+  if (pwchk == true && userpwLength == true) {
+    pwchkResult = "yes";
+  } else pwchkResult = "no";
+
   $.ajax({
     type: "POST",
     url: "/api/register",
@@ -22,8 +27,9 @@ function register() {
 }
 
 let pwchk;
-let pwchkResult = "no";
+let pwchkResult;
 let userpwLength;
+let pwLength = $("#userpw").val().length;
 
 // 비밀번호 확인
 
@@ -52,63 +58,78 @@ $(".pw").focusout(function () {
 
 // 비밀번호 결과 변수에 지정
 
-$(".pw").focusout(function () {
-  if (pwchk == true && userpwLength != false) {
-    pwchkResult = "yes";
-  } else pwchkResult = "no";
-});
+
 
 // 비밀번호 길이 설정
 $("#userpw").focusout(function () {
   if ($("#userpw").val().length < 5) {
     alert("입력한 글자가 5글자 이상이어야 합니다.");
-    return (userpwLength = false);
-  }
+    userpwLength = false;
+  } else userpwLength = true;
 });
+
+function test() {
+  console.log(
+    `pwchk : ${pwchk}, pwchResult:${pwchkResult}, userpwLength : ${userpwLength}`,
+    `pwLength:${pwLength} `, $("#userpw").val().length
+  );
+}
 
 //정규표현식
 function is_nickname(asValue) {
-    var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
-    return regExp.test(asValue);
+  var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
+  return regExp.test(asValue);
 }
 
 function is_password(asValue) {
-    var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
-    return regExp.test(asValue);
+  var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
+  return regExp.test(asValue);
 }
-
 
 // 아이디 중복확인
 function idcheck() {
-    let username = $("#userid").val()
-    console.log(username)
-    if (username == "") {
-        $("#check-id").text("아이디를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
-        $("#userid").focus()
-        return;c
-    }
-    if (!is_nickname(username)) {
-        $("#check-id").text("아이디의 형식을 확인해주세요. 영문과 숫자, 일부 특수문자(._-) 사용 가능. 2-10자 길이").removeClass("is-safe").addClass("is-danger")
-        $("#userid").focus()
-        return;
-    }
-    $("#help-id").addClass("is-loading")
-    $.ajax({
-        type: "POST",
-        url: "/sign_up/check_dup",
-        data: {
-            username_give: username
-        },
-        success: function (response) {
-
-            if (response["exists"]) {
-                $("#help-id").text("이미 존재하는 아이디입니다.").removeClass("is-safe").addClass("is-danger")
-                $("#userid").focus()
-            } else {
-                $("#help-id").text("사용할 수 있는 아이디입니다.").removeClass("is-danger").addClass("is-success")
-            }
-            $("#help-id").removeClass("is-loading")
-
-        }
-    });
+  let username = $("#userid").val();
+  console.log(username);
+  if (username == "") {
+    $("#check-id")
+      .text("아이디를 입력해주세요.")
+      .removeClass("is-safe")
+      .addClass("is-danger");
+    $("#userid").focus();
+    return;
+    c;
+  }
+  if (!is_nickname(username)) {
+    $("#check-id")
+      .text(
+        "아이디의 형식을 확인해주세요. 영문과 숫자, 일부 특수문자(._-) 사용 가능. 2-10자 길이"
+      )
+      .removeClass("is-safe")
+      .addClass("is-danger");
+    $("#userid").focus();
+    return;
+  }
+  $("#help-id").addClass("is-loading");
+  $.ajax({
+    type: "POST",
+    url: "/sign_up/check_dup",
+    data: {
+      username_give: username,
+    },
+    success: function (response) {
+      if (response["exists"]) {
+        $("#help-id")
+          .text("이미 존재하는 아이디입니다.")
+          .removeClass("is-safe")
+          .addClass("is-danger");
+        $("#userid").focus();
+      } else {
+        $("#help-id")
+          .text("사용할 수 있는 아이디입니다.")
+          .removeClass("is-danger")
+          .addClass("is-success");
+      }
+      $("#help-id").removeClass("is-loading");
+    },
+  });
 }
