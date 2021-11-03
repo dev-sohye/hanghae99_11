@@ -25,6 +25,8 @@ function register() {
 
 let pwchk;
 let pwchkResult;
+let userpwLength;
+let pwchkLength;
 
 $(".pw").focusout(function () {
   let pw1 = $("#userpw").val();
@@ -52,7 +54,22 @@ $(".pw").focusout(function () {
 // 비밀번호 결과 변수에 지정
 
 $(".pw").focusout(function () {
-  if (pwchk == true) {
+  if (pwchk == true && userpwLength != false && pwchkLength != false) {
     pwchkResult = "yes";
   } else pwchkResult = "no";
+});
+
+// 비밀번호 길이 설정
+
+$("#userpw").focusout(function () {
+  if ($("#userpw").val().length < 5) {
+    alert("입력한 글자가 5글자 이상이어야 합니다.");
+    return (userpwLength = false);
+  }
+});
+$("#pwchk").focusout(function () {
+  if ($("#pwchk").val().length < 5) {
+    alert("입력한 글자가 5글자 이상이어야 합니다.");
+    return (pwchkLength = false);
+  }
 });
