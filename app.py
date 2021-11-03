@@ -15,20 +15,20 @@ SECRET_KEY = 'okay'
 @app.route('/')
 def home():
 
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.user.find_one({"user_id": payload['id']})
-        return render_template('index.html', user_id=user_info["user_id"])
-    except jwt.ExpiredSignatureError:
-        return render_template("login.html", msg="다시 로그인 해주세요!")
-        # return redirect(url_for("login", msg="다시 로그인"))
-    except jwt.exceptions.DecodeError:
-        return render_template("login.html", msg="로그인 정보 없음!")
-        # return redirect(url_for("login", msg="로그인 정보 없음"))
-
     exhibition = list(db.exhibition.find({}, {'_id': False}))
     return render_template("index.html", exhibition=exhibition)
+
+    # token_receive = request.cookies.get('mytoken')
+    # try:
+    #     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    #     user_info = db.user.find_one({"user_id": payload['id']})
+    #     return render_template('index.html', user_id=user_info["user_id"])
+    # except jwt.ExpiredSignatureError:
+    #     return render_template("login.html", msg="다시 로그인 해주세요!")
+    #     # return redirect(url_for("login", msg="다시 로그인"))
+    # except jwt.exceptions.DecodeError:
+    #     return render_template("login.html", msg="로그인 정보 없음!")
+    #     # return redirect(url_for("login", msg="로그인 정보 없음"))
 
 
 @app.route('/exhibition/<keyword>')
@@ -36,6 +36,7 @@ def detail(keyword):
     contents = list(db.exhibition.find({}))
     return render_template("exhibition_view.html", contents=contents, word=keyword)
 
+    # return render_template('review.html')
 @app.route('/login')
 def login():
     return render_template("login.html")
@@ -110,11 +111,6 @@ def check_dup():
     username_receive = request.form['username_give']
     exists = bool(db.users.find_one({"user_id": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
-  
-## HTML을 주는 부분
-@app.route('/')
-def home():
-    return render_template('review.html')
 
 
 ## 리뷰 작성하기
