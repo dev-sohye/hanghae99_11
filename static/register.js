@@ -17,3 +17,7 @@ function register() {
     }
   })
 }
+
+if ($('#userpw').val()==$('#pwchk').val()){
+  
+}

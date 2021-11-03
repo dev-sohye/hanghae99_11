@@ -23,7 +23,7 @@ body {
 }
 
 .input-group-text {
-  width: 100px;
+  width:150px;
   display: flex;
   justify-content: center;
 }
