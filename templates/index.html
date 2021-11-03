@@ -105,7 +105,7 @@
         {% for exhi in exhibition %}
           {% if exhi.period == "2021.10.10" %}
             <li class="close-exhi-card card">
-                <a href="{{  exhi.url }}">
+                <a href="{{  exhi.title }}">
                     <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
                 </a>
             </li>
@@ -125,7 +125,7 @@
     <div id="card-box">
         {% for exhi in exhibition %}
             <div class="card search-card" id="{{ exhi.title }}">
-                <a href="{{ exhi.url }}">
+                <a href="/exhibition/{{ exhi.title }}">
                     <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card image cap" />
                 </a>
             </div>
@@ -133,5 +133,4 @@
     </div>
     {# 전체 전시  - end #}
 </body>
-
 </html>

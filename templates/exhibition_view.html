@@ -7,9 +7,18 @@
     <title>Document</title>
   </head>
   <body>
-    <!---------페이지 전환 링크------------>
-    <a href="/login">로그인 페이지로 이동</a>
-    <a href="/register">회원가입 페이지로 이동</a>
-    <a href="/">메인 페이지로 이동</a>
+<body>
+   <h1> detail page </h1>
+    <div id="card-box">
+        {% for content in contents %}
+            {% if content.title == word %}
+                <div>{{ content.title }}</div>
+                <img src="{{ content.img_url }}"/>
+                <div>{{ content.url }}</div>
+                <div>{{ content.place }}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
   </body>
 </html>

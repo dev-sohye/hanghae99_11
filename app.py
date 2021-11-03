@@ -15,10 +15,10 @@ def main():
     exhibition = list(db.exhibition.find({}, {'_id':False}))
     return render_template("index.html", exhibition=exhibition)
 
-
-@app.route('/exhibition')
-def exhibition():
-    return render_template("exhibition_view.html")
+@app.route('/exhibition/<keyword>')
+def detail(keyword):
+    contents = list(db.exhibition.find({}))
+    return render_template("exhibition_view.html", contents=contents, word=keyword)
 
 @app.route('/login')
 def login():
