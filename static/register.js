@@ -46,5 +46,4 @@ function pwchk() {
   });
 }
 
-console.log(pwchk());
 //성별 데이터 전송
