@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from pymongo import MongoClient
+##client = MongoClient('3.144.212.36', 27017, username="test", password="test")
 client = MongoClient('localhost', 27017)
 db = client.dbsparta
 
@@ -19,7 +20,7 @@ for tr in trs:
             title = a.text
             img_url = tr.select_one('.stit > table > tbody > tr > td.RKthumb > a > img')['src']
             place = tr.select_one('.stit > table > tbody > tr > td.Rkdate > a').text
-            period = tr.select_one('.stit > table > tbody > tr > td:nth-child(4)').text.strip() #공백 삭제입니다
+            period = tr.select_one('.stit > table > tbody > tr > td:nth-child(4)').text.strip()
             baseUrl = 'http://ticket.interpark.com'
             link_url = tr.select_one('.stit > table > tbody > tr > td.RKthumb > a')['href']
             url = baseUrl + link_url
@@ -37,4 +38,3 @@ for tr in trs:
 
             }
             db.exhibition.insert_one(doc)
-

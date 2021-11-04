@@ -157,32 +157,37 @@
 
       </style>
       <script>
+          $(document).ready(function(){
+              averageRate()
+
+
+          })
           {#   현재 날짜 구하기     #}
           function getTime() {
-          let today ;
-          var d = new Date();
+              let today ;
+              let d = new Date();
 
-          var s =
-          leadingZeros(d.getFullYear(), 4) + '-' +
-          leadingZeros(d.getMonth() + 1, 2) + '-' +
-          leadingZeros(d.getDate(), 2);
+              let s =
+                  leadingZeros(d.getFullYear(), 4) + '-' +
+                  leadingZeros(d.getMonth() + 1, 2) + '-' +
+                  leadingZeros(d.getDate(), 2);
 
-          return s;
-      }
+              return s;
+          }
+
           function leadingZeros(n, digits) {
-          var zero = '';
-          n = n.toString();
+              let zero = '';
+              n = n.toString();
 
-          if (n.length < digits) {
-          for (i = 0; i < digits - n.length; i++)
-          zero += '0';
-      }
-
-          return zero + n;
-      }
+              if (n.length < digits) {
+                  for (i = 0; i < digits - n.length; i++)
+                  zero += '0';
+              }
+              return zero + n;
+          }
 
           {# 리뷰 작성하기 #}
-          function makeReview() {
+          function makeReview() {0
           let review_date = getTime()
           let grade = $('#grade').val()
           let comment = $('#comment').val()
@@ -203,7 +208,7 @@
       }
       })
       }
-
+          }
 
   </script>
   </head>
@@ -247,7 +252,26 @@
           <div id="reviewform">
           </div>
           <div class="review-average">
-              <p>평점 : <span>하잏우에오</span></p>
+              <p>평점 : <span class="average_grade">
+
+                  {% set score = [] %}
+
+                  {% for review in reviews %}
+                       {% if review.review_exhibition == word %}
+                           {% if score.append(review.review_grade)%}{% endif %}
+                       {% endif %}
+                  {% endfor %}
+                    {% set num = score | count-1 %}
+                    {% if  score | count == 0%}
+                        {{ score|count }}
+                    {% else %}
+                        {% set num  = score | count %}
+                        {{ score | sum /  num  }}
+                    {% endif %}
+
+
+
+              </span></p>
           </div>
           {% for review in reviews %}
               {% if review.review_exhibition == word %}
@@ -259,6 +283,7 @@
                                   <li>min</li>
                               </ul>
                               <p class="grade">{{ review.review_grade }}</p>
+
                           </li>
                           <li class="review-content">
                               <ul>

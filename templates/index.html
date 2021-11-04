@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Webpage Title -->
@@ -40,74 +40,47 @@
     ></script>
 
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      h1,
-      form {
-        text-align: center;
-        margin: 60px 0;
-        border: 0;
-        outline: none;
-      }
-      input {
-        border: 1px solid #888;
-        outline: none;
-        padding: 5px 10px;
-      }
-
-      button {
-        border: 0;
-        outline: none;
-        cursor: pointer;
-      }
-
-      #close-exhi {
-        width: 700px;
-        height: 200px;
-        margin: 50px auto;
-        overflow: hidden;
-      }
-
-      .close-exhi-inner {
-        width: 800px;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-      }
-
-      #card-box {
-        width: 700px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-      }
-    </style>
-    <script>
-      $(document).ready(function () {
-        filter();
-      });
-
-      //검색
-      function filter() {
-        let value = $("#value").val();
-        let listInner = document.getElementsByClassName("search-card");
-        if (value == " ") {
-          return (window.location.href = `/`);
+        *{
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+        h1,
+        form{
+            text-align: center;
+            margin: 60px 0;
+            border: 0;
+            outline: none;
+        }
+        input{
+            border: 1px solid #888;
+            outline: none;
+            padding: 5px 10px;
         }
 
-        for (let i = 0; i < listInner.length; i++) {
-          let title = listInner[i].getAttribute("id");
-          if (title.indexOf(value) > -1) {
-            listInner[i].style.display = "flex";
-          } else {
-            listInner[i].style.display = "none";
-          }
+        button {
+            border: 0;
+            outline: none;
+            cursor: pointer;
         }
-      }
-    </script>
-  </head>
+
+        #close-exhi {
+            width: 700px;
+            height: 200px;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        .close-exhi-inner{
+            width:800px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr)
+        }
+
+        #card-box{
+            width: 700px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr)
+        }
 
 
     </style>
@@ -115,6 +88,7 @@
 
             $(document).ready(function () {
                 filter();
+                closeExhi();
             })
 
             //검색
@@ -122,19 +96,68 @@
                 let value = $('#value').val();
                 let listInner = document.getElementsByClassName("search-card");
                 if (value == " ") {
-                    return window.location.href =`/`;
+                    return window.location.href = `/`;
                 }
 
                 for (let i = 0; i < listInner.length; i++) {
                     let title = listInner[i].getAttribute('id')
-                    let tempArr = [];
                     if (title.indexOf(value) > -1) {
                         listInner[i].style.display = 'flex';
                     } else {
                         listInner[i].style.display = 'none';
                     }
-                    }
                 }
+            }
+
+            {#   현재 날짜 구하기     #}
+
+            function getTime() {
+                let today;
+                var d = new Date();
+
+                var s =
+                    leadingZeros(d.getFullYear(), 4) + '-' +
+                    leadingZeros(d.getMonth() + 1, 2) + '-' +
+                    leadingZeros(d.getDate(), 2);
+
+                return s;
+            }
+
+            function leadingZeros(n, digits) {
+                var zero = '';
+                n = n.toString();
+
+                if (n.length < digits) {
+                    for (i = 0; i < digits - n.length; i++)
+                        zero += '0';
+                }
+
+                return zero + n;
+            }
+
+            {# 죵료 임박 순 #}
+
+            function closeExhi() {
+                let today = getTime();
+                let year = today.substr(2, 2);
+                let mon = today.substr(5, 2);
+                let day = today.substr(8, 2);
+
+                let exhiPeriod = document.getElementsByClassName("close-exhi-card");
+                for (let i = 0; i < exhiPeriod.length; i++) {
+                    let exhiYe = exhiPeriod[i].getAttribute('id').substr(0, 2)
+                    let exhiDay = exhiPeriod[i].getAttribute('id').substr(6, 2)
+                    let exhiMon = exhiPeriod[i].getAttribute('id').substr(3, 2)
+
+                    if (year == exhiYe && mon == exhiMon && day <= exhiDay) {
+                        exhiPeriod[i].style.display = 'flex';
+                    } else {
+                        exhiPeriod[i].style.display = 'none';
+                    }
+
+
+                }
+            }
 
         </script>
 
@@ -156,35 +179,32 @@
           </ul>
       </nav>
     <h1>전시 뭐하니?</h1>
-    {# 종료임박 전시 card carousel - start #}
+    {# 종료임박 전시 card carousel  - start #}
     <div id="close-exhi">
-
        <ul class="close-exhi-inner">
         {% for exhi in exhibition %}
-          {% if exhi.period == "2021.10.10" %}
-            <li class="close-exhi-card card">
-                <a href="/exhibition/{{  exhi.id }}">
-                    <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
-                </a>
-            </li>
-          {% endif %}
+
+            {% if loop.index <= 40 %}
+                <li class="close-exhi-card card">
+                    <a href="/exhibition/{{  exhi.id }}">
+                        <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
+                    </a>
+                </li>
+            {% endif %}
+
         {% endfor %}
         </ul>
-
     </div>
-    {# 종료임박 전시 card carousel - end #} {# 검색 input - start #}
-    <form>
-      <input
-        type="text"
-        id="value"
-        onkeyup="filter()"
-        placeholder="전시회명을 검색해주세요"
-        style="width: 18rem"
-      />
-    </form>
-    {# 검색 input - end #} {# 전체 전시 - start #}
-    <div id="card-box">
+    {# 종료임박 전시 card carousel  - end #}
 
+    {# 검색 input  - start #}
+    <form>
+        <input type="text" id="value" onkeyup="filter()" placeholder="전시회명을 검색해주세요" style="width:18rem" />
+    </form>
+    {# 검색 input  - end #}
+
+    {# 전체 전시  - start #}
+    <div id="card-box">
         {% for exhi in exhibition %}
             <div class="card search-card" id="{{ exhi.title }}">
                 <a href="/exhibition/{{ exhi.id }}">
@@ -193,10 +213,8 @@
                 </a>
             </div>
         {% endfor %}
-
     </div>
-    {# 전체 전시 - end #}
-
+    {# 전체 전시  - end #}
 <script type="text/javascript" src="../static/exhibition.js"></script>
   </body>
 </html>

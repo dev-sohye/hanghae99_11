@@ -3,7 +3,8 @@ import requests
 app = Flask(__name__)
 
 from pymongo import MongoClient
-client = MongoClient('mongodb://test:test@3.144.212.36', 27017)
+# client = MongoClient('mongodb://test:test@localhost', 27017)
+client = MongoClient('localhost', 27017)
 db = client.dbsparta
 
 import jwt, datetime, hashlib
@@ -13,11 +14,14 @@ SECRET_KEY = 'okay'
 #멀티 페이지 url
 @app.route('/')
 def home():
-    exhibition = list(db.exhibition.find({}, {'_id': False}))
-    return render_template("index.html", exhibition=exhibition)
+    exhibition = list(db.exhibition.find({}, {'_id': False}))[0:40]
+    close_exhi = list(db.exhibition.find_one({'period': '2021.11.01~\r\n\t\t\t\t\t\t\t2021.11.07'}, {'_id': False}))
 
+
+    return render_template("index.html", exhibition=exhibition, close_exhi=close_exhi)
 
     ############## 로그인 여부 확인 ##############
+
     # token_receive = request.cookies.get('mytoken')
     # try:
     #     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -55,7 +59,6 @@ def register():
 # @app.route('/review')
 # def review():
 #     return render_template('review.html')
-
 
 # 회원가입 API
 @app.route('/api/register', methods=['POST'])
@@ -103,7 +106,6 @@ def api_login():
     else:
         return jsonify({'result': 'fail', 'msg': '비밀번호를 확인해주세요!'})
 
-
 # 유저 정보 확인 API
 @app.route('/api/user', methods=['GET'])
 def api_valid():
@@ -122,7 +124,7 @@ def api_valid():
 @app.route('/sign_up/check_dup', methods=['POST'])
 def check_dup():
     username_receive = request.form['username_give']
-    exists = bool(db.user.find_one({"user_id": username_receive}))
+    exists = bool(db.users.find_one({"user_id": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
 
 ## 리뷰 작성하기
@@ -130,7 +132,7 @@ def check_dup():
 def write_review():
     exhibition_receive = request.form['review_exhibition_give']
     date_receive = request.form['review_date_give']
-    grade_receive = request.form['review_grade_give']
+    grade_receive = int(request.form['review_grade_give'])
     comment_receive = request.form['review_comment_give']
     like_receive = 0
     doc = {
@@ -141,10 +143,17 @@ def write_review():
         'review_date': date_receive
     }
 
+
+
     db.review.insert_one(doc)
 
     return jsonify({'msg': '등록이 완료되었습니다.'})
 
+@app.route('/api/review', methods=['GET'])
+def show_grades():
+    grades_receive = list(db.review.find({}, {'_id': False}))
+    print(grades_receive)
+    return jsonify({'grades_receive': grades_receive})
 
 
 # ## 리뷰 불러오기
