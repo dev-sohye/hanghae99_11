@@ -9,8 +9,8 @@ db = client.dbsparta
 import jwt, datetime, hashlib
 
 SECRET_KEY = 'okay'
-
-#멀티 페이지 url
+#minji
+#멀티 페이지 url 
 @app.route('/')
 def home():
     exhibition = list(db.exhibition.find({}, {'_id': False}))
@@ -137,7 +137,7 @@ def write_review():
 
 
 
-# ## 리뷰 불러오기 //민지
+# ## 리뷰 불러오기
 # @app.route('/api/review', methods=['GET'])
 # def read_reviews():
 #     reviews = list(db.review.find({}, {'_id': False}))
