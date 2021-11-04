@@ -3,14 +3,15 @@ import requests
 app = Flask(__name__)
 
 from pymongo import MongoClient
+# client = MongoClient('mongodb://test:test@localhost', 27017)
 client = MongoClient('localhost', 27017)
 db = client.dbsparta
 
 import jwt, datetime, hashlib
 
 SECRET_KEY = 'okay'
-#minji
-#멀티 페이지 url 
+
+#멀티 페이지 url
 @app.route('/')
 def home():
     exhibition = list(db.exhibition.find({}, {'_id': False}))
@@ -120,7 +121,7 @@ def check_dup():
 def write_review():
     exhibition_receive = request.form['review_exhibition_give']
     date_receive = request.form['review_date_give']
-    grade_receive = request.form['review_grade_give']
+    grade_receive = int(request.form['review_grade_give'])
     comment_receive = request.form['review_comment_give']
     like_receive = 0
     doc = {
@@ -131,10 +132,17 @@ def write_review():
         'review_date': date_receive
     }
 
+
+
     db.review.insert_one(doc)
 
     return jsonify({'msg': '등록이 완료되었습니다.'})
 
+@app.route('/api/review', methods=['GET'])
+def show_grades():
+    grades_receive = list(db.review.find({}, {'_id': False}))
+    print(grades_receive)
+    return jsonify({'grades_receive': grades_receive})
 
 
 # ## 리뷰 불러오기
