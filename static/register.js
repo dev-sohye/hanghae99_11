@@ -2,11 +2,9 @@
 
 function register() {
   // 비밀번호 결과 변수에 지정
-
   if (pwchk == true && userpwLength == true) {
     pwchkResult = "yes";
   } else pwchkResult = "no";
-
   // 아이디 중복확인
   if ($("#help-id").hasClass("is-danger")) {
     alert("아이디를 다시 확인해주세요.");
@@ -15,9 +13,7 @@ function register() {
     alert("아이디 중복확인을 해주세요.");
     return;
   }
-
-  // 회원가입 요청
-
+  // api에 회원가입 요청
   $.ajax({
     type: "POST",
     url: "/api/register",
@@ -43,7 +39,6 @@ let pwchkResult;
 let userpwLength;
 let pwLength = $("#userpw").val().length;
 
-
 // 비밀번호 길이 설정
 
 $("#userpw").focusout(function () {
@@ -55,7 +50,6 @@ $("#userpw").focusout(function () {
     userpwLength = false;
   } else userpwLength = true;
 });
-
 
 // 비밀번호 일치 여부 확인
 
@@ -84,16 +78,6 @@ $(".pw").focusout(function () {
     return;
   }
 });
-
-//테스트용
-
-function test() {
-  console.log(
-    `pwchk : ${pwchk}, pwchResult:${pwchkResult}, userpwLength : ${userpwLength}`,
-    `pwLength:${pwLength} `,
-    $("#userpw").val().length
-  );
-}
 
 //정규표현식
 
