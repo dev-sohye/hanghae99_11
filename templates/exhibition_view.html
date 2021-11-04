@@ -157,52 +157,84 @@
 
       </style>
       <script>
+          $(document).ready(function(){
+              averageRate()
+
+
+          })
           {#   현재 날짜 구하기     #}
           function getTime() {
-          let today ;
-          var d = new Date();
+              let today ;
+              let d = new Date();
 
-          var s =
-          leadingZeros(d.getFullYear(), 4) + '-' +
-          leadingZeros(d.getMonth() + 1, 2) + '-' +
-          leadingZeros(d.getDate(), 2);
+              let s =
+                  leadingZeros(d.getFullYear(), 4) + '-' +
+                  leadingZeros(d.getMonth() + 1, 2) + '-' +
+                  leadingZeros(d.getDate(), 2);
 
-          return s;
-      }
+              return s;
+          }
+
           function leadingZeros(n, digits) {
-          var zero = '';
-          n = n.toString();
+              let zero = '';
+              n = n.toString();
 
-          if (n.length < digits) {
-          for (i = 0; i < digits - n.length; i++)
-          zero += '0';
-      }
-
-          return zero + n;
-      }
+              if (n.length < digits) {
+                  for (i = 0; i < digits - n.length; i++)
+                  zero += '0';
+              }
+              return zero + n;
+          }
 
           {# 리뷰 작성하기 #}
           function makeReview() {
-          let review_date = getTime()
-          let grade = $('#grade').val()
-          let comment = $('#comment').val()
-          let like = $('#like').val()
-          $.ajax({
-          type: "POST",
-          url: "/api/review",
-          data: {
-          review_exhibition_give: {{ word }},
-          review_grade_give: grade,
-          review_comment_give: comment,
-          review_like_give: like,
-          review_date_give: review_date
-      },
-          success: function (response) {
-          alert(response["msg"]);
-          window.location.href=`/exhibition/{{ word }}`;
-      }
-      })
-      }
+              let review_date = getTime()
+              let grade = parseInt($('#grade').val())
+              let comment = $('#comment').val()
+              let like = $('#like').val()
+                  $.ajax({
+                  type: "POST",
+                  url: "/api/review",
+                  data: {
+                      review_exhibition_give: {{ word }},
+                      review_grade_give: grade,
+                      review_comment_give: comment,
+                      review_like_give: like,
+                      review_date_give: review_date
+                  },
+                  success: function (response) {
+                      alert(response["msg"]);
+                      window.location.href=`/exhibition/{{ word }}`;
+                  }
+              })
+          }
+          function averageRate(){
+            $.ajax({
+              type: "GET",
+              url: "/api/review",
+              data: {},
+              success: function(response){
+                  let grades = response['grades_receive']
+                  let total = 0
+                  let i=0
+                  for(i; i<grades.length; i++) {
+                      let exhi_id = grades[i]['review_exhibition']
+                      let exhi_grade = grades[i]['review_grade']
+                      // console.log(exhi_id, exhi_grade)
+
+                      total += exhi_grade
+
+                  }
+                  let average = total/i
+
+                 // console.log(average.toFixed(1))
+
+              }
+            })
+
+          }
+
+
   </script>
   </head>
   <body>
@@ -269,7 +301,26 @@
               </div>
           </div>
           <div class="review-average">
-              <p>평점 : <span>하잏우에오</span></p>
+              <p>평점 : <span class="average_grade">
+
+                  {% set score = [] %}
+
+                  {% for review in reviews %}
+                       {% if review.review_exhibition == word %}
+                           {% if score.append(review.review_grade)%}{% endif %}
+                       {% endif %}
+                  {% endfor %}
+                    {% set num = score | count-1 %}
+                    {% if  score | count == 0%}
+                        {{ score|count }}
+                    {% else %}
+                        {% set num  = score | count %}
+                        {{ score | sum /  num  }}
+                    {% endif %}
+
+
+
+              </span></p>
           </div>
           {% for review in reviews %}
               {% if review.review_exhibition == word %}
@@ -281,6 +332,7 @@
                                   <li>min</li>
                               </ul>
                               <p class="grade">{{ review.review_grade }}</p>
+
                           </li>
                           <li class="review-content">
                               <ul>
