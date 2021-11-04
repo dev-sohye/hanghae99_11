@@ -3,7 +3,7 @@ import requests
 app = Flask(__name__)
 
 from pymongo import MongoClient
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://test:test@3.144.212.36', 27017)
 db = client.dbsparta
 
 import jwt, datetime, hashlib
@@ -48,6 +48,7 @@ def register():
 @app.route('/review')
 def review():
     return render_template('review.html')
+
 
 # 회원가입 API
 @app.route('/api/register', methods=['POST'])

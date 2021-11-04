@@ -1,3 +1,56 @@
+
+let pwchk;
+let pwchkResult;
+let userpwLength;
+
+// 비밀번호 길이 설정
+
+$("#userpw").focusout(function () {
+  if ($("#userpw").val().length < 4) {
+    $("#help-pw")
+      .text("비밀번호는 4글자 이상이어야 합니다!!!!")
+      .removeClass("is-safe")
+      .addClass("is-danger");
+    userpwLength = false;
+  } else userpwLength = true;
+});
+
+// 비밀번호 일치 여부 확인
+
+$(".pw").focusout(function () {
+  let pw1 = $("#userpw").val();
+  let pw2 = $("#pwchk").val();
+
+  if (pw1 == "") {
+    $("#help-pw")
+      .text("비밀번호를 입력해주세요.")
+      .removeClass("is-safe")
+      .addClass("is-danger");
+    return;
+  } else if (pw1 != "" && pw2 != "" && userpwLength == true) {
+    if (pw1 == pw2) {
+      $("#help-pw")
+        .text("비밀번호가 일치합니다~!")
+        .removeClass("is-danger")
+        .addClass("is-success");
+      // $("#alert-success").css("display", "block");
+      // $("#alert-danger").css("display", "none");
+      pwchk = true;
+      return;
+    } else {
+      $("#help-pw")
+        .text("비밀번호를 확인해주세요!!")
+        .removeClass("is-safe")
+        .addClass("is-danger");
+      // $("#alert-success").css("display", "none");
+      // $("#alert-danger").css("display", "block");
+      pwchk = false;
+      return;
+    }
+    return;
+  }
+});
+
 /////// 회원가입 요청///////
 
 function register() {
@@ -33,51 +86,6 @@ function register() {
     },
   });
 }
-
-let pwchk;
-let pwchkResult;
-let userpwLength;
-let pwLength = $("#userpw").val().length;
-
-// 비밀번호 길이 설정
-
-$("#userpw").focusout(function () {
-  if ($("#userpw").val().length < 4) {
-    $("#help-pw")
-      .text("비밀번호는 4글자 이상이어야 합니다!!!!")
-      .removeClass("is-safe")
-      .addClass("is-danger");
-    userpwLength = false;
-  } else userpwLength = true;
-});
-
-// 비밀번호 일치 여부 확인
-
-$(".pw").focusout(function () {
-  let pw1 = $("#userpw").val();
-  let pw2 = $("#pwchk").val();
-
-  if (pw1 != "" && pw2 != "" && userpwLength == true) {
-    if (pw1 == pw2) {
-      $("#help-pw")
-        .text("비밀번호가 일치합니다~!")
-        .removeClass("is-danger")
-        .addClass("is-success");
-      // $("#alert-success").css("display", "block");
-      // $("#alert-danger").css("display", "none");
-      return (pwchk = true);
-    } else {
-      $("#help-pw")
-        .text("비밀번호를 확인해주세요!!")
-        .removeClass("is-safe")
-        .addClass("is-danger");
-      // $("#alert-success").css("display", "none");
-      // $("#alert-danger").css("display", "block");
-      return (pwchk = false);
-    }
-    return;
-  }
-});
 
 //정규표현식
 
