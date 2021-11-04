@@ -175,12 +175,11 @@ def make_like():
 
 
 # # 리뷰 삭제하기
-# @app.route('/api/delete', methods=['POST'])
-# def delete_reviews():
-#     review_title_receive = request.form['review_title_give']
-#
-#     db.review.delete_one({'review_title': review_title_receive})
-#     return jsonify({'msg': '삭제되었습니다.'})
+@app.route('/api/delete', methods=['POST'])
+def delete_reviews():
+    exhibition_receive = request.form['review_exhibition_give']
+    db.review.delete_one({'review_exhibition': exhibition_receive})
+    return jsonify({'result': 'success', 'msg': '삭제되었습니다.'})
 
 
 if __name__ == '__main__':
