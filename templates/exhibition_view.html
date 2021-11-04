@@ -41,6 +41,7 @@
       ></script>
       <!--------------CSS---------------->
       <link rel="stylesheet" href="../static/exhibition_view.css"/>
+        <script type="text/javascript" src="../static/exhibition.js"></script>
   </head>
       <style>
           * {
@@ -69,7 +70,9 @@
           justify-content: space-around;
       }
 
-          li { list-style: none;}
+          li {
+          list-style: none;
+      }
 
           .exhibition-box {
           margin: 0 auto;
@@ -92,11 +95,11 @@
       }
 
           .exhibition-info > li > p {
-          font - size: 15px;
+          font-size: 15px;
       }
 
           .exhibition-info h5 {
-          margin - bottom: 40px;
+          margin-bottom: 40px;
       }
 
           button {
@@ -125,7 +128,7 @@
       }
 
           .review-board {
-          background - color: antiquewhite;
+          background-color: antiquewhite;
           border-radius: 10px;
 
       }
@@ -139,74 +142,74 @@
           .user {
           width: 20%;
           padding-left: 10px;
-              box-sizing: border-box;
-          }
+          box-sizing: border-box;
+      }
 
           .review-content > ul > li:nth-child(1) {
-              display: flex;
-              flex-direction: row;
-              text-align: end;
-          }
+          display: flex;
+          flex-direction: row;
+          text-align: end;
+      }
 
           .review-content {
-              width: 80%;
-              background-color: lightpink;
-          }
+          width: 80%;
+          background-color: lightpink;
+      }
 
       </style>
-  <script>
-      $(document).ready(function () {
-          averageRate()
-      })
-      {#   현재 날짜 구하기     #}
+      <script>
+          $(document).ready(function(){
+              averageRate()
 
-      function getTime() {
-          let today;
-          let d = new Date();
 
-          let s =
-              leadingZeros(d.getFullYear(), 4) + '-' +
-              leadingZeros(d.getMonth() + 1, 2) + '-' +
-              leadingZeros(d.getDate(), 2);
-
-          return s;
-      }
-
-      function leadingZeros(n, digits) {
-          let zero = '';
-          n = n.toString();
-
-          if (n.length < digits) {
-              for (i = 0; i < digits - n.length; i++)
-                  zero += '0';
-          }
-          return zero + n;
-      }
-
-      {# 리뷰 작성하기 #}
-
-      function makeReview() {
-          let review_date = getTime()
-          let grade = $('#grade').val()
-          let comment = $('#comment').val()
-          let like = $('#like').val()
-          $.ajax({
-              type: "POST",
-              url: "/api/review",
-              data: {
-                  review_exhibition_give: {{ word }},
-                  review_grade_give: grade,
-                  review_comment_give: comment,
-                  review_like_give: like,
-                  review_date_give: review_date
-              },
-              success: function (response) {
-                  alert(response["msg"]);
-                  window.location.href = `/exhibition/{{ word }}`;
-              }
           })
-      }
+          {#   현재 날짜 구하기     #}
+          function getTime() {
+              let today ;
+              let d = new Date();
 
+              let s =
+                  leadingZeros(d.getFullYear(), 4) + '-' +
+                  leadingZeros(d.getMonth() + 1, 2) + '-' +
+                  leadingZeros(d.getDate(), 2);
+
+              return s;
+          }
+
+          function leadingZeros(n, digits) {
+              let zero = '';
+              n = n.toString();
+
+              if (n.length < digits) {
+                  for (i = 0; i < digits - n.length; i++)
+                  zero += '0';
+              }
+              return zero + n;
+          }
+
+          {# 리뷰 작성하기 #}
+         {# 리뷰 작성하기 #}
+          function makeReview() {
+              let review_date = getTime()
+              let grade = parseInt($('#grade').val())
+              let comment = $('#comment').val()
+              let like = $('#like').val()
+                  $.ajax({
+                  type: "POST",
+                  url: "/api/review",
+                  data: {
+                      review_exhibition_give: {{ word }},
+                      review_grade_give: grade,
+                      review_comment_give: comment,
+                      review_like_give: like,
+                      review_date_give: review_date
+                  },
+                  success: function (response) {
+                      alert(response["msg"]);
+                      window.location.href=`/exhibition/{{ word }}`;
+                  }
+              })
+          }
 
   </script>
   </head>
@@ -247,27 +250,29 @@
       </section>
       <section class="review-box">
       <button class="upload-btn" onclick="dologin()">리뷰쓰기</button>
-          <div id="reviewform"></div>
+       <div className="reviewWrap" id="reviewform">
+       </div>
+
           <div class="review-average">
               <p>평점 : <span class="average_grade">
 
-                  {% set score = [] %}
+    {% set score = [] %}
 
-                  {% for review in reviews %}
-                       {% if review.review_exhibition == word %}
-                           {% if score.append(review.review_grade)%}{% endif %}
-                       {% endif %}
-                  {% endfor %}
-                    {% set num = score | count-1 %}
-                    {% if  score | count == 0%}
-                        {{ (score|count) | round(2) }}
-                    {% else %}
-                        {% set num  = score | count %}
-                        {{ (score | sum /  num) |round(2) }}
-                    {% endif %}
+    {% for review in reviews %}
+         {% if review.review_exhibition == word %}
+             {% if score.append(review.review_grade)%}{% endif %}
+         {% endif %}
+    {% endfor %}
+      {% set num = score | count-1 %}
+      {% if  score | count == 0%}
+          {{ (score|count) | round(2) }}
+      {% else %}
+          {% set num  = score | count %}
+          {{ (score | sum /  num) |round(2) }}
+      {% endif %}
 
 
-              </span></p>
+</span></p>
           </div>
           {% for review in reviews %}
               {% if review.review_exhibition == word %}
@@ -303,6 +308,6 @@
   </section>
 
   </div>
-  <script type="text/javascript" src="../static/exhibition.js"></script>
+
   </body>
 </html>

@@ -3,7 +3,7 @@
 $.ajax({
   type: "GET",
   url: "/api/user",
-  data: {},
+ data: {},
   success: function (response) {
     if (response["result"] == "success") {
       $(".customer").css("display", "block");
@@ -29,7 +29,7 @@ function dologin() { //리뷰창 카운터
     success: function (response) {
       if (response["result"] == "success" && counterLet == 1) {
         let reviewwrite = `
-          <div className="reviewWrap" id="reviewWrap">
+         
             <div className="review-commit">
               <ul>
                 <li className="user-info">
@@ -43,7 +43,6 @@ function dologin() { //리뷰창 카운터
                     <option value="4">4</option>
                     <option value="5">5</option>
                   </select>
-
                 </li>
                 <li className="table contentArea">
                             <textarea className="form-control" id="comment"
@@ -55,12 +54,11 @@ function dologin() { //리뷰창 카운터
                 <button onClick="makeReview()">등록하기</button>
               </div>
             </div>
-          </div>`;
+          `;
         $("#reviewform").append(reviewwrite);
       } else if(response["result"] != "success"){
         alert("로그인 먼저 하세요~!~!")
-        location.replace('/login')
-        //이전 페이지 URL의 마지막 숫자 또는 이전 페이지의exhi.id값 가져와서 url 뒤쪽에 넣기,,
+        location.replace('/login_to_review')
       }
     },
   });
