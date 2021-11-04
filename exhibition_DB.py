@@ -19,7 +19,7 @@ for tr in trs:
             title = a.text
             img_url = tr.select_one('.stit > table > tbody > tr > td.RKthumb > a > img')['src']
             place = tr.select_one('.stit > table > tbody > tr > td.Rkdate > a').text
-            period = "2021.10.11 - 2021.11.11"
+            period = tr.select_one('.stit > table > tbody > tr > td:nth-child(4)').text.strip() #공백 삭제입니다
             baseUrl = 'http://ticket.interpark.com'
             link_url = tr.select_one('.stit > table > tbody > tr > td.RKthumb > a')['href']
             url = baseUrl + link_url
