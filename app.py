@@ -45,6 +45,13 @@ def detail(keyword):
 def login():
     return render_template("login.html")
 
+# -------수정 중-------리뷰쓰기 통해서 로그인 시 돌아가는 경로
+@app.route('/login/<keyword>')
+def login_to_review(keyword):
+    contents = list(db.exhibition.find({}, {'_id': False}))
+    reviews = list(db.review.find({}, {'_id': False}).sort('review_grade', -1))
+    return render_template("exhibition_view.html", contents=contents, word=keyword, reviews=reviews)
+
 @app.route('/register')
 def register():
     return render_template("register.html")
@@ -107,7 +114,7 @@ def api_valid():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         userinfo = db.user.find_one({'user_id': payload['id']}, {'_id': 0})
 
-        return jsonify({'result': 'success', 'id': userinfo['user_id'], 'gender': userinfo['user_gender']})
+        return jsonify({'result': 'success', 'user_id': userinfo['user_id'], 'user_gender': userinfo['user_gender']})
     except jwt.ExpiredSignatureError:
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
@@ -119,7 +126,6 @@ def check_dup():
     username_receive = request.form['username_give']
     exists = bool(db.users.find_one({"user_id": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
-
 
 ## 리뷰 작성하기
 @app.route('/api/review', methods=['POST'])

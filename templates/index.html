@@ -39,8 +39,6 @@
       crossorigin="anonymous"
     ></script>
 
-
-
     <style>
         *{
             margin: 0; padding: 0; box-sizing: border-box;
@@ -166,7 +164,20 @@
 </head>
 
 <body>
-    <button onclick="logout()">로그아웃</button>
+<nav>
+          <div class="logo"><a href="/">logo</a></div>
+          <ul>
+              <a href="/login" class="visitor">
+                  <li>로그인</li>
+              </a>
+              <a href="/register" class ="visitor">
+                  <li>회원가입</li>
+              </a>
+              <li class="customer" id="customer_name">님, 환영합니다!</li>
+              <li class="customer"><button onclick="logout()">로그아웃</button></li>
+
+          </ul>
+      </nav>
     <h1>전시 뭐하니?</h1>
     {# 종료임박 전시 card carousel  - start #}
     <div id="close-exhi">
@@ -204,10 +215,6 @@
         {% endfor %}
     </div>
     {# 전체 전시  - end #}
-
-
-    <script type="text/javascript" src="../static/index.js"></script>
-
-    </body>
-
+<script type="text/javascript" src="../static/exhibition.js"></script>
+  </body>
 </html>
