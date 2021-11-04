@@ -131,24 +131,57 @@
     </script>
   </head>
 
-  <body>
+
+    </style>
+        <script>
+
+            $(document).ready(function () {
+                filter();
+            })
+
+            //검색
+            function filter() {
+                let value = $('#value').val();
+                let listInner = document.getElementsByClassName("search-card");
+                if (value == " ") {
+                    return window.location.href =`/`;
+                }
+
+                for (let i = 0; i < listInner.length; i++) {
+                    let title = listInner[i].getAttribute('id')
+                    let tempArr = [];
+                    if (title.indexOf(value) > -1) {
+                        listInner[i].style.display = 'flex';
+                    } else {
+                        listInner[i].style.display = 'none';
+                    }
+                    }
+                }
+
+        </script>
+
+</head>
+
+<body>
+
+
     <button onclick="logout()">로그아웃</button>
     <h1>전시 뭐하니?</h1>
     {# 종료임박 전시 card carousel - start #}
     <div id="close-exhi">
-      <ul class="close-exhi-inner">
-        {% for exhi in exhibition %} {% if exhi.period == "2021.10.10" %}
-        <li class="close-exhi-card card">
-          <a href="{{  exhi.title }}">
-            <img
-              class="card-img-top"
-              src="{{ exhi.img_url }}"
-              alt="Card imgae cap"
-            />
-          </a>
-        </li>
-        {% endif %} {% endfor %}
-      </ul>
+
+       <ul class="close-exhi-inner">
+        {% for exhi in exhibition %}
+          {% if exhi.period == "2021.10.10" %}
+            <li class="close-exhi-card card">
+                <a href="/exhibition/{{  exhi.id }}">
+                    <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
+                </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+        </ul>
+
     </div>
     {# 종료임박 전시 card carousel - end #} {# 검색 input - start #}
     <form>
@@ -162,17 +195,16 @@
     </form>
     {# 검색 input - end #} {# 전체 전시 - start #}
     <div id="card-box">
-      {% for exhi in exhibition %}
-      <div class="card search-card" id="{{ exhi.title }}">
-        <a href="/exhibition/{{ exhi.title }}">
-          <img
-            class="card-img-top"
-            src="{{ exhi.img_url }}"
-            alt="Card image cap"
-          />
-        </a>
-      </div>
-      {% endfor %}
+
+        {% for exhi in exhibition %}
+            <div class="card search-card" id="{{ exhi.title }}">
+                <a href="/exhibition/{{ exhi.id }}">
+                    <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card image cap" />
+                    <p>{{ exhi.title }}</p>
+                </a>
+            </div>
+        {% endfor %}
+
     </div>
     {# 전체 전시 - end #}
 
