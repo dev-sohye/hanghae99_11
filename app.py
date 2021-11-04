@@ -46,11 +46,10 @@ def login():
     return render_template("login.html")
 
 # -------수정 중-------리뷰쓰기 통해서 로그인 시 돌아가는 경로
-@app.route('/login/<keyword>')
-def login_to_review(keyword):
+@app.route('/login_to_review')
+def login_to_review():
     contents = list(db.exhibition.find({}, {'_id': False}))
-    reviews = list(db.review.find({}, {'_id': False}).sort('review_grade', -1))
-    return render_template("exhibition_view.html", contents=contents, word=keyword, reviews=reviews)
+    return render_template("login_to_review.html", contents=contents)
 
 @app.route('/register')
 def register():

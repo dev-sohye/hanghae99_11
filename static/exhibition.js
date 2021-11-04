@@ -58,8 +58,7 @@ function dologin() { //리뷰창 카운터
         $("#reviewform").append(reviewwrite);
       } else if(response["result"] != "success"){
         alert("로그인 먼저 하세요~!~!")
-        location.replace('/login')
-        //이전 페이지 URL의 마지막 숫자 또는 이전 페이지의exhi.id값 가져와서 url 뒤쪽에 넣기,,
+        location.replace('/login_to_review')
       }
     },
   });
