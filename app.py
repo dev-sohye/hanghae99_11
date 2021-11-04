@@ -3,7 +3,7 @@ import requests
 app = Flask(__name__)
 
 from pymongo import MongoClient
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://test:test@3.144.212.36', 27017)
 db = client.dbsparta
 
 import jwt, datetime, hashlib
@@ -16,6 +16,8 @@ def home():
     exhibition = list(db.exhibition.find({}, {'_id': False}))
     return render_template("index.html", exhibition=exhibition)
 
+
+    ############## 로그인 여부 확인 ##############
     # token_receive = request.cookies.get('mytoken')
     # try:
     #     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -46,6 +48,7 @@ def register():
 # @app.route('/review')
 # def review():
 #     return render_template('review.html')
+
 
 # 회원가입 API
 @app.route('/api/register', methods=['POST'])
@@ -93,6 +96,7 @@ def api_login():
     else:
         return jsonify({'result': 'fail', 'msg': '비밀번호를 확인해주세요!'})
 
+
 # 유저 정보 확인 API
 @app.route('/api/user', methods=['GET'])
 def api_valid():
@@ -111,7 +115,7 @@ def api_valid():
 @app.route('/sign_up/check_dup', methods=['POST'])
 def check_dup():
     username_receive = request.form['username_give']
-    exists = bool(db.users.find_one({"user_id": username_receive}))
+    exists = bool(db.user.find_one({"user_id": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
 
 
