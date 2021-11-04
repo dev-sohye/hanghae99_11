@@ -90,6 +90,7 @@
 
             $(document).ready(function () {
                 filter();
+                closeExhi();
             })
 
             //검색
@@ -97,19 +98,68 @@
                 let value = $('#value').val();
                 let listInner = document.getElementsByClassName("search-card");
                 if (value == " ") {
-                    return window.location.href =`/`;
+                    return window.location.href = `/`;
                 }
 
                 for (let i = 0; i < listInner.length; i++) {
                     let title = listInner[i].getAttribute('id')
-                    let tempArr = [];
                     if (title.indexOf(value) > -1) {
                         listInner[i].style.display = 'flex';
                     } else {
                         listInner[i].style.display = 'none';
                     }
-                    }
                 }
+            }
+
+            {#   현재 날짜 구하기     #}
+
+            function getTime() {
+                let today;
+                var d = new Date();
+
+                var s =
+                    leadingZeros(d.getFullYear(), 4) + '-' +
+                    leadingZeros(d.getMonth() + 1, 2) + '-' +
+                    leadingZeros(d.getDate(), 2);
+
+                return s;
+            }
+
+            function leadingZeros(n, digits) {
+                var zero = '';
+                n = n.toString();
+
+                if (n.length < digits) {
+                    for (i = 0; i < digits - n.length; i++)
+                        zero += '0';
+                }
+
+                return zero + n;
+            }
+
+            {# 죵료 임박 순 #}
+
+            function closeExhi() {
+                let today = getTime();
+                let year = today.substr(2, 2);
+                let mon = today.substr(5, 2);
+                let day = today.substr(8, 2);
+
+                let exhiPeriod = document.getElementsByClassName("close-exhi-card");
+                for (let i = 0; i < exhiPeriod.length; i++) {
+                    let exhiYe = exhiPeriod[i].getAttribute('id').substr(0, 2)
+                    let exhiDay = exhiPeriod[i].getAttribute('id').substr(6, 2)
+                    let exhiMon = exhiPeriod[i].getAttribute('id').substr(3, 2)
+
+                    if (year == exhiYe && mon == exhiMon && day <= exhiDay) {
+                        exhiPeriod[i].style.display = 'flex';
+                    } else {
+                        exhiPeriod[i].style.display = 'none';
+                    }
+
+
+                }
+            }
 
         </script>
 
@@ -122,13 +172,15 @@
     <div id="close-exhi">
        <ul class="close-exhi-inner">
         {% for exhi in exhibition %}
-          {% if exhi.period <= "2021.11.05" %}
-            <li class="close-exhi-card card">
-                <a href="/exhibition/{{  exhi.id }}">
-                    <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
-                </a>
-            </li>
-          {% endif %}
+
+            {% if loop.index <= 40 %}
+                <li class="close-exhi-card card">
+                    <a href="/exhibition/{{  exhi.id }}">
+                        <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
+                    </a>
+                </li>
+            {% endif %}
+
         {% endfor %}
         </ul>
     </div>

@@ -14,8 +14,13 @@ SECRET_KEY = 'okay'
 #멀티 페이지 url
 @app.route('/')
 def home():
-    exhibition = list(db.exhibition.find({}, {'_id': False}))
-    return render_template("index.html", exhibition=exhibition)
+    exhibition = list(db.exhibition.find({}, {'_id': False}))[0:40]
+    close_exhi = list(db.exhibition.find_one({'period': '2021.11.01~\r\n\t\t\t\t\t\t\t2021.11.07'}, {'_id': False}))
+
+
+    return render_template("index.html", exhibition=exhibition, close_exhi=close_exhi)
+
+    ############## 로그인 여부 확인 ##############
 
     # token_receive = request.cookies.get('mytoken')
     # try:
