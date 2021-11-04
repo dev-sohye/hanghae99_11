@@ -249,7 +249,33 @@
       </section>
       <section class="review-box">
       <button class="upload-btn" onclick="dologin()">리뷰쓰기</button>
-          <div id="reviewform">
+          <div class="reviewWrap" id="reviewWrap">
+                  <div class="review-commit">
+                      <ul>
+                          <li class="user-info">
+                              <p>user img</p>
+                              <p>user name</p>
+                              <select id="grade" class="form-select">
+                                  <option selected>평점</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                              </select>
+
+                          </li>
+                          <li class="table contentArea">
+                            <textarea class="form-control" id="comment"
+                                      cols="30"
+                                      rows="5" placeholder="내용을 입력하세요."></textarea>
+                          </li>
+                      </ul>
+                      <div>
+                          <button onclick="makeReview()">등록하기</button>
+                      </div>
+                  </div>
+              </div>
           </div>
           <div class="review-average">
               <p>평점 : <span class="average_grade">
