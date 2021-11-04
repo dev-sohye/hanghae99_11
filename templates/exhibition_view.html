@@ -203,6 +203,8 @@
       }
       })
       }
+
+
   </script>
   </head>
   <body>
@@ -210,12 +212,15 @@
       <nav>
           <div class="logo"><a href="/">logo</a></div>
           <ul>
-              <a hef="/login">
+              <a href="/login" class="visitor">
                   <li>로그인</li>
               </a>
-              <a href="/register">
+              <a href="/register" class ="visitor">
                   <li>회원가입</li>
               </a>
+              <li class="customer" id="customer_name">님, 환영합니다!</li>
+              <li class="customer"><button onclick="logout()">로그아웃</button></li>
+
           </ul>
       </nav>
       <section class="exhibition-box" id="card-box">
@@ -238,35 +243,8 @@
           {% endfor %}
       </section>
       <section class="review-box">
-          <div>
-              <button class="upload-btn">리뷰쓰기</button>
-              <div class="reviewWrap" id="reviewWrap">
-                  <div class="review-commit">
-                      <ul>
-                          <li class="user-info">
-                              <p>user img</p>
-                              <p>user name</p>
-                              <select id="grade" class="form-select">
-                                  <option selected>평점</option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
-                              </select>
-
-                          </li>
-                          <li class="table contentArea">
-                            <textarea class="form-control" id="comment"
-                                      cols="30"
-                                      rows="5" placeholder="내용을 입력하세요."></textarea>
-                          </li>
-                      </ul>
-                      <div>
-                          <button onclick="makeReview()">등록하기</button>
-                      </div>
-                  </div>
-              </div>
+      <button class="upload-btn" onclick="dologin()">리뷰쓰기</button>
+          <div id="reviewform">
           </div>
           <div class="review-average">
               <p>평점 : <span>하잏우에오</span></p>
@@ -304,5 +282,6 @@
   </section>
 
   </div>
+  <script type="text/javascript" src="../static/exhibition.js"></script>
   </body>
 </html>

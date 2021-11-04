@@ -38,28 +38,6 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-    <script>
-      if (data && data.length > 0) {
-        $.each(data, function (key, obj) {
-          tag += "<li>";
-          tag += "<div>";
-          tag += "<div>";
-          if (1==1) {
-            tag +=
-              '<button type="button" onClick="jsLogin(\'' +
-              "L" +
-              "')\" >로그인</button></div>";
-          } else {
-            tag +=
-              '<button type="button" onClick="jsLogin(\'' +
-              "A" +
-              "')\" >Hello Login</button></div>";
-          }
-          tag += "</div>";
-          tag += "</li>";
-        });
-      }
-    </script>
 
     <style>
       * {
@@ -163,9 +141,20 @@
 </head>
 
 <body>
+<nav>
+          <div class="logo"><a href="/">logo</a></div>
+          <ul>
+              <a href="/login" class="visitor">
+                  <li>로그인</li>
+              </a>
+              <a href="/register" class ="visitor">
+                  <li>회원가입</li>
+              </a>
+              <li class="customer" id="customer_name">님, 환영합니다!</li>
+              <li class="customer"><button onclick="logout()">로그아웃</button></li>
 
-
-    <button onclick="logout()">로그아웃</button>
+          </ul>
+      </nav>
     <h1>전시 뭐하니?</h1>
     {# 종료임박 전시 card carousel - start #}
     <div id="close-exhi">
@@ -208,6 +197,6 @@
     </div>
     {# 전체 전시 - end #}
 
-    <script type="text/javascript" src="../static/index.js"></script>
+<script type="text/javascript" src="../static/exhibition.js"></script>
   </body>
 </html>
