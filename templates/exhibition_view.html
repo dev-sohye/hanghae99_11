@@ -208,30 +208,19 @@
                   }
               })
           }
-          function averageRate(){
-            $.ajax({
-              type: "GET",
-              url: "/api/review",
-              data: {},
-              success: function(response){
-                  let grades = response['grades_receive']
-                  let total = 0
-                  let i=0
-                  for(i; i<grades.length; i++) {
-                      let exhi_id = grades[i]['review_exhibition']
-                      let exhi_grade = grades[i]['review_grade']
-                      // console.log(exhi_id, exhi_grade)
-
-                      total += exhi_grade
-
+          
+           function deleteReview(){
+             $.ajax({
+                  type: "POST",
+                  url: `/api/delete`,
+                  data: {
+                      review_exhibition_give: '{{ review_exhibition }}',
+                  },
+                  success: function (response) {
+                      alert(response["msg"])
+                      window.location.href = document.referrer
                   }
-                  let average = total/i
-
-                 // console.log(average.toFixed(1))
-
-              }
-            })
-
+              });
           }
 
 
