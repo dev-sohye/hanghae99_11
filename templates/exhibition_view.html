@@ -14,45 +14,295 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
     />
-    <!-- Cookie -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+      <!-- Cookie -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <!--------------CSS---------------->
-    <link rel="stylesheet" href="../static/login.css" />
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
+      <!--------------CSS---------------->
+      <link rel="stylesheet" href="../static/login.css"/>
+      <!-- Bootstrap CSS -->
+      <link
+              rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous"
+      />
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+              integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+              crossorigin="anonymous"
+      ></script>
+      <script
+              src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+              integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+              crossorigin="anonymous"
+      ></script>
+      <!--------------CSS---------------->
+      <link rel="stylesheet" href="../static/exhibition_view.css"/>
+  </head>
+      <style>
+          * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+
+      }
+
+          .wrapper {
+          width: 600px;
+          margin: 0 auto;
+      }
+
+          nav {
+          width: 100%;
+          display: grid;
+          grid-template-columns: 500px 200px;
+          text-align: center;
+
+          padding: 10px 0;
+      }
+
+          nav > ul {
+          display: flex;
+          justify-content: space-around;
+      }
+
+          li {
+          list - style: none;
+      }
+
+          .exhibition-box {
+          margin: 0 auto;
+          background-color: antiquewhite;
+          padding: 30px 30px;
+      }
+
+          .exhibition-info {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+      }
+
+          .thumnail {
+          display: flex;
+          justify-content: center;
+      }
+
+          .thumnail img {
+          width: 80%;
+      }
+
+          .exhibition-info > li > p {
+          font - size: 15px;
+      }
+
+          .exhibition-info h5 {
+          margin - bottom: 40px;
+      }
+
+          button {
+          border: 0;
+          outline: none;
+          margin: 20px auto;
+          padding: 5px 10px;
+          background-color: rosybrown;
+          border-radius: 5px;
+          color: #fff;
+          cursor: pointer;
+      }
+
+
+          /* REVIEW */
+          .review-commit > ul {
+          display: flex;
+      }
+
+          .user-info {
+          width: 20%;
+      }
+
+          .contentArea {
+          width: 80%;
+      }
+
+          .review-board {
+          background - color: antiquewhite;
+          border-radius: 10px;
+
+      }
+
+          .review-board > ul {
+          display: flex;
+          flex-direction: row;
+          padding: 10px 0;
+      }
+
+          .user {
+          width: 20%;
+          padding-left: 10px;
+          box-sizing: border-box;
+      }
+
+          .review-content > ul > li:nth-child(1) {
+          display: flex;
+          flex-direction: row;
+          text-align: end;
+      }
+
+          .review-content {
+          width: 80%;
+          background-color: lightpink;
+      }
+
+      </style>
+      <script>
+          {#   현재 날짜 구하기     #}
+          function getTime() {
+          let today ;
+          var d = new Date();
+
+          var s =
+          leadingZeros(d.getFullYear(), 4) + '-' +
+          leadingZeros(d.getMonth() + 1, 2) + '-' +
+          leadingZeros(d.getDate(), 2);
+
+          return s;
+      }
+          function leadingZeros(n, digits) {
+          var zero = '';
+          n = n.toString();
+
+          if (n.length < digits) {
+          for (i = 0; i < digits - n.length; i++)
+          zero += '0';
+      }
+
+          return zero + n;
+      }
+
+          {# 리뷰 작성하기 #}
+          function makeReview() {
+          let review_date = getTime()
+          let grade = $('#grade').val()
+          let comment = $('#comment').val()
+          let like = $('#like').val()
+          $.ajax({
+          type: "POST",
+          url: "/api/review",
+          data: {
+          review_exhibition_give: {{ word }},
+          review_grade_give: grade,
+          review_comment_give: comment,
+          review_like_give: like,
+          review_date_give: review_date
+      },
+          success: function (response) {
+          alert(response["msg"]);
+          window.location.href=`/exhibition/{{ word }}`;
+      }
+      })
+      }
+  </script>
   </head>
   <body>
-<body>
-   <h1> detail page </h1>
-    <div id="card-box">
-        {% for content in contents %}
-            {% if content.title == word %}
-                <div>{{ content.title }}</div>
-                <img src="{{ content.img_url }}"/>
-                <div>{{ content.url }}</div>
-                <div>{{ content.place }}</div>
-            {% endif %}
-        {% endfor %}
-    </div>
-</body>
+  <div class="wrapper">
+      <nav>
+          <div class="logo"><a href="/">logo</a></div>
+          <ul>
+              <a hef="/login">
+                  <li>로그인</li>
+              </a>
+              <a href="/register">
+                  <li>회원가입</li>
+              </a>
+          </ul>
+      </nav>
+      <section class="exhibition-box" id="card-box">
+          {% for content in contents %}
+              {% if content.id == word %}
+                  <ul class="exhibition-info">
+                      <li class="thumnail"><img src="{{ content.img_url }}"/></li>
+                      <li>
+                          <h5>{{ content.title }}</h5>
+                          <p>날짜 : <span>{{ content.period }}</span></p>
+                          <p>장소 : <span>{{ content.place }}</span></p>
+                          <p>가격 : <span>{{ content.price }}</span> 원</p>
+
+                          <a href="{{ content.url }}">
+                              <button>예매하러가기</button>
+                          </a>
+                      </li>
+                  </ul>
+              {% endif %}
+          {% endfor %}
+      </section>
+      <section class="review-box">
+          <div>
+              <button class="upload-btn">리뷰쓰기</button>
+              <div class="reviewWrap" id="reviewWrap">
+                  <div class="review-commit">
+                      <ul>
+                          <li class="user-info">
+                              <p>user img</p>
+                              <p>user name</p>
+                              <select id="grade" class="form-select">
+                                  <option selected>평점</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                              </select>
+
+                          </li>
+                          <li class="table contentArea">
+                            <textarea class="form-control" id="comment"
+                                      cols="30"
+                                      rows="5" placeholder="내용을 입력하세요."></textarea>
+                          </li>
+                      </ul>
+                      <div>
+                          <button onclick="makeReview()">등록하기</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="review-average">
+              <p>평점 : <span>하잏우에오</span></p>
+          </div>
+          {% for review in reviews %}
+              {% if review.review_exhibition == word %}
+                  <div class="review-board">
+                      <ul>
+                          <li class="user">
+                              <ul>
+                                  <li>userImg</li>
+                                  <li>min</li>
+                              </ul>
+                              <p class="grade">{{ review.review_grade }}</p>
+                          </li>
+                          <li class="review-content">
+                              <ul>
+                                  <li>
+                                      <p>{{ review.review_date }}</p>
+                                      <p>
+                                          <button onclick="likeup()">❤</button>
+                                      </p>
+                                  </li>
+                                  <li><p class="comment">{{ review.review_comment }}</p></li>
+                              </ul>
+                          </li>
+                      </ul>
+                      <div>
+                          <button onclick="deleteReview()">삭제</button>
+                      </div>
+                  </div>
+              {% endif %}
+          {% endfor %}
+  </div>
+  </section>
+
+  </div>
   </body>
 </html>

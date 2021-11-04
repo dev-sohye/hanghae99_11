@@ -102,12 +102,12 @@
 
                 for (let i = 0; i < listInner.length; i++) {
                     let title = listInner[i].getAttribute('id')
+                    let tempArr = [];
                     if (title.indexOf(value) > -1) {
                         listInner[i].style.display = 'flex';
                     } else {
                         listInner[i].style.display = 'none';
                     }
-
                     }
                 }
 
@@ -124,7 +124,7 @@
         {% for exhi in exhibition %}
           {% if exhi.period == "2021.10.10" %}
             <li class="close-exhi-card card">
-                <a href="{{  exhi.title }}">
+                <a href="/exhibition/{{  exhi.id }}">
                     <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
                 </a>
             </li>
@@ -144,8 +144,9 @@
     <div id="card-box">
         {% for exhi in exhibition %}
             <div class="card search-card" id="{{ exhi.title }}">
-                <a href="/exhibition/{{ exhi.title }}">
+                <a href="/exhibition/{{ exhi.id }}">
                     <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card image cap" />
+                    <p>{{ exhi.title }}</p>
                 </a>
             </div>
         {% endfor %}

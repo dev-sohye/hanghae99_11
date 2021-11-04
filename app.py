@@ -3,7 +3,7 @@ import requests
 app = Flask(__name__)
 
 from pymongo import MongoClient
-client = MongoClient('mongodb://test:test@localhost', 27017)
+client = MongoClient('localhost', 27017)
 db = client.dbsparta
 
 import jwt, datetime, hashlib
@@ -13,7 +13,6 @@ SECRET_KEY = 'okay'
 #멀티 페이지 url
 @app.route('/')
 def home():
-
     exhibition = list(db.exhibition.find({}, {'_id': False}))
     return render_template("index.html", exhibition=exhibition)
 
@@ -32,8 +31,9 @@ def home():
 
 @app.route('/exhibition/<keyword>')
 def detail(keyword):
-    contents = list(db.exhibition.find({}))
-    return render_template("exhibition_view.html", contents=contents, word=keyword)
+    contents = list(db.exhibition.find({}, {'_id':False}))
+    reviews = list(db.review.find({}, {'_id':False}).sort('review_grade', -1))
+    return render_template("exhibition_view.html", contents=contents, word=keyword, reviews=reviews)
 
 @app.route('/login')
 def login():
@@ -43,9 +43,9 @@ def login():
 def register():
     return render_template("register.html")
 
-@app.route('/review')
-def review():
-    return render_template('review.html')
+# @app.route('/review')
+# def review():
+#     return render_template('review.html')
 
 # 회원가입 API
 @app.route('/api/register', methods=['POST'])
@@ -118,16 +118,17 @@ def check_dup():
 ## 리뷰 작성하기
 @app.route('/api/review', methods=['POST'])
 def write_review():
+    exhibition_receive = request.form['review_exhibition_give']
+    date_receive = request.form['review_date_give']
     grade_receive = request.form['review_grade_give']
-    title_receive = request.form['review_title_give']
     comment_receive = request.form['review_comment_give']
     like_receive = 0
-
     doc = {
+        'review_exhibition': exhibition_receive,
         'review_grade': grade_receive,
-        'review_title': title_receive,
         'review_comment': comment_receive,
-        'review_like': like_receive
+        'review_like': like_receive,
+        'review_date': date_receive
     }
 
     db.review.insert_one(doc)
@@ -135,12 +136,14 @@ def write_review():
     return jsonify({'msg': '등록이 완료되었습니다.'})
 
 
-## 리뷰 불러오기
-@app.route('/api/review', methods=['GET'])
-def read_reviews():
-    reviews = list(db.review.find({}, {'_id': False}))
-    return jsonify({'all_reviews': reviews})
 
+# ## 리뷰 불러오기
+# @app.route('/api/review', methods=['GET'])
+# def read_reviews():
+#     reviews = list(db.review.find({}, {'_id': False}))
+#     print(reviews)
+#     return jsonify({'all_reviews': reviews})
+#
 
 # 리뷰 좋아요 누르기
 @app.route('/api/like', methods=['POST'])
