@@ -25,7 +25,7 @@ function login_to_review() {
       if (response["result"] == "success") {
         $.cookie("mytoken", response["token"]);
         alert("로그인 완료!");
-        window.location.href = "/";
+        window.location.href = document.referrer;
         // exhibition/{{ exhi.id }}
       } else {
         alert(response["msg"]);

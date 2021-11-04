@@ -95,11 +95,11 @@
       }
 
           .exhibition-info > li > p {
-          font - size: 15px;
+          font-size: 15px;
       }
 
           .exhibition-info h5 {
-          margin - bottom: 40px;
+          margin-bottom: 40px;
       }
 
           button {
@@ -128,7 +128,7 @@
       }
 
           .review-board {
-          background - color: antiquewhite;
+          background-color: antiquewhite;
           border-radius: 10px;
 
       }
@@ -256,24 +256,23 @@
           <div class="review-average">
               <p>평점 : <span class="average_grade">
 
-                  {% set score = [] %}
+    {% set score = [] %}
 
-                  {% for review in reviews %}
-                       {% if review.review_exhibition == word %}
-                           {% if score.append(review.review_grade)%}{% endif %}
-                       {% endif %}
-                  {% endfor %}
-                    {% set num = score | count-1 %}
-                    {% if  score | count == 0%}
-                        {{ score|count }}
-                    {% else %}
-                        {% set num  = score | count %}
-                        {{ score | sum /  num  }}
-                    {% endif %}
+    {% for review in reviews %}
+         {% if review.review_exhibition == word %}
+             {% if score.append(review.review_grade)%}{% endif %}
+         {% endif %}
+    {% endfor %}
+      {% set num = score | count-1 %}
+      {% if  score | count == 0%}
+          {{ (score|count) | round(2) }}
+      {% else %}
+          {% set num  = score | count %}
+          {{ (score | sum /  num) |round(2) }}
+      {% endif %}
 
 
-
-              </span></p>
+</span></p>
           </div>
           {% for review in reviews %}
               {% if review.review_exhibition == word %}
