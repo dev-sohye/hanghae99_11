@@ -159,9 +159,6 @@
       </style>
       <script>
           $(document).ready(function(){
-              averageRate()
-
-
           })
           {#   현재 날짜 구하기     #}
           function getTime() {
@@ -188,7 +185,6 @@
           }
 
           {# 리뷰 작성하기 #}
-         {# 리뷰 작성하기 #}
           function makeReview() {
               let review_date = getTime()
               let grade = parseInt($('#grade').val())
@@ -210,6 +206,22 @@
                   }
               })
           }
+
+         function deleteReview(idx) {
+             console.log(idx)
+            $.ajax({
+                type: 'GET',
+                url: '/delete/idx',
+                data: { review_comment_give : idx },
+                success: function (response) {
+                    alert(response['msg']);
+                    window.location.reload()
+                },
+                error: function (error) {
+                    alert(JSON.stringify)
+                }
+            })
+        }
 
   </script>
   </head>
@@ -249,34 +261,34 @@
           {% endfor %}
       </section>
       <section class="review-box">
-      <button class="upload-btn" onclick="dologin()">리뷰쓰기</button>
-       <div className="reviewWrap" id="reviewform">
-       </div>
+          <button class="upload-btn" onclick="dologin()">리뷰쓰기</button>
+          <div className="reviewWrap" id="reviewform">
+          </div>
 
           <div class="review-average">
               <p>평점 : <span class="average_grade">
 
     {% set score = [] %}
 
-    {% for review in reviews %}
-         {% if review.review_exhibition == word %}
-             {% if score.append(review.review_grade)%}{% endif %}
-         {% endif %}
-    {% endfor %}
-      {% set num = score | count-1 %}
-      {% if  score | count == 0%}
-          {{ (score|count) | round(2) }}
-      {% else %}
-          {% set num  = score | count %}
-          {{ (score | sum /  num) |round(2) }}
-      {% endif %}
+                  {% for review in reviews %}
+                      {% if review.review_exhibition == word %}
+                          {% if score.append(review.review_grade) %}{% endif %}
+                      {% endif %}
+                  {% endfor %}
+                  {% set num = score | count-1 %}
+                  {% if  score | count == 0 %}
+                      {{ (score|count) | round(2) }}
+                  {% else %}
+                      {% set num  = score | count %}
+                      {{ (score | sum /  num) |round(2) }}
+                  {% endif %}
 
 
 </span></p>
           </div>
           {% for review in reviews %}
               {% if review.review_exhibition == word %}
-                  <div class="review-board">
+                  <div class="review-board" id="{{ review._id }}">
                       <ul>
                           <li class="user">
                               <ul>
@@ -294,12 +306,13 @@
                                           <button onclick="likeup()">❤</button>
                                       </p>
                                   </li>
-                                  <li><p class="comment">{{ review.review_comment }}</p></li>
+                                  <li><p class="comment">{{ review.review_comment }}</p>
+                                  </li>
                               </ul>
                           </li>
                       </ul>
                       <div>
-                          <button onclick="deleteReview()">삭제</button>
+                          <button onclick="deleteReview('{{  review.review_comment }}')">삭제</button>
                       </div>
                   </div>
               {% endif %}

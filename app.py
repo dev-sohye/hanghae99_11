@@ -55,9 +55,7 @@ def login_to_review():
 def register():
     return render_template("register.html")
 
-# @app.route('/review')
-# def review():
-#     return render_template('review.html')
+
 
 # 회원가입 API
 @app.route('/api/register', methods=['POST'])
@@ -142,8 +140,6 @@ def write_review():
         'review_date': date_receive
     }
 
-
-
     db.review.insert_one(doc)
 
     return jsonify({'msg': '등록이 완료되었습니다.'})
@@ -153,15 +149,6 @@ def show_grades():
     grades_receive = list(db.review.find({}, {'_id': False}))
     print(grades_receive)
     return jsonify({'grades_receive': grades_receive})
-
-
-# ## 리뷰 불러오기
-# @app.route('/api/review', methods=['GET'])
-# def read_reviews():
-#     reviews = list(db.review.find({}, {'_id': False}))
-#     print(reviews)
-#     return jsonify({'all_reviews': reviews})
-#
 
 # 리뷰 좋아요 누르기
 @app.route('/api/like', methods=['POST'])
@@ -179,13 +166,13 @@ def make_like():
     return jsonify({'msg': current_like})
 
 
-# # 리뷰 삭제하기
-# @app.route('/api/delete', methods=['POST'])
-# def delete_reviews():
-#     review_title_receive = request.form['review_title_give']
-#
-#     db.review.delete_one({'review_title': review_title_receive})
-#     return jsonify({'msg': '삭제되었습니다.'})
+# 리뷰 삭제하기
+@app.route('/delete/<idx>', methods=['GET'])
+def delete_reviews(idx):
+    review_comment_receive = request.form['review_comment_give']
+    print(review_comment_receive)
+    db.review.delete_one({'review_comment': review_comment_receive})
+    return jsonify('msg')
 
 
 if __name__ == '__main__':
