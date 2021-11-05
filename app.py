@@ -173,7 +173,7 @@ def write_review():
 
     return jsonify({'msg': '등록이 완료되었습니다.'})
 
-
+#평점 불러오기
 @app.route('/api/review', methods=['GET'])
 def show_grades():
     grades_receive = list(db.review.find({}, {'_id': False}))
