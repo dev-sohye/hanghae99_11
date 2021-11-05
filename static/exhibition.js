@@ -30,6 +30,7 @@ function dologin() { //리뷰창 카운터
       if (response["result"] == "success" && counterLet == 1) {
         let reviewwrite = `
          
+<!--            여기 수정했습니다-->
             <div class="review-commit">
               <ul>
                 <li class="user-info">
@@ -49,10 +50,11 @@ function dologin() { //리뷰창 카운터
                 </li>
               </ul>
               <div>
-                <button onClick="makeReview()">등록하기</button>
+                <button class="wwrite-btn" onClick="makeReview()">등록하기</button>
               </div>
             </div>
           `;
+        // 여기까지입니다
         $("#reviewform").append(reviewwrite);
       } else if(response["result"] != "success"){
         alert("로그인 먼저 하세요~!~!")
