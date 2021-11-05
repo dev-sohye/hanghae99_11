@@ -2,8 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from pymongo import MongoClient
-client = MongoClient('mongodb://test:test@localhost', 27017)
-# client = MongoClient('localhost', 27017)
+# client = MongoClient('mongodb://test:test@localhost', 27017)
+client = MongoClient('localhost', 27017)
 
 # dbsparta 테이블에 인터파크 티켓 크롤링 한 데이터 저장하기
 db = client.dbsparta
