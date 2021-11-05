@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 from pymongo import MongoClient
 
-# client = MongoClient('mongodb://test:test@localhost', 27017)
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://test:test@localhost', 27017)
+# client = MongoClient('localhost', 27017)
 db = client.dbsparta
 
 import jwt, datetime, hashlib
@@ -40,7 +40,7 @@ def home():
 @app.route('/exhibition/<keyword>')
 def detail(keyword):
     contents = list(db.exhibition.find({}, {'_id': False}))
-    reviews = list(db.review.find({}, {'_id': False}).sort('review_grade', -1))
+    reviews = list(db.review.find({}, {'_id': False}).sort('review_time', -1))
     return render_template("exhibition_view.html", contents=contents, word=keyword, reviews=reviews)
 
 
@@ -147,7 +147,7 @@ def api_valid2():
 @app.route('/sign_up/check_dup', methods=['POST'])
 def check_dup():
     username_receive = request.form['username_give']
-    exists = bool(db.users.find_one({"user_id": username_receive}))
+    exists = bool(db.user.find_one({"user_id": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
 
 
@@ -159,6 +159,7 @@ def write_review():
     grade_receive = int(request.form['review_grade_give'])
     comment_receive = request.form['review_comment_give']
     id_receive = request.form['review_id']
+    time_receive = request.form['review_time']
     like_receive = 0
     doc = {
         'review_exhibition': exhibition_receive,
@@ -167,6 +168,7 @@ def write_review():
         'review_like': like_receive,
         'review_date': date_receive,
         'review_id': id_receive,
+        'review_time': time_receive,
     }
 
     db.review.insert_one(doc)
