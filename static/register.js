@@ -1,4 +1,3 @@
-
 let pwchk;
 let pwchkResult;
 let userpwLength;
@@ -12,7 +11,14 @@ $("#userpw").focusout(function () {
       .removeClass("is-safe")
       .addClass("is-danger");
     userpwLength = false;
-  } else userpwLength = true;
+  } else {
+    userpwLength = true;
+
+    $("#help-pw")
+      .text("비밀번호 확인란을 입력해주세요^^")
+      .removeClass("is-danger")
+      .addClass("is-safe");
+  }
 });
 
 // 비밀번호 일치 여부 확인
@@ -54,8 +60,15 @@ $(".pw").focusout(function () {
 /////// 회원가입 요청///////
 
 function register() {
+  let username = $("#userid").val();
+  if (username == "") {
+    alert("아이디를 입력해주세요!");
+    $("#userid").focus();
+    return;
+  }
+
   // 비밀번호 결과 변수에 지정
-  if (pwchk == true && userpwLength == true) {
+  else if (pwchk == true && userpwLength == true) {
     pwchkResult = "yes";
   } else pwchkResult = "no";
   // 아이디 중복확인
@@ -96,7 +109,7 @@ function is_nickname(asValue) {
 
 // 아이디 중복확인
 
-function idcheck() {
+$("#userid").focusout(function () {
   let username = $("#userid").val();
   console.log(username);
   if (username == "") {
@@ -104,7 +117,6 @@ function idcheck() {
       .text("아이디를 입력해주세요.")
       .removeClass("is-safe")
       .addClass("is-danger");
-    $("#userid").focus();
     return;
   }
   if (!is_nickname(username)) {
@@ -114,7 +126,6 @@ function idcheck() {
       )
       .removeClass("is-safe")
       .addClass("is-danger");
-    $("#userid").focus();
     return;
   }
   $("#help-id").addClass("is-loading");
@@ -130,7 +141,6 @@ function idcheck() {
           .text("이미 존재하는 아이디입니다.")
           .removeClass("is-safe")
           .addClass("is-danger");
-        $("#userid").focus();
       } else {
         $("#help-id")
           .text("사용할 수 있는 아이디입니다.")
@@ -140,4 +150,4 @@ function idcheck() {
       $("#help-id").removeClass("is-loading");
     },
   });
-}
+});

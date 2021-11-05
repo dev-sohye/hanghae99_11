@@ -5,10 +5,12 @@
     <title>회원가입 페이지</title>
     <!-- Required meta tags -->
     <meta charset="utf-8"/>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+
     />
     <!-- Cookie -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -17,6 +19,7 @@
     <!--------------CSS---------------->
     <link rel="stylesheet" href="../static/login.css"/>
     <!-- Bootstrap CSS -->
+
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -29,7 +32,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
+
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     <!--------------CUSTOM CSS---------------->
     <link rel="stylesheet" href="../static/exhibition_view.css"/>
     <link rel="stylesheet" href="../static/style.css"/>
@@ -71,41 +76,70 @@
     }
 
     {# 리뷰 작성하기 #}
+
+    //리뷰 등록, 유저id 가져오기
     function makeReview() {
-        let review_date = getTime()
-        let grade = parseInt($('#grade').val())
-        let comment = $('#comment').val()
-        let like = $('#like').val()
         $.ajax({
-            type: "POST",
-            url: "/api/review",
-            data: {
-                review_exhibition_give: {{ word }},
-                review_grade_give: grade,
-                review_comment_give: comment,
-                review_like_give: like,
-                review_date_give: review_date
-            },
+            type: "GET",
+            url: "/api/user",
+            data: {},
             success: function (response) {
-                alert(response["msg"]);
-                window.location.href = `/exhibition/{{ word }}`;
+                if (response["result"] == "success") {
+                    let username = response["user_id"];
+                    let review_date = getTime()
+                    let grade = parseInt($('#grade').val())
+                    let comment = $('#comment').val()
+                    let like = $('#like').val()
+                    //db에 데이터 전송
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/review",
+                        data: {
+                            review_exhibition_give: {{ word }},
+                            review_grade_give: grade,
+                            review_comment_give: comment,
+                            review_like_give: like,
+                            review_date_give: review_date,
+                            review_id: username
+                        },
+                        success: function (response) {
+                            alert(response["msg"]);
+                            window.location.href = `/exhibition/{{ word }}`;
+                        }
+                    })
+                } else {
+                    alert('nooooooo')
+                }
             }
         })
     }
-    function deleteReview(idx) {
-        console.log(idx)
-        $.ajax({
-            type: 'GET',
-            url: '/delete/idx',
-            data: {review_comment_give: idx},
-            success: function (response) {
-                alert(response['msg']);
-                window.location.reload()
-            },
-            error: function (error) {
-                alert(JSON.stringify)
+
+    //삭제창 유무 판별
+    $.ajax({
+        type: "GET",
+        url: "/api/user",
+        data: {},
+        success: function (response) {
+            if (response["result"] == "success") {
+                let username = response["user_id"];
             }
-        })
+        }
+    })
+    ;
+
+    //리뷰 삭제
+    function deleteReview() {
+        $.ajax({
+            type: "POST",
+            url: '/api/delete',
+            data: {
+                review_exhibition_give: reviewId.toString()
+            },
+            success: function (response) {
+                alert(response["msg"])
+                window.location.reload()
+            }
+        });
     }
 
 </script>
