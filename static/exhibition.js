@@ -6,13 +6,13 @@ $.ajax({
  data: {},
   success: function (response) {
     if (response["result"] == "success") {
-      $(".customer").css("display", "block");
-      $(".visitor").css("display", "none");
+      $(".login-btn-active").css("display", "block");
+      $(".login-btn").css("display", "none");
       let username = response["user_id"];
       $("#customer_name").prepend(username);
     } else {
-      $(".customer").css("display", "none");
-      $(".visitor").css("display", "block");
+      $(".login-btn-active").css("display", "none");
+      $(".login-btn").css("display", "block");
     }
   },
 });

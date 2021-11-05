@@ -1,0 +1,72 @@
+/* 메인 폰트 - 코트라 희망체 */
+@font-face {
+    font-family: 'KOTRAHOPE';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 서브 폰트 - 코트라 고딕체 */
+@font-face {
+    font-family: 'KOTRA_GOTHIC';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/KOTRA_GOTHIC.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* //FONTAWESOME 4.7 // */
+ @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+
+}
+
+h1 {
+  font-family: 'KOTRAHOPE';
+  -webkit-font-family: 'KOTRAHOPE', sans-serif;
+  -moz-osx-font-family: 'KOTRAHOPE', sans-serif;
+}
+
+:root{
+  --main-color: #222222;
+  --line-color: #ffebee;
+  --btn-color: #fdd93a;
+  --form-color: #f0e9e3;
+    --btn-hover-color: #fdbf3a;
+    --font-hover-color: #fff;
+/*  상세 전시 투명도 줘서 하는걸로 */
+}
+
+a,
+a:visited,
+a:active,
+a:hover{
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--main-color);
+}
+
+section{
+  width: 1080px;
+  background-color: var(--form-back-color);
+  margin: 0 auto;
+
+}
+
+
+button{
+  border: 0;
+  outline: 0;
+  border-radius: 10px;
+  background-color: var(--btn-color);
+  cursor: pointer;
+
+}

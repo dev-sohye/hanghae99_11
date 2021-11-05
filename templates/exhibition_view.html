@@ -9,10 +9,6 @@
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <!-- Bulma CSS -->
-    <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
     />
     <!-- Cookie -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -21,152 +17,39 @@
     <!--------------CSS---------------->
     <link rel="stylesheet" href="../static/login.css"/>
     <!-- Bootstrap CSS -->
-    <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous"
-    />
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous"/>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"
-    ></script>
-    <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"
-    ></script>
-    <!--------------CSS---------------->
+            crossorigin="anonymous"></script>
+    <!--------------CUSTOM CSS---------------->
     <link rel="stylesheet" href="../static/exhibition_view.css"/>
+    <link rel="stylesheet" href="../static/style.css"/>
+    <link rel="stylesheet" href="../static/nav.css"/>
     <script type="text/javascript" src="../static/exhibition.js"></script>
 </head>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-
-    }
-
-    .wrapper {
-        width: 600px;
-        margin: 0 auto;
-    }
-
-    nav {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 500px 200px;
-        text-align: center;
-
-        padding: 10px 0;
-    }
-
-    nav > ul {
-        display: flex;
-        justify-content: space-around;
-    }
-
-    li {
-        list-style: none;
-    }
-
-    .exhibition-box {
-        margin: 0 auto;
-        background-color: antiquewhite;
-        padding: 30px 30px;
-    }
-
-    .exhibition-info {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .thumnail {
-        display: flex;
-        justify-content: center;
-    }
-
-    .thumnail img {
-        width: 80%;
-    }
-
-    .exhibition-info > li > p {
-        font-size: 15px;
-    }
-
-    .exhibition-info h5 {
-        margin-bottom: 40px;
-    }
-
-    button {
-        border: 0;
-        outline: none;
-        margin: 20px auto;
-        padding: 5px 10px;
-        background-color: rosybrown;
-        border-radius: 5px;
-        color: #fff;
-        cursor: pointer;
-    }
-
-
-    /* REVIEW */
-    .review-commit > ul {
-        display: flex;
-    }
-
-    .user-info {
-        width: 20%;
-    }
-
-    .contentArea {
-        width: 80%;
-    }
-
-    .review-board {
-        background-color: antiquewhite;
-        border-radius: 10px;
-
-    }
-
-    .review-board > ul {
-        display: flex;
-        flex-direction: row;
-        padding: 10px 0;
-    }
-
-    .user {
-        width: 20%;
-        padding-left: 10px;
-        box-sizing: border-box;
-    }
-
-    .review-content > ul > li:nth-child(1) {
-        display: flex;
-        flex-direction: row;
-        text-align: end;
-    }
-
-    .review-content {
-        width: 80%;
-        background-color: lightpink;
-    }
-
-</style>
 <script>
     $(document).ready(function () {
-        averageRate()
-
-
     })
-    {#   현재 날짜 구하기     #}
 
+    //상단 메뉴 고정
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 50) {
+            $('nav, .btn-top').addClass('active')
+        } else {
+            $('nav, .btn-top').removeClass('active')
+        }
+    });
+    {#   현재 날짜 구하기     #}
     function getTime() {
-        let today;
         let d = new Date();
 
         let s =
@@ -176,7 +59,6 @@
 
         return s;
     }
-
     function leadingZeros(n, digits) {
         let zero = '';
         n = n.toString();
@@ -189,9 +71,6 @@
     }
 
     {# 리뷰 작성하기 #}
-    {# 리뷰 작성하기 #}
-
-
     //리뷰 등록, 유저id 가져오기
     function makeReview() {
         $.ajax({
@@ -260,100 +139,126 @@
 </head>
 <body>
 <div class="wrapper">
-    <nav>
-        <div class="logo"><a href="/">logo</a></div>
-        <ul>
-            <a href="/login" class="visitor">
-                <li>로그인</li>
-            </a>
-            <a href="/register" class="visitor">
-                <li>회원가입</li>
-            </a>
-            <li class="customer" id="customer_name">님, 환영합니다!</li>
-            <li class="customer">
-                <button onclick="logout()">로그아웃</button>
-            </li>
-
-        </ul>
-    </nav>
-    <section class="exhibition-box" id="card-box">
-        {% for content in contents %}
-            {% if content.id == word %}
-                <ul class="exhibition-info">
-                    <li class="thumnail"><img src="{{ content.img_url }}"/></li>
-                    <li>
-                        <h5>{{ content.title }}</h5>
-                        <p>날짜 : <span>{{ content.period }}</span></p>
-                        <p>장소 : <span>{{ content.place }}</span></p>
-                        <p>가격 : <span>{{ content.price }}</span> 원</p>
-
-                        <a href="{{ content.url }}">
-                            <button>예매하러가기</button>
-                        </a>
-                    </li>
-                </ul>
-            {% endif %}
-        {% endfor %}
-    </section>
-    <section class="review-box">
-        <button class="upload-btn" onclick="dologin()">리뷰쓰기</button>
-        <div className="reviewWrap" id="reviewform">
+ {# nav 메뉴 시작 #}
+    <nav id="nav">
+        <div class="logo">
+                <a href="/">
+                    <img src="../static/logo_02.png" alt="logo"/>
+                </a>
         </div>
+        <div class="login-box">
+            <ul class="login-btn-form login-btn">
+                    <a href="/login" class="visitor">
+                        <li>로그인</li>
+                    </a>
+                    <a href="/register" class="visitor">
+                        <li>회원가입</li>
+                    </a>
+            </ul>
+             <ul class="login-btn-form login-btn-active">
+                    <li class="customer" id="customer_name">님, 환영합니다!</li>
+                    <li class="customer">
+                        <button class="logout-btn" onclick="logout()">로그아웃</button>
+                    </li>
 
-        <div class="review-average">
-            <p>평점 : <span class="average_grade">
+            </ul>
+        </div>
+    </nav>
+    {# nav 메뉴 끝 #}
 
-    {% set score = [] %}
+    {# 상세 section 시작 #}
+    <section>
+        {#  전시 상세 레이어 시작 #}
+        <article class="exhibition">
+            <section class="exhibition-box" id="card-box">
+                {% for content in contents %}
+                    {% if content.id == word %}
+                        <ul class="exhibition-info">
+                            <li class="thumnail"><img src="{{ content.img_url }}"/></li>
+                            <li>
+                                <h1>{{ content.title }}</h1>
+                                <p>날짜 : <span>{{ content.period }}</span></p>
+                                <p>장소 : <span>{{ content.place }}</span></p>
+                                <p>가격 : <span>{{ content.price }}</span> 원</p>
 
-                {% for review in reviews %}
-                    {% if review.review_exhibition == word %}
-                        {% if score.append(review.review_grade) %}{% endif %}
+                                <a href="{{ content.url }}">
+                                    <button class="book-btn">예매하러가기</button>
+                                </a>
+                            </li>
+                        </ul>
                     {% endif %}
                 {% endfor %}
-                {% set num = score | count-1 %}
-                {% if  score | count == 0 %}
-                    {{ (score|count) | round(2) }}
-                {% else %}
-                    {% set num  = score | count %}
-                    {{ (score | sum /  num) |round(2) }}
-                {% endif %}
+            </section>
+        </article>
+       {#  전시 상세 레이어 끝 #}
+    </section>
+
+    <div class="review-box">
+            <button class="upload-btn" onclick="dologin()">리뷰쓰기</button>
+            <div className="reviewWrap" id="reviewform">
+            </div>
+
+            <div class="review-average">
+                <p>평점 : <span class="average_grade">
+
+                {% set score = [] %}
+
+                                {% for review in reviews %}
+                                    {% if review.review_exhibition == word %}
+                                        {% if score.append(review.review_grade) %}{% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% set num = score | count-1 %}
+                                {% if  score | count == 0 %}
+                                    {{ (score|count) | round(2) }}
+                                {% else %}
+                                    {% set num  = score | count %}
+                                    {{ (score | sum /  num) |round(2) }}
+                                {% endif %}
 
 
-</span></p>
-        </div>
-        {% for review in reviews %}
-            {% if review.review_exhibition == word %}
-                <div class="review-board">
-                    <ul>
-                        <li class="user">
-                            <ul>
-                                <li>userImg</li>
-                                <li>min</li>
-                            </ul>
-                            <p class="grade">{{ review.review_grade }}</p>
+            </span>
+                </p>
+            </div>
+            {% for review in reviews %}
+                {% if review.review_exhibition == word %}
+                    <div class="review-board" id="{{ review._id }}">
+                        <ul>
+                            <li class="user">
+                                <ul>
+                                    <li>userImg</li>
+                                    <li>min</li>
+                                </ul>
+                                <p class="grade">{{ review.review_grade }}</p>
 
-                        </li>
-                        <li class="review-content">
-                            <ul>
-                                <li>
-                                    <p>{{ review.review_date }}</p>
-                                    <p>
-                                        <button onclick="likeup()">❤</button>
-                                    </p>
-                                </li>
-                                <li><p class="comment">{{ review.review_comment }}</p></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div>
-                        <button onclick="deleteReview()">삭제</button>
+                            </li>
+                            <li class="review-content">
+                                <ul>
+                                    <li>
+                                        <p>{{ review.review_date }}</p>
+                                        <p>
+                                            <button onclick="likeup()">❤</button>
+                                        </p>
+                                    </li>
+                                    <li><p class="comment">{{ review.review_comment }}</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div>
+                            <button onclick="deleteReview('{{ review.review_comment }}')">삭제</button>
+                        </div>
                     </div>
-                </div>
-            {% endif %}
-        {% endfor %}
-</div>
-</section>
-
+                {% endif %}
+            {% endfor %}
+    </div>
+    {# footer - top 버튼 끝 #}
+    <footer>
+        <a href="#" class="btn-top">
+          Top
+        </a>
+    </footer>
+    {# footer - top 버튼  끝  #}
 </div>
 
 </body>
