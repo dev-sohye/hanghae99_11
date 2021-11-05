@@ -108,6 +108,12 @@ main {
   font-size: 14px;
 }
 
+.register-button:hover,
+.register-button:active,
+.register-button:focus {
+  background: var(--btn-hover-color)
+}
+
 .msg {
   margin-top: 20px;
   font-family: "KOTRA_GOTHIC";
