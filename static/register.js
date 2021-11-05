@@ -1,4 +1,3 @@
-
 let pwchk;
 let pwchkResult;
 let userpwLength;
