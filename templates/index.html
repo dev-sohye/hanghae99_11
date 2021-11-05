@@ -150,49 +150,6 @@ $(document).ready(function () {
 
 
 <body class="window__scene">
-    {# nav 메뉴 시작 #}
-    <nav id="nav">
-        <div class="logo">
-                <a href="/">
-                    <img src="../static/logo_02.png" alt="logo"/>
-                </a>
-        </div>
-        <div class="login-box">
-            <ul class="login-btn-form login-btn">
-                    <a href="/login" class="visitor">
-                        <li>로그인</li>
-                    </a>
-                    <a href="/register" class="visitor">
-                        <li>회원가입</li>
-                    </a>
-            </ul>
-             <ul class="login-btn-form login-btn-active">
-                    <li class="customer" id="customer_name">님, 환영합니다!</li>
-                    <li class="customer">
-                        <button class="logout-btn" onclick="logout()">로그아웃</button>
-                    </li>
-
-            </ul>
-        </div>
-    </nav>
-    {# nav 메뉴 끝 #}
-
-    {# 종료임박 전시 card carousel  - start #}
-    <div id="close-exhi">
-       <ul class="close-exhi-inner">
-        {% for exhi in exhibition %}
-
-            {% if loop.index <= 40 %}
-                <li class="close-exhi-card card">
-                    <a href="/exhibition/{{  exhi.id }}">
-                        <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
-                    </a>
-                </li>
-            {% endif %}
-
-        {% endfor %}
-        </ul>
-    </div>
     <header>
         <nav id="nav">
             <div class="logo">
