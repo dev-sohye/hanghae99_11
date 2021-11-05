@@ -9,11 +9,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <!-- Bulma CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
-    />
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
     <!-- Cookie -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
@@ -43,18 +40,23 @@
     ></script>
 
     <style>
-
-        h1,
         form{
             text-align: center;
             margin: 60px 0;
             border: 0;
             outline: none;
         }
-        input{
-            border: 1px solid #888;
+        input[type=text]{
+            width: 500px;
+            border: 0;
             outline: none;
-            padding: 5px 10px;
+            padding: 5px 20px;
+            background-color: var(--btn-color);
+            border-radius: 15px;
+
+        }
+        input::placeholder{
+            color: var(--main-color)
         }
 
         #close-exhi {
@@ -75,6 +77,10 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(4, 1fr)
+        }
+
+        .card{
+            margin: 5px 10px;
         }
 
 
@@ -153,7 +159,7 @@
                     let exhiMon = exhiPeriod[i].getAttribute('id').substr(3, 2)
 
                     if (year == exhiYe && mon == exhiMon && day <= exhiDay) {
-                        exhiPeriod[i].style.display = 'flex';
+                        {#exhiPeriod[i].style.display = 'flex';#}
                     } else {
                         exhiPeriod[i].style.display = 'none';
                     }
@@ -167,40 +173,41 @@
 </head>
 
 <body>
+<div class="total-wrapper">
     {# nav 메뉴 시작 #}
+<header>
     <nav id="nav">
         <div class="logo">
-                <a href="/">
-                    <img src="../static/logo_02.png" alt="logo"/>
-                </a>
+            <a href="/">
+                <img src="../static/logo_02.png" alt="logo"/>
+            </a>
         </div>
         <div class="login-box">
             <ul class="login-btn-form login-btn">
                     <a href="/login" class="visitor">
-                        <li>로그인</li>
+                        <li><button class="before-login-btn">로그인</button></li>
                     </a>
                     <a href="/register" class="visitor">
-                        <li>회원가입</li>
+                        <li><button class="before-login-btn">회원가입</button></li>
                     </a>
             </ul>
              <ul class="login-btn-form login-btn-active">
-                    <li class="customer" id="customer_name">님, 환영합니다!</li>
-                    <li class="customer">
-                        <button class="logout-btn" onclick="logout()">로그아웃</button>
-                    </li>
-
+                <li class="customer" id="customer_name">님, 환영합니다!</li>
+                <li class="customer">
+                    <button class="logout-btn" onclick="logout()">로그아웃</button>
+                </li>
             </ul>
         </div>
     </nav>
+</header>
     {# nav 메뉴 끝 #}
 
     {# 종료임박 전시 card carousel  - start #}
     <div id="close-exhi">
        <ul class="close-exhi-inner">
         {% for exhi in exhibition %}
-
-            {% if loop.index <= 40 %}
-                <li class="close-exhi-card card">
+            {% if loop.index <= 33 %}
+                <li class="close-exhi-card card" id="{{ exhi.period[-8:] }}">
                     <a href="/exhibition/{{  exhi.id }}">
                         <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
                     </a>
@@ -224,7 +231,6 @@
             <div class="card search-card" id="{{ exhi.title }}">
                 <a href="/exhibition/{{ exhi.id }}">
                     <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card image cap" />
-                    <p>{{ exhi.title }}</p>
                 </a>
             </div>
         {% endfor %}
@@ -232,11 +238,12 @@
     {# footer - top 버튼  시작  #}
     <footer>
         <a href="#" class="btn-top">
-          Top
+            <i class="fas fa-arrow-up"></i>
         </a>
     </footer>
     {# footer - top 버튼  끝  #}
     {# 전체 전시  - end #}
+</div>
 <script type="text/javascript" src="../static/exhibition.js"></script>
   </body>
 </html>

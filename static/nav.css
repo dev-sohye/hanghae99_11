@@ -1,3 +1,7 @@
+header {
+    position: relative;
+    height: 200px;
+}
 
 nav {
     width: 100%;
@@ -5,7 +9,7 @@ nav {
     font-family: 'KOTRA_GOTHIC';
     -webkit-font-family: 'KOTRAHOPE', sans-serif;
     -moz-osx-font-family: 'KOTRAHOPE', sans-serif;
-    background-color: var(--btn-hover-color);
+    /*background-color: var(--btn-hover-color);*/
 
     position: fixed;
     top: 0;
@@ -34,20 +38,23 @@ nav {
 
 nav.active {
     height: 100px;
-    background-color: #fff;
+    background-color: rgba(255,255,255, 0.5);
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 nav.active .logo{
     padding: 15px 0;
+    left: 15%;
+    transform: translate(0, -15);
 }
 nav.active .logo img{
     width: 50%;
 }
 
-
+/* 로그인 버튼 시작 */
 .login-box {
     width: 300px;
     position: absolute;
+    top: 20px;
     right: 0;
 }
 
@@ -67,8 +74,11 @@ nav.active .logo img{
     width: 100%;
     padding: 10px 20px 0 0px;
     overflow: hidden;
-}
 
+}
+.block-btn{
+      display: block;
+}
 .login-btn-active > li {
     float: left;
 }
@@ -82,22 +92,23 @@ nav.active .logo img{
     width: 30%;
 }
 
-
-.customer {
-    font-weight: 600;
+.customer{
+    font-weight: 700;
 }
 
+.before-login-btn,
 .logout-btn {
     padding: 5px 10px;
     transition: all 0.3s ease;
 }
 
+.before-login-btn:hover,
 .logout-btn:hover {
     background-color: var(--btn-hover-color);
     color: var(--font-hover-color);
 }
-
-/*footer*/
+/* 로그인 버튼 끝*/
+/*footer - 탑 버튼 시작 */
 
 .btn-top {
     position: fixed;
@@ -122,3 +133,4 @@ nav.active .logo img{
     background-color: var(--btn-hover-color);
     color: var(--font-hover-color);
 }
+/*footer - 탑 버튼 끝 */

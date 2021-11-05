@@ -1,20 +1,9 @@
-/* html,
-body {
-  margin: 0px;
-  height: 100%;
-  width: 100vw;
-} */
 
 main {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-img {
-  margin: 0 auto 10px auto;
-  height: 25%;
 }
 
 .login-container {
@@ -28,6 +17,10 @@ img {
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.login-container img{
+  margin: 0 auto 10px auto;
+  height: 25%;
 }
 
 .input-box input {
@@ -61,7 +54,7 @@ img {
 .login-button:hover,
 .login-button:active,
 .login-button:focus {
-  background: rgb(204, 204, 0);
+  background: var(--btn-hover-color)
 }
 
 .msg {

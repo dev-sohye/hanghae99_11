@@ -9,11 +9,11 @@
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    />
     <!-- Cookie -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
     <!--------------CSS---------------->
     <link rel="stylesheet" href="../static/login.css"/>
     <!-- Bootstrap CSS -->
@@ -140,7 +140,8 @@
 <body>
 <div class="wrapper">
  {# nav 메뉴 시작 #}
-    <nav id="nav">
+<header>
+    <nav>
         <div class="logo">
                 <a href="/">
                     <img src="../static/logo_02.png" alt="logo"/>
@@ -149,10 +150,10 @@
         <div class="login-box">
             <ul class="login-btn-form login-btn">
                     <a href="/login" class="visitor">
-                        <li>로그인</li>
+                        <li><button class="before-login-btn">로그인</button></li>
                     </a>
                     <a href="/register" class="visitor">
-                        <li>회원가입</li>
+                        <li><button class="before-login-btn">회원가입</button></li>
                     </a>
             </ul>
              <ul class="login-btn-form login-btn-active">
@@ -164,6 +165,7 @@
             </ul>
         </div>
     </nav>
+</header>
     {# nav 메뉴 끝 #}
 
     {# 상세 section 시작 #}
@@ -255,7 +257,7 @@
     {# footer - top 버튼 끝 #}
     <footer>
         <a href="#" class="btn-top">
-          Top
+            <i class="fas fa-arrow-up"></i>
         </a>
     </footer>
     {# footer - top 버튼  끝  #}
