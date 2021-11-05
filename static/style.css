@@ -14,14 +14,19 @@
     font-style: normal;
 }
 
+/* //FONTAWESOME 4.7 // */
+ @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
-  background-image:url('');
+
 }
 
 h1 {
@@ -35,12 +40,15 @@ h1 {
   --line-color: #ffebee;
   --btn-color: #fdd93a;
   --form-color: #f0e9e3;
+    --btn-hover-color: #fdbf3a;
+    --font-hover-color: #fff;
 /*  상세 전시 투명도 줘서 하는걸로 */
 }
 
 a,
 a:visited,
-a:active{
+a:active,
+a:hover{
   text-decoration: none;
   cursor: pointer;
   color: var(--main-color);
@@ -58,7 +66,7 @@ button{
   border: 0;
   outline: 0;
   border-radius: 10px;
-  background-color: var(--button-color);
+  background-color: var(--btn-color);
   cursor: pointer;
 
 }

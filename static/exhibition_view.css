@@ -1,0 +1,105 @@
+
+.wrapper{
+    width: 100%;
+    margin: 0 auto;
+    background-image: url("paperbg.jpg");
+    background-size: cover;
+    object-fit: cover;
+    padding-top: 300px;
+    font-family: 'KOTRA_GOTHIC';
+    -webkit-font-family: 'KOTRA_GOTHIC', sans-serif;
+    -moz-osx-font-family: 'KOTRA_GOTHIC', sans-serif;
+}
+
+.exhibition-box {
+    width: 800px;
+    margin: 0 auto;
+    background-color: var(--form-color);
+    border-radius: 10px;
+    padding: 30px;
+
+}
+
+.exhibition-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+.thumnail {
+    display: flex;
+    justify-content: center;
+}
+
+.thumnail img {
+    width: 70%;
+}
+
+.exhibition-info h1{
+    font-size: 30px;
+    padding: 10px 0;
+}
+
+.exhibition-info > li > p {
+   padding: 5px;
+}
+
+.exhibition-info h5 {
+    margin-bottom: 40px;
+}
+
+.book-btn{
+    margin-top: 100px;
+    margin-left: 80px;
+    padding: 10px 60px;
+    color: var(--main-color);
+    transition: all 0.3s ease;
+    text-align: center;
+
+}
+.book-btn:hover{
+    background-color:var(--btn-hover-color);
+    color: var(--font-hover-color);
+}
+
+/* REVIEW */
+.review-commit > ul {
+    display: flex;
+}
+
+.user-info {
+    width: 20%;
+}
+
+.contentArea {
+    width: 80%;
+}
+
+.review-board {
+    background-color: antiquewhite;
+    border-radius: 10px;
+
+}
+
+.review-board > ul {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0;
+}
+
+.user {
+    width: 20%;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.review-content > ul > li:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    text-align: end;
+}
+
+.review-content {
+    width: 80%;
+    background-color: lightpink;
+}
