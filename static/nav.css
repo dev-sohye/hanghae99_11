@@ -1,0 +1,136 @@
+header {
+    position: relative;
+    height: 200px;
+}
+
+nav {
+    width: 100%;
+    height: 200px;
+    font-family: 'KOTRA_GOTHIC';
+    -webkit-font-family: 'KOTRAHOPE', sans-serif;
+    -moz-osx-font-family: 'KOTRAHOPE', sans-serif;
+    /*background-color: var(--btn-hover-color);*/
+
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    transition: all 0.3s;
+}
+
+
+.logo {
+    width: 200px;
+    padding: 70px 0;
+    text-align: center;
+
+    position: absolute;
+    top: 0;
+    left: 44%;
+    transform: translate(0, -44);
+    transition: width 0.3s;
+
+}
+
+
+.logo img {
+    width: 100%;
+}
+
+nav.active {
+    height: 100px;
+    background-color: rgba(255,255,255, 0.5);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+nav.active .logo{
+    padding: 15px 0;
+    left: 15%;
+    transform: translate(0, -15);
+}
+nav.active .logo img{
+    width: 50%;
+}
+
+/* 로그인 버튼 시작 */
+.login-box {
+    width: 300px;
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+
+.login-btn {
+    width: 180px;
+    padding: 10px 20px 0 0;
+    overflow: hidden;
+    margin-left: 120px;
+}
+
+.login-btn > a {
+    float: left;
+    width: 50%;
+}
+
+.login-btn-active {
+    width: 100%;
+    padding: 10px 20px 0 0px;
+    overflow: hidden;
+
+}
+.block-btn{
+      display: block;
+}
+.login-btn-active > li {
+    float: left;
+}
+
+.login-btn-active > li:nth-child(1) {
+    width: 60%;
+    margin-top: 5px;
+}
+
+.login-btn-active > li:nth-child(2) {
+    width: 30%;
+}
+
+.customer{
+    font-weight: 700;
+}
+
+.before-login-btn,
+.logout-btn {
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+}
+
+.before-login-btn:hover,
+.logout-btn:hover {
+    background-color: var(--btn-hover-color);
+    color: var(--font-hover-color);
+}
+/* 로그인 버튼 끝*/
+/*footer - 탑 버튼 시작 */
+
+.btn-top {
+    position: fixed;
+    bottom: -50px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: var(--btn-color);
+    text-align: center;
+    padding-top: 8px;
+    color: var(--main-color);
+    transition: all 0.3s;
+}
+
+
+.btn-top.active {
+    bottom: 20px;
+}
+
+.btn-top.active:hover {
+    background-color: var(--btn-hover-color);
+    color: var(--font-hover-color);
+}
+/*footer - 탑 버튼 끝 */

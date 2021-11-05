@@ -1,0 +1,197 @@
+
+.exhibition-box {
+    width: 800px;
+    margin: 0 auto;
+    background-color: var(--form-color);
+    border-radius: 10px;
+    padding: 30px;
+
+}
+
+.exhibition-info {
+    display: flex;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+.thumnail {
+    display: flex;
+    justify-content: center;
+    width:300px;
+}
+
+
+
+.exhibition {padding-top:80px; }
+.exhibition-info h1{
+    font-size: 30px;
+    padding: 10px 0;
+}
+
+.exhibition-info > li > p {
+   padding: 5px;
+}
+
+.exhibition-info h5 {
+    margin-bottom: 40px;
+}
+
+.book-btn{
+    margin-top: 100px;
+    padding: 10px 60px;
+    color: var(--main-color);
+    transition: all 0.3s ease;
+    text-align: center;
+
+}
+.book-btn:hover{
+    background-color:var(--btn-hover-color);
+    color: var(--font-hover-color);
+}
+
+/* REVIEW */
+.review-commit > ul {
+    display: flex;
+    align-items:center;
+
+}
+.review-commit {display:flex;align-content: center;  justify-content: flex-start;}
+.user-info {
+    margin-right:20px;
+}
+
+.contentArea {
+    width: 670px;
+}
+
+.review-board {
+    background-color: antiquewhite;
+    border-radius: 10px;
+
+}
+
+.review-board > ul {
+    *display: flex;
+    flex-direction: row;
+    padding: 10px 0;
+}
+
+.user {
+    width: 20%;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+.reviewWrap {width:860px; }
+.review-content > ul > li:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    text-align: end;
+}
+
+.review-content {
+    width: 80%;
+    background-color: lightpink;
+}
+
+
+/**review 댓글달기***/
+.review-box {padding:50px 0;align-items: center;   }
+.review-board {
+              width: 100%;
+              background-color: #ffffff;
+              margin-top: 20px;
+              border-radius: 10px;
+
+          }
+
+          .upload-btn {
+              border: 0;
+              outline: 0;
+              border-radius: 10px;
+              background-color: #fdd93a;
+              cursor: pointer;
+              padding:10px;
+          }
+
+          .wwrite-btn {
+              border: 0;
+              outline: 0;
+              border-radius: 10px;
+              background-color: #fdd93a;
+              cursor: pointer;
+              padding:55px 10px;
+              margin-left:20px;
+          }
+
+
+          .delbtn {
+              border: 0;
+              outline: 0;
+              border-radius: 10px;
+              background-color: #fdd93a;
+              cursor: pointer;
+          }
+
+
+          .likebtn {
+              border: 0;
+              outline: 0;
+              border-radius: 10px;
+              background-color: var(--button-color);
+              cursor: pointer;
+
+          }
+
+          .review-wrap {
+              position: relative;
+              padding: 15px 20px 10px;
+          }
+
+
+          .review-wrap .grade {
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+          }
+
+          .review-wrap .grade > span {
+
+          }
+
+          .review-wrap .grade > span:last-child {
+              text-align: right;
+          }
+
+          .review-wrap .comment {
+              display: flex;
+              width: 100%;
+              height: auto;
+              padding-bottom: 30px;
+              margin-top: 10px;
+          }
+
+          .review-wrap .comment {
+              flex: 0 0 50px;
+              font-size: 16px;
+              font-weight: normal;
+          }
+
+          .review-wrap .comment .text {
+              flex: 0 0 calc(100% - 50px);
+          }
+
+          .review-wrap .like {
+              position: absolute;
+              right: 15px;
+              bottom: 0;
+          }
+
+          .review-wrap .like button {
+              margin: 0;
+              padding:10px;
+          }
+
+          .review_box_wrap {display:flex; align-items:center;justify-content: space-between; }
+          .review-average {margin-right:20px;   }
+          .average_grade {font-size:20px; font-weight:bold;}
+          .form-select {padding:10px; border-radius:10px; }
