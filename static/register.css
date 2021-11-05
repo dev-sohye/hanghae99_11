@@ -1,0 +1,121 @@
+/* html,
+body {
+  margin: 0px;
+  height: 100%;
+  width: 100vw;
+} */
+
+main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container img {
+  margin: 0 auto 10px auto;
+  height: 17%;
+}
+
+.login-container {
+  background-color: var(--form-color);
+  border-radius: 10px;
+  opacity: 0.8;
+  height: 650px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.input-box input {
+  font-family: "KOTRA_GOTHIC";
+  outline: 0;
+  background: #f2f2f2;
+  width: 300px;
+  border: 0;
+  margin: 10px 0 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 아이디 확인 메세지 */
+#help-id {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+/* 확인 메세지 */
+.input-box p {
+  margin: 0;
+  padding: 0;
+}
+
+/* 비밀번호 확인 메세지 */
+#help-pw {
+  height: 10px;
+  margin-bottom: 10px;
+}
+
+/* 폰트 설정 */
+.font-size {
+  font-size: 15px;
+  font-family: "KOTRA_GOTHIC";
+}
+
+.caution-font-size {
+  font-size: 8px;
+}
+
+/* 로그인 중복확인 */
+.chkbutton {
+  border: none;
+  color: white;
+  width: 300px;
+  border: 0;
+  margin-top: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.gender-box {
+  width: 300px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.gender-right {
+  display: flex;
+  align-items: center;
+}
+
+.gender-right label {
+  margin: 0 20px 0 5px;
+  padding: 0;
+}
+
+.register-button {
+  font-family: "KOTRA_GOTHIC";
+  border: none;
+  color: white;
+  width: 300px;
+  border: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.register-button:hover,
+.register-button:active,
+.register-button:focus {
+  background: var(--btn-hover-color)
+}
+
+.msg {
+  margin-top: 20px;
+  font-family: "KOTRA_GOTHIC";
+  color: rgba(128, 128, 128, 0.678);
+}
