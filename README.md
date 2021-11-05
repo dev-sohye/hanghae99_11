@@ -1,5 +1,5 @@
 # [ 🎆 전시 뭐하니? ]
- <img width="300" alt="thumb" src="https://user-images.githubusercontent.com/63698668/140554745-e2c47db4-5f45-4fe0-8b75-2ea065026dc3.png">
+![전시뭐하니](https://user-images.githubusercontent.com/65863834/140554983-96080ef4-aafa-4d87-b6d1-404d7a5c54f6.JPG)
 
 
 [logo]: https://github.com/dev-sohye/hanghae99_11/blob/main/logo_02.png?raw=true
