@@ -69,4 +69,3 @@ function logout() {
   alert("로그아웃!");
   window.location.reload();
 }
-
