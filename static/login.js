@@ -1,4 +1,10 @@
 function login() {
+  let username = $("#userid").val();
+  if (username == "") {
+    alert("아이디를 입력해주세요!");
+    $("#userid").focus();
+    return;
+  }
   $.ajax({
     type: "POST",
     url: "/api/login",

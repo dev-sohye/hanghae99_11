@@ -26,6 +26,7 @@
     />
     <!--------------CSS---------------->
     <link rel="stylesheet" href="../static/login.css" />
+    <link rel="stylesheet" href="../static/stlye.css" />
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
@@ -38,53 +39,37 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-      <script>
-      //로그인 경고창
-            {% if msg %}
-                alert("{{ msg }}")
-            {% endif %}
-            </script>
+    <script>
+      //토큰 여부 경고창
+      // {% if msg %}
+      //     alert("{{ msg }}")
+      // {% endif %}
+    </script>
   </head>
 
   <body>
-    <!---------페이지 전환 링크------------>
-    <div class="header-container">
-      <a href="/exhibition">상세 페이지로 이동</a>
-      <a href="/register">회원가입 페이지로 이동</a>
-      <a href="/">메인 페이지로 이동</a>
-    </div>
-    <!-----------로그인------------->
-    <div class="main-conatainer d-flex">
+    <!----------------------로그인 컨테이너 ------------------------>
+    <main>
       <div class="login-container">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default"
-              >ID</span
-            >
-          </div>
-          <input
-            id="userid"
-            type="text"
-            class="form-control form-control-lg"
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
-          />
+        <img
+          src="https://github.com/dev-sohye/hanghae99_11/blob/minji_forserver/logo_02.png?raw=true"
+          alt=""
+        />
+        <div class="input-box">
+          <input id="userid" type="text" placeholder="아이디" />
         </div>
-        <div class="input-group mb-3 d-flex">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="">Password</span>
-          </div>
-          <input
-            id="userpw"
-            type="password"
-            class="form-control form-control-lg"
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
-          />
+        <div class="input-box">
+          <input id="userpw" type="password" placeholder="비밀번호" />
         </div>
+        <button class="login-button" onclick="login()">로그인</button>
+        <p class="msg">
+          계정이 없으신가요?
+          <a style="color: var(--main-color)" href="/register"
+            >회원가입하세요!</a
+          >
+        </p>
       </div>
-      <button class="button is-primary" onclick="login()">로그인</button>
-      <script type="text/javascript" src="../static/login.js"></script>
-    </div>
+    </main>
+    <script type="text/javascript" src="../static/login.js"></script>
   </body>
 </html>

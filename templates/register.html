@@ -18,8 +18,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <!--------------CSS---------------->
-    <link rel="stylesheet" href="../static/login.css" />
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -27,6 +25,9 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <!--------------CSS---------------->
+    <link rel="stylesheet" href="../static/register.css" />
+    <link rel="stylesheet" href="../static/stlye.css" />
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
@@ -42,67 +43,71 @@
   </head>
 
   <body>
-    <!---------페이지 전환 링크------------>
-    <div class="header-container">
-      <a href="/exhibition"> 상세 페이지로 이동</a>
-      <a href="/login">로그인 페이지로 이동</a>
-      <a href="/">메인 페이지로 이동</a>
-    </div>
     <!-----------회원가입------------->
-    <div class="main-conatainer d-flex">
+    <main>
       <div class="login-container">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default"
-              >ID</span
-            >
-          </div>
+        <img
+          src="https://github.com/dev-sohye/hanghae99_11/blob/minji_forserver/logo_02.png?raw=true"
+          alt=""
+        />
+        <div class="input-box">
           <input
             id="userid"
             type="text"
-            class="form-control form-control-lg"
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
+            class="font-size"
+            placeholder="아이디"
           />
         </div>
-        <div>
-          <button
-            style="margin-top: 1px; margin-bottom: 15px"
-            onclick="idcheck()"
-          >
-            중복확인
-          </button>
-          <p id="help-id" class="help">
-            아이디는 4-10자의 영문과 숫자와 일부 특수문자(._-)만 입력
-            가능합니다!!
-          </p>
-        </div>
-        <div class="input-group mb-3 d-flex">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="">Password</span>
-          </div>
+        <p id="help-id" class="help caution-font-size">
+          아이디는 4-10자의 영문과 숫자와 일부 특수문자(._-)만 입력 가능합니다!!
+        </p>
+        <div class="input-box">
           <input
             id="userpw"
             type="password"
-            class="form-control form-control-lg pw"
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
+            class="pw"
+            placeholder="비밀번호"
           />
         </div>
-        <div class="input-group mb-3 d-flex">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="">Password Check</span>
-          </div>
+        <div class="input-box">
           <input
             id="pwchk"
             type="password"
-            class="form-control form-control-lg pw"
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
+            class="pw"
+            placeholder="비밀번호 확인"
           />
         </div>
-        <p id="help-pw" class="help">비밀번호는 4자 이상 입력해주세요!!!!</p>
-        <!-- <span
+        <p id="help-pw" class="help caution-font-size">
+          비밀번호는 4자 이상 입력해주세요~
+        </p>
+        <form class="gender-box">
+          <div class="gender-right">
+            <input
+              type="radio"
+              name="gender"
+              value="male"
+              class="gender-input gender"
+              checked
+            />
+            <label for="male" class="font-size gender">Male</label><br />
+            <input
+              type="radio"
+              name="gender"
+              value="female"
+              r
+              class="gender-input gender"
+            />
+            <label for="female" class="font-size gender">Female</label>
+          </div>
+        </form>
+        <button class="register-button" onclick="register()">회원가입</button>
+        <p class="msg font-size">
+          계정이 이미 있으신가요?
+          <a style="color: var(--main-color)" href="/login">로그인하세요!</a>
+        </p>
+      </div>
+    </main>
+    <!-- <span
           id="alert-success"
           class="pwchk-str"
           style="display: none; margin-bottom: 10px; margin-top: 5px"
@@ -119,27 +124,6 @@
           "
           >비밀번호가 일치하지 않습니다.</span
         > -->
-        <form>
-          <input
-            type="radio"
-            name="gender"
-            value="male"
-            class="usergender"
-            checked
-          />
-          <label for="male">Male</label><br />
-          <input
-            type="radio"
-            name="gender"
-            value="female"
-            r
-            class="usergender"
-          />
-          <label for="female">Female</label>
-        </form>
-        <button class="button is-primary" onclick="register()">회원가입</button>
-      </div>
-    </div>
     <script type="text/javascript" src="../static/register.js"></script>
   </body>
 </html>
