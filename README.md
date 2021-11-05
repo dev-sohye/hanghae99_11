@@ -1,5 +1,6 @@
 # [ 🎆 전시 뭐하니? ]
-![img][logo]
+![img][logo] <img width="140" alt="thumb" src="https://user-images.githubusercontent.com/63698668/140554745-e2c47db4-5f45-4fe0-8b75-2ea065026dc3.png">
+
 
 [logo]: https://github.com/dev-sohye/hanghae99_11/blob/main/logo_02.png?raw=true
 ## 미니 프로젝트 <span style="font-size:12px;">항해99 4기 11조</span>
