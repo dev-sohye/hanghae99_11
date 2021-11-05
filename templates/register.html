@@ -20,6 +20,7 @@
 
     <!--------------CSS---------------->
     <link rel="stylesheet" href="../static/login.css" />
+    <link rel="stylesheet" href="../static/stlye.css" />
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -42,67 +43,8 @@
   </head>
 
   <body>
-    <!---------페이지 전환 링크------------>
-    <div class="header-container">
-      <a href="/exhibition"> 상세 페이지로 이동</a>
-      <a href="/login">로그인 페이지로 이동</a>
-      <a href="/">메인 페이지로 이동</a>
-    </div>
     <!-----------회원가입------------->
-    <div class="main-conatainer d-flex">
-      <div class="login-container">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default"
-              >ID</span
-            >
-          </div>
-          <input
-            id="userid"
-            type="text"
-            class="form-control form-control-lg"
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
-          />
-        </div>
-        <div>
-          <button
-            style="margin-top: 1px; margin-bottom: 15px"
-            onclick="idcheck()"
-          >
-            중복확인
-          </button>
-          <p id="help-id" class="help">
-            아이디는 4-10자의 영문과 숫자와 일부 특수문자(._-)만 입력
-            가능합니다!!
-          </p>
-        </div>
-        <div class="input-group mb-3 d-flex">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="">Password</span>
-          </div>
-          <input
-            id="userpw"
-            type="password"
-            class="form-control form-control-lg pw"
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
-          />
-        </div>
-        <div class="input-group mb-3 d-flex">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="">Password Check</span>
-          </div>
-          <input
-            id="pwchk"
-            type="password"
-            class="form-control form-control-lg pw"
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
-          />
-        </div>
-        <p id="help-pw" class="help">비밀번호는 4자 이상 입력해주세요!!!!</p>
-        <!-- <span
+    <!-- <span
           id="alert-success"
           class="pwchk-str"
           style="display: none; margin-bottom: 10px; margin-top: 5px"
@@ -119,6 +61,40 @@
           "
           >비밀번호가 일치하지 않습니다.</span
         > -->
+    <main>
+      <div class="login-container">
+        <div class="input-box">
+          <input
+            id="userid"
+            type="text"
+            class="font-size"
+            placeholder="아이디"
+          />
+          <button onclick="idcheck()" class="font-size chkbutton">
+            중복확인
+          </button>
+        </div>
+        <p id="help-id" class="help font-size">
+          아이디는 4-10자의 영문과 숫자와 일부 특수문자(._-)만 입력 가능합니다!!
+        </p>
+        <input
+          id="userpw"
+          type="password"
+          class="form-control form-control-lg pw"
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+        />
+        <p style="color: var(--main-color)" class="font-size">
+          비밀번호는 4자 이상 입력해주세요!!!
+        </p>
+        <input
+          id="pwchk"
+          type="password"
+          class="form-control form-control-lg pw"
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+        />
+        <p id="help-pw" class="help"></p>
         <form>
           <input
             type="radio"
@@ -127,7 +103,7 @@
             class="usergender"
             checked
           />
-          <label for="male">Male</label><br />
+          <label for="male" class="font-size">Male</label><br />
           <input
             type="radio"
             name="gender"
@@ -135,11 +111,15 @@
             r
             class="usergender"
           />
-          <label for="female">Female</label>
+          <label for="female" class="font-size">Female</label>
         </form>
         <button class="button is-primary" onclick="register()">회원가입</button>
+        <p class="msg font-size">
+          계정이 이미 있으신가요?
+          <a style="color: var(--main-color)" href="/login">로그인하세요!</a>
+        </p>
       </div>
-    </div>
+    </main>
     <script type="text/javascript" src="../static/register.js"></script>
   </body>
 </html>
