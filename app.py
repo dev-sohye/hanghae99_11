@@ -40,7 +40,7 @@ def home():
 @app.route('/exhibition/<keyword>')
 def detail(keyword):
     contents = list(db.exhibition.find({}, {'_id': False}))
-    reviews = list(db.review.find({}, {'_id': False}).sort('review_grade', -1))
+    reviews = list(db.review.find({}, {'_id': False}).sort('review_date', 1))
     return render_template("exhibition_view.html", contents=contents, word=keyword, reviews=reviews)
 
 
@@ -159,6 +159,7 @@ def write_review():
     grade_receive = int(request.form['review_grade_give'])
     comment_receive = request.form['review_comment_give']
     id_receive = request.form['review_id']
+    time_receive = request.form['review_time']
     like_receive = 0
     doc = {
         'review_exhibition': exhibition_receive,
@@ -167,6 +168,7 @@ def write_review():
         'review_like': like_receive,
         'review_date': date_receive,
         'review_id': id_receive,
+        'review_time': id_receive,
     }
 
     db.review.insert_one(doc)
@@ -174,10 +176,14 @@ def write_review():
     return jsonify({'msg': '등록이 완료되었습니다.'})
 
 
+
+
 @app.route('/api/review', methods=['GET'])
 def show_grades():
-    grades_receive = list(db.review.find({}, {'_id': False}))
-    print(grades_receive)
+    posts = list(db.posts.find({}).sort("date", -1).limit(20))
+    for post in posts:
+        post["_id"] = str(post["_id"])
+    db.posts.insert_one(doc)
     return jsonify({'grades_receive': grades_receive})
 
 # 리뷰 좋아요 누르기
@@ -221,6 +227,8 @@ def delete_reviews(idx):
     print(review_comment_receive)
     db.review.delete_one({'review_comment': review_comment_receive})
     return jsonify('msg')
+
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

@@ -14,10 +14,12 @@
     font-style: normal;
 }
 
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+font-family: 'KOTRA_GOTHIC';
     scroll-behavior: smooth;
 }
 
@@ -38,12 +40,15 @@ body {
 }
 
 h1 {
+
   font-family: 'KOTRAHOPE';
   -webkit-font-family: 'KOTRAHOPE', sans-serif;
   -moz-osx-font-family: 'KOTRAHOPE', sans-serif;
 }
-
-li{ list-style: none;}
+p {padding:0; margin:0;}
+li{
+    list-style: none;
+}
 
 :root{
     --main-color: #222222;
@@ -52,13 +57,20 @@ li{ list-style: none;}
     --form-color: #f0e9e3;
     --btn-hover-color: #fcb10f;
     --font-hover-color: #fff;
-/*  상세 전시 투명도 줘서 하는걸로 */
-}
+  /*  상세 전시 투명도 줘서 하는걸로 */
+  }
+
+/*
+
+*/
+
+.op60 {opacity: 0.6;}
+.op75 {opacity: 0.75;}
 
 a,
 a:visited,
-a:active,
-a:hover{
+a:active,a:hover{
+
   text-decoration: none;
   cursor: pointer;
   color: var(--main-color);
@@ -74,9 +86,204 @@ section{
 
 button{
   border: 0;
-  outline: 0;
+  outline: none;
   border-radius: 10px;
   background-color: var(--btn-color);
   cursor: pointer;
 
 }
+button:focus{
+
+    outline: none;
+}
+
+.window__scene {
+
+    position: relative;
+
+    width: 100%;
+
+    height: auto;
+
+    *overflow: hidden;
+
+    background: #E08183 url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI3OTguNzAycHgiIGhlaWdodD0iNzk4LjcwMnB4IiB2aWV3Qm94PSIwIDAgNzk4LjcwMiA3OTguNzAyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA3OTguNzAyIDc5OC43MDIiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxyZWN0IGZpbGw9IiNFMDgyODMiIHdpZHRoPSI3OTguNzAyIiBoZWlnaHQ9Ijc5OC43MDIiLz48Zz48cGF0aCBmaWxsPSIjRTY5QzlEIiBkPSJNMTcxLjMzOSwxODAuMDUxaC02OS4xODVjLTYuNjE4LDAtMTIuMDMzLDUuNDE0LTEyLjAzMywxMi4wMzJ2MjIuNTZjMCw2LjYxOCw1LjQxNSwxMi4wMzMsMTIuMDMzLDEyLjAzM2g2OS4xODVjNi42MTcsMCwxMi4wMzItNS40MTUsMTIuMDMyLTEyLjAzM3YtMjIuNTZDMTgzLjM3MiwxODUuNDY1LDE3Ny45NTcsMTgwLjA1MSwxNzEuMzM5LDE4MC4wNTF6Ii8+PHBhdGggZmlsbD0iI0U2OUM5RCIgZD0iTTIwMi44ODcsMTIzLjM3Nmg2OS4xODVjNi42MTgsMCwxMi4wMzMtNS40MTQsMTIuMDMzLTEyLjAzMnYtMjIuNTZjMC02LjYxOS01LjQxNS0xMi4wMzMtMTIuMDMzLTEyLjAzM2gtNjkuMTg1Yy02LjYxNywwLTEyLjAzMiw1LjQxNC0xMi4wMzIsMTIuMDMzdjIyLjU2QzE5MC44NTQsMTE3Ljk2MiwxOTYuMjcsMTIzLjM3NiwyMDIuODg3LDEyMy4zNzZ6Ii8+PHBhdGggZmlsbD0iI0U2OUM5RCIgZD0iTTIxNy45NjQsMTI3LjcxMmgtNjkuMTg1Yy02LjYxOCwwLTEyLjAzMyw1LjQxNS0xMi4wMzMsMTIuMDMydjIyLjU2MWMwLDYuNjE4LDUuNDE1LDEyLjAzMiwxMi4wMzMsMTIuMDMyaDY5LjE4NWM2LjYxOCwwLDEyLjAzMi01LjQxNSwxMi4wMzItMTIuMDMydi0yMi41NjFDMjI5Ljk5NiwxMzMuMTI3LDIyNC41ODIsMTI3LjcxMiwyMTcuOTY0LDEyNy43MTJ6Ii8+PHBhdGggZmlsbD0iI0U2OUM5RCIgZD0iTTEyOS43MywxNjIuMzA1di0yMi41NjFjMC02LjYxOC01LjQxNS0xMi4wMzItMTIuMDMyLTEyLjAzMkg0OC41MTNjLTYuNjE4LDAtMTIuMDMyLDUuNDE1LTEyLjAzMiwxMi4wMzJ2MjIuNTYxYzAsNi42MTgsNS40MTQsMTIuMDMyLDEyLjAzMiwxMi4wMzJoNjkuMTg2QzEyNC4zMTYsMTc0LjMzNywxMjkuNzMsMTY4LjkyMywxMjkuNzMsMTYyLjMwNXoiLz48cGF0aCBmaWxsPSIjRTY5QzlEIiBkPSJNNTE1LjYwNCwxMDcuOTIxdjIyLjU2MWMwLDYuNjE4LDUuNDE1LDEyLjAzMiwxMi4wMzIsMTIuMDMyaDY5LjE4NmM2LjYxOCwwLDEyLjAzMi01LjQxNSwxMi4wMzItMTIuMDMydi0yMi41NjFjMC02LjYxOC01LjQxNC0xMi4wMzItMTIuMDMyLTEyLjAzMmgtNjkuMTg2QzUyMS4wMTksOTUuODg5LDUxNS42MDQsMTAxLjMwMyw1MTUuNjA0LDEwNy45MjF6Ii8+PHBhdGggZmlsbD0iI0U2OUM5RCIgZD0iTTYyNy4zNjgsMTQyLjUxNGg2OS4xODVjNi42MTgsMCwxMi4wMzQtNS40MTUsMTIuMDM0LTEyLjAzMnYtMjIuNTYxYzAtNi42MTgtNS40MTYtMTIuMDMyLTEyLjAzNC0xMi4wMzJoLTY5LjE4NWMtNi42MTksMC0xMi4wMzIsNS40MTUtMTIuMDMyLDEyLjAzMnYyMi41NjFDNjE1LjMzNSwxMzcuMDk5LDYyMC43NDksMTQyLjUxNCw2MjcuMzY4LDE0Mi41MTR6Ii8+PHBhdGggZmlsbD0iI0U2OUM5RCIgZD0iTTU3NC4yNjEsMTU1LjI4NGMtNi42MTcsMC0xMi4wMzEsNS40MTUtMTIuMDMxLDEyLjAzM3YyMi41NjFjMCw2LjYxNyw1LjQxNCwxMi4wMzIsMTIuMDMxLDEyLjAzMmg2OS4xODdjNi42MTcsMCwxMi4wMzEtNS40MTUsMTIuMDMxLTEyLjAzMnYtMjIuNTYxYzAtNi42MTgtNS40MTQtMTIuMDMzLTEyLjAzMS0xMi4wMzNINTc0LjI2MXoiLz48cGF0aCBmaWxsPSIjRTY5QzlEIiBkPSJNMzU0LjIwMyw0MTMuMDR2LTIyLjU2MWMwLTYuNjE4LTUuNDE0LTEyLjAzMi0xMi4wMzItMTIuMDMyaC02OS4xODZjLTYuNjE3LDAtMTIuMDMyLDUuNDE1LTEyLjAzMiwxMi4wMzJ2MjIuNTYxYzAsNi42MTcsNS40MTUsMTIuMDMyLDEyLjAzMiwxMi4wMzJoNjkuMTg2QzM0OC43ODksNDI1LjA3MiwzNTQuMjAzLDQxOS42NTcsMzU0LjIwMyw0MTMuMDR6Ii8+PHBhdGggZmlsbD0iI0U2OUM5RCIgZD0iTTQ0MS45MDEsMzc4LjQ0N2gtNjkuMTg1Yy02LjYxOSwwLTEyLjAzMiw1LjQxNS0xMi4wMzIsMTIuMDMydjIyLjU2MWMwLDYuNjE3LDUuNDEzLDEyLjAzMiwxMi4wMzIsMTIuMDMyaDY5LjE4NWM2LjYxOCwwLDEyLjAzNC01LjQxNSwxMi4wMzQtMTIuMDMydi0yMi41NjFDNDUzLjkzNSwzODMuODYxLDQ0OC41MTksMzc4LjQ0Nyw0NDEuOTAxLDM3OC40NDd6Ii8+PHBhdGggZmlsbD0iI0U2OUM5RCIgZD0iTTM4OC43OTYsNDM3Ljg0MkgzMTkuNjFjLTYuNjE3LDAtMTIuMDMxLDUuNDE0LTEyLjAzMSwxMi4wMzN2MjIuNTYxYzAsNi42MTcsNS40MTQsMTIuMDMxLDEyLjAzMSwxMi4wMzFoNjkuMTg3YzYuNjE3LDAsMTIuMDMxLTUuNDE0LDEyLjAzMS0xMi4wMzF2LTIyLjU2MUM0MDAuODI4LDQ0My4yNTYsMzk1LjQxNCw0MzcuODQyLDM4OC43OTYsNDM3Ljg0MnoiLz48cGF0aCBmaWxsPSIjRTY5QzlEIiBkPSJNNzQzLjE3Nyw2NTYuMTg4aC02OS4xODVjLTYuNjE5LDAtMTIuMDMzLDUuNDE1LTEyLjAzMywxMi4wMzJ2MjIuNTZjMCw2LjYyLDUuNDE0LDEyLjAzMiwxMi4wMzMsMTIuMDMyaDY5LjE4NWM2LjYxNywwLDEyLjAzMy01LjQxMiwxMi4wMzMtMTIuMDMydi0yMi41NkM3NTUuMjEsNjYxLjYwMyw3NDkuNzk0LDY1Ni4xODgsNzQzLjE3Nyw2NTYuMTg4eiIvPjxwYXRoIGZpbGw9IiNFNjlDOUQiIGQ9Ik02OTYuNTUyLDcxMS4zMzNoLTY5LjE4NWMtNi42MTksMC0xMi4wMzIsNS40MTUtMTIuMDMyLDEyLjAzMnYyMi41NjFjMCw2LjYxNyw1LjQxMywxMi4wMzEsMTIuMDMyLDEyLjAzMWg2OS4xODVjNi42MTgsMCwxMi4wMzEtNS40MTQsMTIuMDMxLTEyLjAzMXYtMjIuNTYxQzcwOC41ODMsNzE2Ljc0OCw3MDMuMTcsNzExLjMzMyw2OTYuNTUyLDcxMS4zMzN6Ii8+PHBhdGggZmlsbD0iI0U2OUM5RCIgZD0iTTU5Ni44MjIsNzExLjMzM2gtNjkuMTg2Yy02LjYxNywwLTEyLjAzMiw1LjQxNS0xMi4wMzIsMTIuMDMydjIyLjU2MWMwLDYuNjE3LDUuNDE1LDEyLjAzMSwxMi4wMzIsMTIuMDMxaDY5LjE4NmM2LjYxOCwwLDEyLjAzMi01LjQxNCwxMi4wMzItMTIuMDMxdi0yMi41NjFDNjA4Ljg1NCw3MTYuNzQ4LDYwMy40NCw3MTEuMzMzLDU5Ni44MjIsNzExLjMzM3oiLz48cGF0aCBmaWxsPSIjRTY5QzlEIiBkPSJNNTU0LjkyNiw3OS41OTdWNTcuMDM2YzAtNi42MTctNS40MTUtMTIuMDMyLTEyLjAzMi0xMi4wMzJoLTY5LjE4N2MtNi42MTcsMC0xMi4wMzEsNS40MTUtMTIuMDMxLDEyLjAzMnYyMi41NjFjMCw2LjYxOCw1LjQxNCwxMi4wMzIsMTIuMDMxLDEyLjAzMmg2OS4xODdDNTQ5LjUxMSw5MS42MjksNTU0LjkyNiw4Ni4yMTUsNTU0LjkyNiw3OS41OTd6Ii8+PC9nPjwvZz48L3N2Zz4=) repeat;
+
+    background-size: 30%;
+
+  }
+
+
+/*********** nav 헤더 디자인입니다 ***********/
+header {position: relative; height:200px; }
+nav {
+    width: 100%;
+    height: 200px;
+    font-family: 'KOTRA_GOTHIC';
+    -webkit-font-family: 'KOTRAHOPE', sans-serif;
+    -moz-osx-font-family: 'KOTRAHOPE', sans-serif;
+    *background-color: var(--btn-hover-color);
+
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    transition: all 0.3s;
+}
+
+
+.logo {
+    width: 200px;
+    padding: 20px 0;
+    text-align: center;
+
+    position: absolute;
+    top: 0;
+    *left: 44%;
+    left:130px;
+    transform: translate(0, -44);
+    transition: width 0.3s;
+
+}
+
+
+.logo img {
+    width: 100%;
+}
+
+nav.active {
+    height: 100px;
+    *background-color: #fff;
+    *background-color:#c4a48c;
+    *box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+nav.active .logo{
+    padding: 15px 0;
+}
+nav.active .logo img{
+    width: 50%;
+}
+
+
+.login-box {
+    width: 300px;
+    position: absolute;
+    right: 0;
+}
+
+.login-btn {
+    width: 180px;
+    padding: 10px 20px 0 0;
+    overflow: hidden;
+    margin-left: 120px;
+}
+
+.login-btn > a {
+    float: left;
+    width: 50%;
+}
+
+.login-btn-active {
+    width: 100%;
+    padding: 10px 20px 0 0px;
+    overflow: hidden;
+}
+
+.login-btn-active > li {
+    float: left;
+}
+
+.login-btn-active > li:nth-child(1) {
+    width: 60%;
+    margin-top: 5px;
+}
+
+.login-btn-active > li:nth-child(2) {
+    width: 30%;
+}
+
+
+.customer {
+    font-weight: 600;
+}
+
+.logout-btn {
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: var(--btn-hover-color);
+    color: var(--font-hover-color);
+}
+
+.login-btn-active {display:none;}
+/*footer*/
+
+.btn-top {
+    position: fixed;
+    bottom: -50px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: var(--btn-color);
+    text-align: center;
+    padding-top: 8px;
+    color: var(--main-color);
+    transition: all 0.3s;
+}
+
+
+.btn-top.active {
+    bottom: 20px;
+}
+
+.btn-top.active:hover {
+    background-color: var(--btn-hover-color);
+    color: var(--font-hover-color);
+}
+/*********** index.html 메인 페이지 디자인입니다 ***********/
+main {position:relative; width:100%; height:auto;}
+ /*content area*/
+ .content_area {width:1080px; margin:0 auto; }
+
+
+
+
+ #card-box{width: 1080px;margin: 0 auto;display: flex; flex-wrap:wrap;  justify-content: space-between;}
+.card{width:23%; margin-bottom:40px; background:none; border:none;  }
+
+.main_wrap {position:relative; width:100%;}
+.main_wrap .main {width:100%; height:500px; background:#123456;}
+
+.endSoon_wrap {width:100%; height:auto;}
+.endSoon_wrap .endSoon {position:relative; padding:80px 0;display:flex; justify-content: flex-start;}
+.endSoon_wrap .endSoon .end_cate {width:28% }
+.endSoon_wrap .endSoon .end_exhi {width:72%;}
+.endSoon_wrap .endSoon .endSoon_list {width:auto; overflow:hidden;display:flex; }
+.endSoon_wrap .endSoon .endSoon_list li {width: 198px!important; height:250px; margin-right:20px; }
+
+.endSoon_wrap .endSoon .end_cate {font-family: 'Montserrat', sans-serif; font-weight:800; font-style:italic;}
+.endSoon_wrap .endSoon .end_cate h2 {font-size:70px;margin-top: 36px;color:#fff; text-shadow: 6px 2px 0px #535353; }
+.bx-wrapper {border:0; margin-bottom:0; box-shadow: none;}
+.bx-wrapper img {width:100%;}
+
+.all_exhibit_wrap {position:relative;width:100%; height:500px; }
+.all_exhibit_wrap .all_exhibit{display:flex; justify-content: flex-start;flex-wrap:wrap;}
+.all_exhibit_wrap .all_exhibit li{width:24%; height:auto; margin-right:1%;margin-bottom:10px;  }
+.all_exhibit_wrap .all_exhibit li img{width:100%; }
+.all_exhibit_wrap .all_exhibit li:nth-child(5n+1){margin-right:0;}
+.all_wrap .content_area form{text-align: center;}
+.all_wrap .content_area .search {width:50%; border-radius:.25em;padding:8px 20px;margin:0 auto; }
+.all_wrap .content_area .search:focus {border:none;}
+
+.all_wrap .content_area .card-box {padding:80px 0;}
+.all_wrap .content_area .card-box .card a{.border-radius: 12  px  ;  overflow: hidden;}
+.all_wrap .content_area .card-box .search-card {width:23%;height:auto; display: block!important; margin-bottom:20px;box-shadow: 0px 0px 10px 1px #8c8c8c8f; }
+.all_wrap .content_area .card-box .search-card img{width:100%; }
+
+
+
+
+
+
