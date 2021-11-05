@@ -2,11 +2,11 @@
 ![img][logo]
 
 [logo]: https://github.com/dev-sohye/hanghae99_11/blob/main/logo_02.png?raw=true
-## 미니 프로젝트<span style="font-size:12px;">항해 4기 11조</span>
+## 미니 프로젝트 <span style="font-size:12px;">항해 4기 11조</span>
 ***
 ### 전시 뭐하니?
 위드코로나 시대로 전환되고 있는 지금, 방구석에만 있으면 안되겠죠? 다양한 전시회를 한 눈에 볼 수 있도록 만들었습니다! 사람들의 리뷰와 상세페이지를 참고하여 후회없는 전시회에 다녀오세요. 다녀온 후에는 리뷰도 남겨주시는 거 잊지 마세요!
-- 웹사이트 링크 : http://전시뭐하니?.shop
+- 웹사이트 링크 : http://전시뭐하니.shop
 - 데모영상 :
 ***
 ##### 프로젝트 기간
