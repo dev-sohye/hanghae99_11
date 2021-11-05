@@ -25,7 +25,7 @@
       crossorigin="anonymous"
     />
     <!--------------CSS---------------->
-    <link rel="stylesheet" href="../static/login.css" />
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
@@ -39,53 +39,15 @@
       crossorigin="anonymous"
     ></script>
 
+     <!-- bxSlider Javascript file -->
+     <script src="/js/jquery.bxslider.min.js"></script>
+     <!-- bxSlider CSS file -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
+
+    <link rel="stylesheet" href="../static/login.css" />
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" />
 
 
-    <style>
-        *{
-            margin: 0; padding: 0; box-sizing: border-box;
-        }
-        h1,
-        form{
-            text-align: center;
-            margin: 60px 0;
-            border: 0;
-            outline: none;
-        }
-        input{
-            border: 1px solid #888;
-            outline: none;
-            padding: 5px 10px;
-        }
-
-        button {
-            border: 0;
-            outline: none;
-            cursor: pointer;
-        }
-
-        #close-exhi {
-            width: 700px;
-            height: 200px;
-            margin: 50px auto;
-            overflow: hidden;
-        }
-
-        .close-exhi-inner{
-            width:800px;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr)
-        }
-
-        #card-box{
-            width: 700px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr)
-        }
-
-
-    </style>
         <script>
 
             $(document).ready(function () {
@@ -111,7 +73,7 @@
                 }
             }
 
-            {#   현재 날짜 구하기     #}
+            // {#   현재 날짜 구하기     #}
 
             function getTime() {
                 let today;
@@ -137,7 +99,7 @@
                 return zero + n;
             }
 
-            {# 죵료 임박 순 #}
+            // {# 죵료 임박 순 #}
 
             function closeExhi() {
                 let today = getTime();
@@ -161,53 +123,86 @@
                 }
             }
 
+            $(document).ready(function(){
+                $('.bxslider').bxSlider({
+                    mode:'horizontal', //horizontal', 'vertical', 'fade'
+                    pager:false,
+                    controls:false,
+                    auto:true,
+                   
+                    responsive:true,
+                });
+            });
         </script>
 
 </head>
 
 <body>
-    <button onclick="logout()">로그아웃</button>
-    <h1>전시 뭐하니?</h1>
-    {# 종료임박 전시 card carousel  - start #}
-    <div id="close-exhi">
-       <ul class="close-exhi-inner">
-        {% for exhi in exhibition %}
+<nav>
+    <div class="logo"><a href="/"></a></div>
+    <ul>
+        <a href="/login" class="visitor">
+            <li>로그인</li>
+        </a>
+        <a href="/register" class ="visitor">
+            <li>회원가입</li>
+        </a>
+        <li class="customer" id="customer_name">님, 환영합니다!</li>
+        <li class="customer"><button onclick="logout()">로그아웃</button></li>
 
-            {% if loop.index <= 40 %}
-                <li class="close-exhi-card card">
-                    <a href="/exhibition/{{  exhi.id }}">
-                        <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
-                    </a>
-                </li>
-            {% endif %}
-
-        {% endfor %}
-        </ul>
-    </div>
-    {# 종료임박 전시 card carousel  - end #}
-
-    {# 검색 input  - start #}
-    <form>
-        <input type="text" id="value" onkeyup="filter()" placeholder="전시회명을 검색해주세요" style="width:18rem" />
-    </form>
-    {# 검색 input  - end #}
-
-    {# 전체 전시  - start #}
-    <div id="card-box">
-        {% for exhi in exhibition %}
-            <div class="card search-card" id="{{ exhi.title }}">
-                <a href="/exhibition/{{ exhi.id }}">
-                    <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card image cap" />
-                    <p>{{ exhi.title }}</p>
-                </a>
+    </ul>
+</nav>
+   
+<main>
+    <section class="endSoon_wrap">
+        <div id="close-exhi" class="content_area endSoon">
+            <div class="end_cate">
+                <h2>곧 마감입니다</h2>
             </div>
-        {% endfor %}
-    </div>
-    {# 전체 전시  - end #}
+            <div class="end_exhi">
+                <ul class="close-exhi-inner endSoon_list bxslider">
+                    {% for exhi in exhibition %}
+            
+                        {% if loop.index <= 40 %}
+                            <li class="close-exhi-card ">
+                                <a href="/exhibition/{{  exhi.id }}">
+                                    <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
+                                </a>
+                            </li>
+                        {% endif %}
+            
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
 
+    <section class="all_wrap">
+        <div class="content_area">
+                <!-- {# 검색 input  - start #} -->
+            <form>
+                <input type="text" id="value" class="search" onkeyup="filter()" placeholder="전시회명을 검색해주세요" />
+            </form>
+            <!-- {# 검색 input  - end #} -->
+        
+            <!-- {# 전체 전시  - start #} -->
+            <div id="card-box" class="card-box">
+                {% for exhi in exhibition %}
+                    <div class=" search-card" id="{{ exhi.title }}">
+                        <a href="/exhibition/{{ exhi.id }}">
+                            <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card image cap" />
+                        
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- {# 전체 전시  - end #} -->
+        </div>
+    </section>
 
-    <script type="text/javascript" src="../static/index.js"></script>
+</main>
+    
 
-    </body>
-
+<script type="text/javascript" src="../static/exhibition.js"></script>
+  </body>
 </html>
