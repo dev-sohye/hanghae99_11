@@ -12,10 +12,6 @@ main {
   align-items: center;
 }
 
-img {
-  margin: 0 auto 10px auto;
-  height: 15%;
-}
 
 .login-container {
   background-color: var(--form-color);
