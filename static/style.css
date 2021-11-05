@@ -1,0 +1,123 @@
+/* 메인 폰트 - 코트라 희망체 */
+@font-face {
+    font-family: 'KOTRAHOPE';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 서브 폰트 - 코트라 고딕체 */
+@font-face {
+    font-family: 'KOTRA_GOTHIC';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/KOTRA_GOTHIC.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image:url('');
+}
+
+h1,p {
+  font-family: 'KOTRAHOPE';
+  -webkit-font-family: 'KOTRAHOPE', sans-serif;
+  -moz-osx-font-family: 'KOTRAHOPE', sans-serif;
+}
+
+:root{
+  --main-color: #222222;
+  --line-color: #ffebee;
+  --btn-color: #fdd93a;
+  --form-color: #f0e9e3;
+/*  상세 전시 투명도 줘서 하는걸로 */
+}
+/*
+
+*/
+
+.op60 {opacity: 0.6;}
+.op75 {opacity: 0.75;}
+
+a,
+a:visited,
+a:active,a:hover{
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--main-color);
+}
+
+section{
+  width: 1080px;
+  background-color: var(--form-back-color);
+  margin: 0 auto;
+
+}
+
+
+button{
+  border: 0;
+  outline: 0;
+  border-radius: 10px;
+  background-color: var(--button-color);
+  cursor: pointer;
+
+}
+body {width:100%; height:auto;  background:url('/static/paperbg.jpg') repeat 100%; }
+
+
+
+
+/*********** index.html 메인 페이지 디자인입니다 ***********/
+main {position:relative; width:100%; height:auto;}
+ /*content area*/
+ .content_area {width:1080px; margin:0 auto; }
+
+
+.card{width:200px; }
+
+
+
+ /*main*/
+
+        
+ #card-box{width: 1080px;margin: 0 auto;display: flex; flex-wrap:wrap;  justify-content: space-between;}
+
+
+.main_wrap {position:relative; width:100%;}
+.main_wrap .main {width:100%; height:500px; background:#123456;}
+
+.endSoon_wrap {width:100%; height:auto;}
+.endSoon_wrap .endSoon {position:relative; padding:80px 0;display:flex; justify-content: flex-start;}
+.endSoon_wrap .endSoon .end_cate {width:25% }
+.endSoon_wrap .endSoon .end_exhi {width:75%;}
+.endSoon_wrap .endSoon .endSoon_list {width:auto; overflow:hidden;display:flex; }
+.endSoon_wrap .endSoon .endSoon_list li {width: 198px!important; height:250px; margin-right:20px; }
+
+.bx-wrapper {border:0; margin-bottom:0; box-shadow: none;}
+.bx-wrapper img {width:100%;}
+
+.all_exhibit_wrap {position:relative;width:100%; height:500px; }
+.all_exhibit_wrap .all_exhibit{display:flex; justify-content: flex-start;flex-wrap:wrap;}
+.all_exhibit_wrap .all_exhibit li{width:24%; height:auto; margin-right:1%;margin-bottom:10px;  }
+.all_exhibit_wrap .all_exhibit li img{width:100%; }
+.all_exhibit_wrap .all_exhibit li:nth-child(5n+1){margin-right:0;}
+.all_wrap .content_area form{text-align: center;}
+.all_wrap .content_area .search {width:50%; border-radius:.25em;padding:8px 20px;margin:0 auto; }
+.all_wrap .content_area .search:focus {border:none;}
+
+.all_wrap .content_area .card-box {padding:80px 0;}
+.all_wrap .content_area .card-box .search-card {width:200px;height:auto; display: block!important; margin-bottom:20px; }
+.all_wrap .content_area .card-box .search-card img{width:100%; }
+
+#card-box{width: 1080px;margin: 0 auto;display: flex; flex-wrap:wrap;  justify-content: space-between;}
+
+.close-exhi-inner {    width: 100%; height: 265px; display: flex;overflow-x:scroll}
+.close-exhi-inner li{width:200px; }
+
+/*********** index.html 메인 페이지 디자인입니다 ***********/
