@@ -12,9 +12,9 @@ main {
   align-items: center;
 }
 
-img {
+.login-container img {
   margin: 0 auto 10px auto;
-  height: 15%;
+  height: 17%;
 }
 
 .login-container {

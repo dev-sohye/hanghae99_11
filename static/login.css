@@ -6,6 +6,7 @@ main {
   align-items: center;
 }
 
+
 .login-container {
   background-color: var(--form-color);
   border-radius: 10px;

@@ -21,10 +21,12 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+
       <!--------------CSS---------------->
       <link rel="stylesheet" href="../static/login.css"/>
-      <link rel="stylesheet" href="../static/style.css"/>
       <link rel="stylesheet" href="../static/nav.css"/>
+     <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" />
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -38,6 +40,14 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+     <!-- bxSlider Javascript file -->
+     <script src="/js/jquery.bxslider.min.js"></script>
+     <!-- bxSlider CSS file -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
+
+
+       <script>
 
     <style>
         form{
@@ -160,6 +170,7 @@
 
                     if (year == exhiYe && mon == exhiMon && day <= exhiDay) {
                         {#exhiPeriod[i].style.display = 'flex';#}
+
                     } else {
                         exhiPeriod[i].style.display = 'none';
                     }
@@ -168,6 +179,17 @@
                 }
             }
 
+            $(document).ready(function(){
+                $('.bxslider').bxSlider({
+                    mode:'horizontal', //horizontal', 'vertical', 'fade'
+                    pager:false,
+                    controls:false,
+                    auto:true,
+                   speed:200,
+                    responsive:true,
+                    randomStart:false
+                });
+            });
         </script>
 
 </head>
@@ -244,6 +266,7 @@
     {# footer - top 버튼  끝  #}
     {# 전체 전시  - end #}
 </div>
+
 <script type="text/javascript" src="../static/exhibition.js"></script>
   </body>
 </html>
