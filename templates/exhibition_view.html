@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- Webpage Title -->
-    <title>회원가입 페이지</title>
+    <title>전시 상페페이지</title>
     <!-- Required meta tags -->
     <meta charset="utf-8"/>
 
@@ -33,84 +33,53 @@
 
     <!--------------CUSTOM CSS---------------->
     <link rel="stylesheet" href="../static/style.css"/>
-    <link rel="stylesheet" href="../static/nav.css"/>
-    <link rel="stylesheet" href="../static/exhibition_view.css"/>
+
+
+     <link rel="stylesheet" href="{{url_for('static',filename='exhibition_view.css')}}" />
     <script type="text/javascript" src="../static/exhibition.js"></script>
+
 </head>
-<script>
-    $(document).ready(function () {
-    })
+<style>
 
-    //상단 메뉴 고정
-    $(window).scroll(function () {
-        if ($(window).scrollTop() > 50) {
-            $('nav, .btn-top').addClass('active')
-        } else {
-            $('nav, .btn-top').removeClass('active')
-        }
-    });
-    {#   현재 날짜 구하기     #}
-    function getTime() {
-        let d = new Date();
-
-        let s =
-            leadingZeros(d.getFullYear(), 4) + '-' +
-            leadingZeros(d.getMonth() + 1, 2) + '-' +
-            leadingZeros(d.getDate(), 2);
-
-        return s;
-    }
-    function leadingZeros(n, digits) {
-        let zero = '';
-        n = n.toString();
-
-        if (n.length < digits) {
-            for (i = 0; i < digits - n.length; i++)
-                zero += '0';
-        }
-        return zero + n;
-    }
-
-    {# 리뷰 작성하기 #}
-
-    //리뷰 등록, 유저id 가져오기
-    function makeReview() {
-        $.ajax({
-            type: "GET",
-            url: "/api/user",
-            data: {},
-            success: function (response) {
-                if (response["result"] == "success") {
-                    let username = response["user_id"];
-                    let review_date = getTime()
-                    let grade = parseInt($('#grade').val())
-                    let comment = $('#comment').val()
-                    let like = $('#like').val()
-                    //db에 데이터 전송
-                    $.ajax({
-                        type: "POST",
-                        url: "/api/review",
-                        data: {
-                            review_exhibition_give: {{ word }},
-                            review_grade_give: grade,
-                            review_comment_give: comment,
-                            review_like_give: like,
-                            review_date_give: review_date,
-                            review_id: username
-                        },
-                        success: function (response) {
-                            alert(response["msg"]);
-                            window.location.href = `/exhibition/{{ word }}`;
-                        }
-                    })
-                } else {
-                    alert('nooooooo')
-                }
-            }
+</style>
+    <script>
+        $(document).ready(function () {
         })
-    }
 
-    //삭제창 유무 판별
+        //상단 메뉴 고정
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 50) {
+                $('nav, .btn-top').addClass('active')
+            } else {
+                $('nav, .btn-top').removeClass('active')
+            }
+        });
+        {#   현재 날짜 구하기     #}
+        function getTime() {
+            let d = new Date();
+
+            let s =
+                leadingZeros(d.getFullYear(), 4) + '-' +
+                leadingZeros(d.getMonth() + 1, 2) + '-' +
+                leadingZeros(d.getDate(), 2);
+
+            return s;
+        }
+        function leadingZeros(n, digits) {
+            let zero = '';
+            n = n.toString();
+
+            if (n.length < digits) {
+                for (i = 0; i < digits - n.length; i++)
+                    zero += '0';
+            }
+            return zero + n;
+        }
+
+        {# 리뷰 작성하기 #}
+
+        //리뷰 등록, 유저id 가져오기
+        function makeReview() {
     $.ajax({
         type: "GET",
         url: "/api/user",
@@ -118,96 +87,134 @@
         success: function (response) {
             if (response["result"] == "success") {
                 let username = response["user_id"];
+                let review_date = getTime()
+                let review_time = new Date()
+                let grade = parseInt($('#grade').val())
+                let comment = $('#comment').val()
+                let like = $('#like').val()
+                //db에 데이터 전송
+                $.ajax({
+                    type: "POST",
+                    url: "/api/review",
+                    data: {
+                        review_exhibition_give: {{ word }},
+                        review_grade_give: grade,
+                        review_comment_give: comment,
+                        review_like_give: like,
+                        review_date_give: review_date,
+                        review_id: username,
+                        review_time : review_time,
+                    },
+                    success: function (response) {
+                        alert(response["msg"]);
+                        window.location.href = `/exhibition/{{ word }}`;
+                    }
+                })
+            } else {
+                alert('nooooooo')
             }
         }
     })
-    ;
+}
 
-    //리뷰 삭제
-    function deleteReview() {
+
+        //삭제창 유무 판별
         $.ajax({
-            type: "POST",
-            url: '/api/delete',
-            data: {
-                review_exhibition_give: reviewId.toString()
-            },
+            type: "GET",
+            url: "/api/user",
+            data: {},
             success: function (response) {
-                alert(response["msg"])
-                window.location.reload()
+                if (response["result"] == "success") {
+                    let username = response["user_id"];
+                }
             }
-        });
-    }
+        })
+        ;
 
-</script>
+        //리뷰 삭제
+        function deleteReview() {
+            $.ajax({
+                type: "POST",
+                url: '/api/delete',
+                data: {
+                    review_exhibition_give: reviewId.toString()
+                },
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+
+    </script>
 </head>
-<body>
-<div class="wrapper">
- {# nav 메뉴 시작 #}
-<header>
-    <nav>
-        <div class="logo">
-                <a href="/">
-                    <img src="../static/logo_02.png" alt="logo"/>
-                </a>
-        </div>
-        <div class="login-box">
-            <ul class="login-btn-form login-btn">
-                    <a href="/login" class="visitor">
-                        <li><button class="before-login-btn">로그인</button></li>
-                    </a>
-                    <a href="/register" class="visitor">
-                        <li><button class="before-login-btn">회원가입</button></li>
-                    </a>
-            </ul>
-             <ul class="login-btn-form login-btn-active">
-                    <li class="customer" id="customer_name">님, 환영합니다!</li>
-                    <li class="customer">
-                        <button class="logout-btn" onclick="logout()">로그아웃</button>
-                    </li>
-
-            </ul>
-        </div>
-    </nav>
-</header>
-    {# nav 메뉴 끝 #}
-
-    {# 상세 section 시작 #}
-    <section>
-        {#  전시 상세 레이어 시작 #}
-        <article class="exhibition">
-            <section class="exhibition-box" id="card-box">
-                {% for content in contents %}
-                    {% if content.id == word %}
-                        <ul class="exhibition-info">
-                            <li class="thumnail"><img src="{{ content.img_url }}"/></li>
-                            <li>
-                                <h1>{{ content.title }}</h1>
-                                <p>날짜 : <span>{{ content.period }}</span></p>
-                                <p>장소 : <span>{{ content.place }}</span></p>
-                                <p>가격 : <span>{{ content.price }}</span> 원</p>
-
-                                <a href="{{ content.url }}">
-                                    <button class="book-btn">예매하러가기</button>
-                                </a>
+    <body>
+    <!--헤더-->
+        <header>
+            <nav>
+                <div class="logo">
+                        <a href="/">
+                            <img src="../static/logo_02.png" alt="logo"/>
+                        </a>
+                </div>
+                <div class="login-box">
+                    <ul class="login-btn-form login-btn">
+                            <a href="/login" class="visitor">
+                                <li><button class="before-login-btn">로그인</button></li>
+                            </a>
+                            <a href="/register" class="visitor">
+                                <li><button class="before-login-btn">회원가입</button></li>
+                            </a>
+                    </ul>
+                     <ul class="login-btn-form login-btn-active">
+                            <li class="customer" id="customer_name">님, 환영합니다!</li>
+                            <li class="customer">
+                                <button class="logout-btn" onclick="logout()">로그아웃</button>
                             </li>
-                        </ul>
-                    {% endif %}
-                {% endfor %}
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        {# nav 메뉴 끝 #}
+        
+        <!--메인-->
+        <main>
+            {# 상세 section 시작 #}
+            <section>
+                {#  전시 상세 레이어 시작 #}
+                <article class="exhibition">
+                    <section class="exhibition-box" id="card-box">
+                        {% for content in contents %}
+                            {% if content.id == word %}
+                                <ul class="exhibition-info">
+                                    <li class="thumnail"><img src="{{ content.img_url }}"/></li>
+                                    <li style="padding-left:30px;width:685px;">
+                                        <h1>{{ content.title }}</h1>
+                                        <p>날짜 : <span>{{ content.period }}</span></p>
+                                        <p>장소 : <span>{{ content.place }}</span></p>
+                                        <p>가격 : <span>{{ content.price }}</span> 원</p>
+
+                                        <a href="{{ content.url }}" style="display:block; text-align:center; ">
+                                            <button class="book-btn">예매하러가기</button>
+                                        </a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                    </section>
+                </article>
+               {#  전시 상세 레이어 끝 #}
             </section>
-        </article>
-       {#  전시 상세 레이어 끝 #}
-    </section>
-
-    <div class="review-box">
-            <button class="upload-btn" onclick="dologin()">리뷰쓰기</button>
-            <div className="reviewWrap" id="reviewform">
-            </div>
-
-            <div class="review-average">
-                <p>평점 : <span class="average_grade">
-
-                {% set score = [] %}
-
+            <section class="review-box">
+            <div class="review-box">
+                <div class="review_box_wrap">
+                    <button class="upload-btn" onclick="dologin()">리뷰쓰기</button>
+                    <div class="reviewWrap" id="reviewform"> </div>
+                    <!--댓글 평점 평균내기, 소숫점 2자리 수 까지만 나타내기-->
+                    <div class="review-average">
+                        <p>평점 : <span class="average_grade" >
+                            {% set score = [] %}
                                 {% for review in reviews %}
                                     {% if review.review_exhibition == word %}
                                         {% if score.append(review.review_grade) %}{% endif %}
@@ -217,55 +224,47 @@
                                 {% if  score | count == 0 %}
                                     {{ (score|count) | round(2) }}
                                 {% else %}
-                                    {% set num  = score | count %}
-                                    {{ (score | sum /  num) |round(2) }}
-                                {% endif %}
-
-
-            </span>
-                </p>
-            </div>
-            {% for review in reviews %}
-                {% if review.review_exhibition == word %}
-                    <div class="review-board" id="{{ review._id }}">
-                        <ul>
-                            <li class="user">
-                                <ul>
-                                    <li>userImg</li>
-                                    <li>min</li>
-                                </ul>
-                                <p class="grade">{{ review.review_grade }}</p>
-
-                            </li>
-                            <li class="review-content">
-                                <ul>
-                                    <li>
-                                        <p>{{ review.review_date }}</p>
-                                        <p>
-                                            <button onclick="likeup()">❤</button>
-                                        </p>
-                                    </li>
-                                    <li><p class="comment">{{ review.review_comment }}</p>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <div>
-                            <button onclick="deleteReview('{{ review.review_comment }}')">삭제</button>
-                        </div>
+                                {% set num  = score | count %}
+                                {{ (score | sum /  num) |round(2) }}
+                            {% endif %}
+                            / 5</span>
+                        </p>
                     </div>
-                {% endif %}
-            {% endfor %}
-    </div>
-    {# footer - top 버튼 끝 #}
-    <footer>
-        <a href="#" class="btn-top">
-            <i class="fas fa-arrow-up"></i>
-        </a>
-    </footer>
-    {# footer - top 버튼  끝  #}
+                </div>
+                    {% for review in reviews %}
+              {% if review.review_exhibition == word %}
+                  <div class="review-board" id="{{ review._id }}">
+                      <ul>
+                          <li>
+                              <ul class="review-wrap">
+                                  <li class="grade">
+                                     <span><b style="font-size:25px; ">{{ review.review_grade }} </b> / 5</span><span>{{ review.review_date }} <br>{{ review.review_id }}님 </span>
+                                  </li>
+                                  <li class="comment">
+                                      <p class="text">{{ review.review_comment }}</p>
+                                  </li>
+                                  <li class="like">
+                                      <span><button class="likebtn" onclick="likeup()">❤</button></span><span><button class="delbtn" onclick="deleteReview('{{  review.review_comment }}')">삭제</button></span>
+                                  </li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </div>
+              {% endif %}
+          {% endfor %}
+            </div>
+            </section>
+        </main>
+        
+        {# footer - top 버튼 끝 #}
+        <footer>
+            <a href="#" class="btn-top">
+                <i class="fas fa-arrow-up"></i>
+            </a>
+        </footer>
+        {# footer - top 버튼  끝  #}
 
-</div>
 
-</body>
+
+    </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- Webpage Title -->
-    <title>회원가입 페이지</title>
+    <title>메인페이지</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -24,6 +24,13 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&display=swap" rel="stylesheet">
+    <!--------------CSS---------------->
+
+{#    <link rel="stylesheet" href="../static/nav.css" />#}
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" />
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -46,52 +53,28 @@
     <!-- bxSlider CSS file -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
 
-    <!--------------CSS---------------->
-    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" />
-    <link rel="stylesheet" href="../static/nav.css" />
 
     <style>
       form {
         text-align: center;
-        margin: 60px 0;
+        margin: 60px 0 110px 0;
         border: 0;
         outline: none;
       }
       input[type="text"] {
-        width: 500px;
+        width: 532px;
         border: 0;
         outline: none;
-        padding: 5px 20px;
+        padding: 14px 35px;
         background-color: var(--btn-color);
-        border-radius: 15px;
+        border-radius: 32px;
       }
       input::placeholder {
         color: var(--main-color);
       }
 
-      #close-exhi {
-        width: 700px;
-        height: 200px;
-        margin: 50px auto;
-        overflow: hidden;
-      }
 
-      .close-exhi-inner {
-        width: 800px;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-      }
 
-      #card-box {
-        width: 700px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .card {
-        margin: 5px 10px;
-      }
     </style>
     <script>
 
@@ -192,7 +175,7 @@
   </head>
 
   <body>
-    <div class="total-wrapper">
+
       {# nav 메뉴 시작 #}
       <header>
         <nav id="nav">
@@ -220,45 +203,64 @@
         </nav>
       </header>
       {# nav 메뉴 끝 #} {# 종료임박 전시 card carousel - start #}
-      <div id="close-exhi">
-        <ul class="close-exhi-inner">
-          {% for exhi in exhibition %} {% if loop.index <= 33 %}
-          <li class="close-exhi-card card" id="{{ exhi.period[-8:] }}">
-            <a href="/exhibition/{{  exhi.id }}">
-              <img
-                class="card-img-top"
-                src="{{ exhi.img_url }}"
-                alt="Card imgae cap"
-              />
-            </a>
-          </li>
-          {% endif %} {% endfor %}
-        </ul>
-      </div>
-      {# 종료임박 전시 card carousel - end #} {# 검색 input - start #}
-      <form>
-        <input
-          type="text"
-          id="value"
-          onkeyup="filter()"
-          placeholder="전시회명을 검색해주세요"
-          style="width: 18rem"
-        />
-      </form>
-      {# 검색 input - end #} {# 전체 전시 - start #}
-      <div id="card-box">
-        {% for exhi in exhibition %}
-        <div class="card search-card" id="{{ exhi.title }}">
-          <a href="/exhibition/{{ exhi.id }}">
-            <img
-              class="card-img-top"
-              src="{{ exhi.img_url }}"
-              alt="Card image cap"
-            />
-          </a>
-        </div>
-        {% endfor %}
-      </div>
+      <main >
+{#          <div id="close-exhi">#}
+{#           #}
+{#            <ul class="close-exhi-inner">#}
+{#              {% for exhi in exhibition %} {% if loop.index <= 33 %}#}
+{#              <li class="close-exhi-card card" id="{{ exhi.period[-8:] }}">#}
+{#                <a href="/exhibition/{{  exhi.id }}">#}
+{#                  <img#}
+{#                    class="card-img-top"#}
+{#                    src="{{ exhi.img_url }}"#}
+{#                    alt="Card imgae cap"#}
+{#                  />#}
+{#                </a>#}
+{#              </li>#}
+{#              {% endif %} {% endfor %}#}
+{#            </ul>#}
+{#          </div>#}
+          {# 종료임박 전시 card carousel - end #} {# 검색 input - start #}
+      <section class="endSoon_wrap">
+            <div id="close-exhi" class="content_area endSoon">
+                <div class="end_cate">
+                    <h2>HURRY<br>UP!</h2>
+                </div>
+                <div class="end_exhi">
+                    <ul class="close-exhi-inner endSoon_list bxslider">
+                        {% for exhi in exhibition %}
+
+                            {% if loop.index <= 40 %}
+                                <li  class="close-exhi-card" >
+                                    <a href="/exhibition/{{  exhi.id }}">
+                                        <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+          <section class="all_wrap">
+              <form>
+            <input type="text"  id="value"  onkeyup="filter()"   placeholder="전시회명을 검색해주세요"  />
+          </form>
+          {# 검색 input - end #} {# 전체 전시 - start #}
+         <div class="content_area">
+              <div id="card-box">
+            {% for exhi in exhibition %}
+            <div class="card search-card" id="{{ exhi.title }}">
+              <a href="/exhibition/{{ exhi.id }}">
+                <img  class="card-img-top"  src="{{ exhi.img_url }}" alt="Card image cap"  />
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+         </div>
+          </section>
+        </main>
       {# footer - top 버튼 시작 #}
       <footer>
         <a href="#" class="btn-top">
@@ -266,7 +268,6 @@
         </a>
       </footer>
       {# footer - top 버튼 끝 #} {# 전체 전시 - end #}
-    </div>
 
     <script type="text/javascript" src="../static/exhibition.js"></script>
   </body>

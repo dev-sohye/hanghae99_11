@@ -1,4 +1,3 @@
-
 main {
   height: 100vh;
   display: flex;
@@ -10,7 +9,7 @@ main {
 .login-container {
   background-color: var(--form-color);
   border-radius: 10px;
-  opacity: 0.8;
+  *opacity: 0.8;
   height: 550px;
   width: 500px;
   display: flex;

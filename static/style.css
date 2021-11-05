@@ -19,7 +19,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
+font-family: 'KOTRA_GOTHIC';
     scroll-behavior: smooth;
 }
 
@@ -45,8 +45,10 @@ h1 {
   -webkit-font-family: 'KOTRAHOPE', sans-serif;
   -moz-osx-font-family: 'KOTRAHOPE', sans-serif;
 }
-
-li{ list-style: none;}
+p ,ul , li {padding:0; margin:0;}
+li{
+    list-style: none;
+}
 
 :root{
     --main-color: #222222;
@@ -84,14 +86,17 @@ section{
 
 button{
   border: 0;
-  outline: 0;
+  outline: none;
   border-radius: 10px;
   background-color: var(--btn-color);
   cursor: pointer;
 
 }
+button:focus{
 
-body {width:100%; height:100%;  *background:url('/static/paperbg.jpg') repeat 100%; }
+    outline: none;
+}
+
 .window__scene {
 
     position: relative;
@@ -110,7 +115,7 @@ body {width:100%; height:100%;  *background:url('/static/paperbg.jpg') repeat 10
 
 
 /*********** nav 헤더 디자인입니다 ***********/
-header {position: relative; height:200px; }
+header {position: relative; *height:200px; }
 nav {
     width: 100%;
     height: 200px;
@@ -128,21 +133,24 @@ nav {
 
 .logo {
     width: 200px;
-    padding: 20px 0;
+    padding: 47px 0;
     text-align: center;
 
     position: absolute;
     top: 0;
-    *left: 44%;
-    left:130px; 
+   * left: 44%;
+    left:130px;
     transform: translate(0, -44);
     transition: width 0.3s;
+    transition: 1s;
 
 }
 
 
 .logo img {
     width: 100%;
+    transition:width 1s;
+
 }
 
 nav.active {
@@ -152,17 +160,21 @@ nav.active {
     *box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 nav.active .logo{
-    padding: 15px 0;
+    *padding: 20px 0;
+    *transition: 0.5s;
+    *left:200px;
 }
 nav.active .logo img{
-    width: 50%;
+    *width: 50%;
+   * transition:width 0.5s;
 }
 
 
 .login-box {
     width: 300px;
     position: absolute;
-    right: 0;
+    top:39px;
+    right: 40px;
 }
 
 .login-btn {
@@ -243,28 +255,23 @@ main {position:relative; width:100%; height:auto;}
  .content_area {width:1080px; margin:0 auto; }
 
 
-.card{width:200px; }
 
 
-
- /*main*/
-
- /* .back_deco {position:fixed;  width:58%;left:50%; margin-left:-29%; height:auto; display:flex;justify-content: space-around;}
- .back_deco .line {width:2px; height:100vh; background:#222;opacity:0.3;}        */
-
- #card-box{width: 1080px;margin: 0 auto;display: flex; flex-wrap:wrap;  justify-content: space-between;}
-
-
+ #card-box{width: 1080px;margin: 0 auto;display: flex; flex-wrap:wrap;  justify-content: flex-start;}
+.card{width:23%; margin-left:2%; margin-bottom:40px; background:none; border:none;  }
+.card:nth-child(4n+1) {*margin-left:0;}
 .main_wrap {position:relative; width:100%;}
 .main_wrap .main {width:100%; height:500px; background:#123456;}
 
 .endSoon_wrap {width:100%; height:auto;}
 .endSoon_wrap .endSoon {position:relative; padding:80px 0;display:flex; justify-content: flex-start;}
-.endSoon_wrap .endSoon .end_cate {width:25% }
-.endSoon_wrap .endSoon .end_exhi {width:75%;}
+.endSoon_wrap .endSoon .end_cate {width:28% }
+.endSoon_wrap .endSoon .end_exhi {width:72%;}
 .endSoon_wrap .endSoon .endSoon_list {width:auto; overflow:hidden;display:flex; }
 .endSoon_wrap .endSoon .endSoon_list li {width: 198px!important; height:250px; margin-right:20px; }
 
+.endSoon_wrap .endSoon .end_cate {font-family: 'Montserrat', sans-serif; font-weight:800; font-style:italic;}
+.endSoon_wrap .endSoon .end_cate h2 {font-size:70px;margin-top: 36px;color:#fff; text-shadow: 6px 2px 0px #535353; }
 .bx-wrapper {border:0; margin-bottom:0; box-shadow: none;}
 .bx-wrapper img {width:100%;}
 
@@ -278,116 +285,80 @@ main {position:relative; width:100%; height:auto;}
 .all_wrap .content_area .search:focus {border:none;}
 
 .all_wrap .content_area .card-box {padding:80px 0;}
+.all_wrap .content_area .card-box .card a{.border-radius: 12  px  ;  overflow: hidden;}
 .all_wrap .content_area .card-box .search-card {width:23%;height:auto; display: block!important; margin-bottom:20px;box-shadow: 0px 0px 10px 1px #8c8c8c8f; }
 .all_wrap .content_area .card-box .search-card img{width:100%; }
 
-#card-box{width: 1080px;margin: 0 auto;display: flex; flex-wrap:wrap;  justify-content: space-between;}
 
 
+.login-btn {
+    width: 180px;
+    padding: 10px 20px 0 0;
+    overflow: hidden;
+    margin-left: 120px;
+}
 
-/*********** exhibition_view.html   페이지 디자인입니다 ***********/
-.wrapper{
+.login-btn > a {
+    float: left;
+    width: 50%;
+}
+
+.login-btn-active {
     width: 100%;
-    margin: 0 auto;
-    background-image: url("paperbg.jpg");
-    background-size: cover;
-    object-fit: cover;
-    padding-top: 300px;
-    font-family: 'KOTRA_GOTHIC';
-    -webkit-font-family: 'KOTRA_GOTHIC', sans-serif;
-    -moz-osx-font-family: 'KOTRA_GOTHIC', sans-serif;
-}
-
-.exhibition-box {
-    width: 800px;
-    margin: 0 auto;
-    background-color: var(--form-color);
-    border-radius: 10px;
-    padding: 30px;
+    padding: 10px 20px 0 0px;
+    overflow: hidden;
 
 }
-
-.exhibition-info {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+.block-btn{
+      display: block;
+}
+.login-btn-active > li {
+    float: left;
 }
 
-
-.thumnail {
-    display: flex;
-    justify-content: center;
+.login-btn-active > li:nth-child(1) {
+    width: 60%;
+    margin-top: 5px;
 }
 
-.thumnail img {
-    width: 70%;
+.login-btn-active > li:nth-child(2) {
+    width: 30%;
 }
 
-.exhibition-info h1{
-    font-size: 30px;
-    padding: 10px 0;
+.customer{
+    font-weight: 700;
 }
 
-.exhibition-info > li > p {
-   padding: 5px;
-}
-
-.exhibition-info h5 {
-    margin-bottom: 40px;
-}
-
-.book-btn{
-    margin-top: 100px;
-    margin-left: 80px;
-    padding: 10px 60px;
-    color: var(--main-color);
+.before-login-btn,
+.logout-btn {
+    padding: 5px 10px;
     transition: all 0.3s ease;
-    text-align: center;
-
 }
-.book-btn:hover{
-    background-color:var(--btn-hover-color);
+
+.before-login-btn:hover,
+.logout-btn:hover {
+    background-color: var(--btn-hover-color);
     color: var(--font-hover-color);
 }
+/* 로그인 버튼 끝*/
+/*footer - 탑 버튼 시작 */
 
-/* REVIEW */
-.review-commit > ul {
-    display: flex;
+.btn-top {
+    position: fixed;
+    bottom: -50px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: var(--btn-color);
+    text-align: center;
+    padding-top: 8px;
+    color: var(--main-color);
+    transition: all 0.3s;
 }
 
-.user-info {
-    width: 20%;
-}
 
-.contentArea {
-    width: 80%;
-}
 
-.review-board {
-    background-color: antiquewhite;
-    border-radius: 10px;
 
-}
 
-.review-board > ul {
-    display: flex;
-    flex-direction: row;
-    padding: 10px 0;
-}
-
-.user {
-    width: 20%;
-    padding-left: 10px;
-    box-sizing: border-box;
-}
-
-.review-content > ul > li:nth-child(1) {
-    display: flex;
-    flex-direction: row;
-    text-align: end;
-}
-
-.review-content {
-    width: 80%;
-    background-color: lightpink;
-}
 
