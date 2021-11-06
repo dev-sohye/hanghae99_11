@@ -68,12 +68,6 @@ li {
     /*  상세 전시 투명도 줘서 하는걸로 */
 }
 
-.op60 {
-    opacity: 0.6;
-}
-.op75 {
-    opacity: 0.75;
-}
 
 a,
 a:active,
@@ -110,7 +104,7 @@ button:focus {
     background-size: 30%;
 }
 
-/*********** nav 헤더 디자인입니다 ***********/
+/*********** 헤더  ***********/
 header {
     position: relative;
     *height: 200px;
@@ -145,6 +139,7 @@ nav {
 .logo img {
     width: 100%;
     transition: width 1s;
+
 }
 
 nav.active {
@@ -153,13 +148,11 @@ nav.active {
     *background-color: #c4a48c;
     *box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
-
 nav.active .logo {
     *padding: 20px 0;
     *transition: 0.5s;
     *left: 200px;
 }
-
 
 .login-box {
     width: 300px;
@@ -167,6 +160,7 @@ nav.active .logo {
     top: 39px;
     right: 40px;
 }
+
 
 .login-btn {
     width: 180px;
@@ -198,50 +192,29 @@ nav.active .logo {
 .login-btn-active > li:nth-child(2) {
     width: 30%;
 }
-
-.customer {
-    font-weight: 600;
+.block-btn {
+    display: block;
 }
 
+.customer {
+    font-weight: 700;
+}
+
+.before-login-btn,
 .logout-btn {
     padding: 5px 10px;
     transition: all 0.3s ease;
 }
 
+.before-login-btn:hover,
 .logout-btn:hover {
     background-color: var(--btn-hover-color);
     color: var(--font-hover-color);
 }
 
-.login-btn-active {
-    display: none;
-}
-/*footer*/
 
-.btn-top {
-    position: fixed;
-    bottom: -50px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    background-color: var(--btn-color);
-    text-align: center;
-    padding-top: 8px;
-    color: var(--main-color);
-    transition: all 0.3s;
-}
 
-.btn-top.active {
-    bottom: 20px;
-}
-
-.btn-top.active:hover {
-    background-color: var(--btn-hover-color);
-    color: var(--font-hover-color);
-}
-
-/*********** 메 ***********/
+/*********** 메인페이지 ***********/
 main {
     position: relative;
     width: 100%;
@@ -327,7 +300,6 @@ main {
     width: 100%;
 }
 
-
 .all_exhibit_wrap {
     position: relative;
     width: 100%;
@@ -367,7 +339,7 @@ main {
     padding: 80px 0;
 }
 .all_wrap .content_area .card-box .card a {
-    
+
     overflow: hidden;
 }
 .all_wrap .content_area .card-box .search-card {
@@ -381,58 +353,9 @@ main {
     width: 100%;
 }
 
-/*********** 헤더부분 ***********/
-.login-btn {
-    width: 180px;
-    padding: 10px 20px 0 0;
-    overflow: hidden;
-    margin-left: 120px;
-}
 
-.login-btn > a {
-    float: left;
-    width: 50%;
-}
 
-.login-btn-active {
-    width: 100%;
-    padding: 10px 20px 0 0;
-    overflow: hidden;
-
-}
-.block-btn {
-    display: block;
-}
-.login-btn-active > li {
-    float: left;
-}
-
-.login-btn-active > li:nth-child(1) {
-    width: 60%;
-    margin-top: 5px;
-}
-
-.login-btn-active > li:nth-child(2) {
-    width: 30%;
-}
-
-.customer {
-    font-weight: 700;
-}
-
-.before-login-btn,
-.logout-btn {
-    padding: 5px 10px;
-    transition: all 0.3s ease;
-}
-
-.before-login-btn:hover,
-.logout-btn:hover {
-    background-color: var(--btn-hover-color);
-    color: var(--font-hover-color);
-}
-/* 로그인 버튼 끝*/
-/*footer - 탑 버튼 시작 */
+/*footer*/
 
 .btn-top {
     position: fixed;
@@ -447,3 +370,16 @@ main {
     color: var(--main-color);
     transition: all 0.3s;
 }
+
+
+.btn-top.active {
+    bottom: 20px;
+}
+
+.btn-top.active:hover {
+    background-color: var(--btn-hover-color);
+    color: var(--font-hover-color);
+}
+
+
+
