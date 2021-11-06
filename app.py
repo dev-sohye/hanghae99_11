@@ -34,6 +34,18 @@ def login_to_review():
 def register():
     return render_template("register.html")
 
+
+
+
+## 상세페이지 생성 및 리뷰 불러오기
+@app.route('/exhibition/<keyword>')
+def detail(keyword):
+    contents = list(db.exhibition.find({}, {'_id': False}))
+    reviews = list(db.review.find({}, {'_id': False}).sort('review_time', -1))
+    return render_template("exhibition_view.html", contents=contents, word=keyword, reviews=reviews)
+
+
+
 # 회원가입 API
 @app.route('/api/register', methods=['POST'])
 def api_register():
@@ -55,6 +67,8 @@ def api_register():
     elif gender_receive == 'no':
         return jsonify({'msg': '성별을 선택해주세요!'})
 
+    
+    
 # 로그인 API
 @app.route('/api/login', methods=['POST'])
 def api_login():
@@ -79,6 +93,8 @@ def api_login():
     else:
         return jsonify({'result': 'fail', 'msg': '비밀번호를 확인해주세요!'})
 
+    
+    
 # 유저 정보 확인 API
 @app.route('/api/user', methods=['GET'])
 def api_valid():
@@ -94,6 +110,8 @@ def api_valid():
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+    
+    
 
 # 댓글 삭제 유저 정보 확인 API
 @app.route('/api/delete2', methods=['GET'])
@@ -113,6 +131,9 @@ def api_valid2():
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
+    
+    
+    
 # 아이디 중복 확인
 @app.route('/sign_up/check_dup', methods=['POST'])
 def check_dup():
@@ -120,12 +141,8 @@ def check_dup():
     exists = bool(db.user.find_one({"user_id": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
 
-## 상세페이지 생성 및 리뷰 불러오기
-@app.route('/exhibition/<keyword>')
-def detail(keyword):
-    contents = list(db.exhibition.find({}, {'_id': False}))
-    reviews = list(db.review.find({}, {'_id': False}).sort('review_time', -1))
-    return render_template("exhibition_view.html", contents=contents, word=keyword, reviews=reviews)
+
+
 
 ## 리뷰 작성하기
 @app.route('/api/review', methods=['POST'])
@@ -151,12 +168,18 @@ def write_review():
 
     return jsonify({'msg': '등록이 완료되었습니다.'})
 
+
+
+
 # 평점 불러오기
 @app.route('/api/review', methods=['GET'])
 def show_grades():
     grades_receive = list(db.review.find({}, {'_id': False}))
     print(grades_receive)
     return jsonify({'grades_receive': grades_receive})
+
+
+
 
 # 리뷰 좋아요 누르기
 @app.route('/api/like', methods=['POST'])
@@ -172,8 +195,10 @@ def make_like():
 
     return jsonify({'msg': current_like})
 
-# 리뷰 삭제하기
 
+
+# 삭제 기능 구현을 위해 적었던 수스코드입니다 
+# 리뷰 삭제하기 - 1
 #@app.route('/api/delete', methods=['POST'])
 #def delete_reviews():
 #    token_receive = request.cookies.get('mytoken')
@@ -188,14 +213,13 @@ def make_like():
 #   return jsonify({'result': 'success', 'msg': '삭제되었습니다.'})
 
 
-# 리뷰 삭제하기
-
-@app.route('/delete/<idx>', methods=['GET'])
-def delete_reviews(idx):
-    review_comment_receive = request.form['review_comment_give']
-    print(review_comment_receive)
-    db.review.delete_one({'review_comment': review_comment_receive})
-    return jsonify('msg')
+# 리뷰 삭제하기 - 2
+# @app.route('/delete/<idx>', methods=['GET'])
+# def delete_reviews(idx):
+#     review_comment_receive = request.form['review_comment_give']
+#     print(review_comment_receive)
+#     db.review.delete_one({'review_comment': review_comment_receive})
+#     return jsonify('msg')
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
