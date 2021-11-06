@@ -1,3 +1,4 @@
+<!-- 헤더부분 로그인 버튼 클릭 시-->
 function login() {
   let username = $("#userid").val();
   if (username == "") {
@@ -22,6 +23,7 @@ function login() {
   });
 }
 
+<!-- 리뷰쓰기 눌렀을 때 나타나는 로그인 창으로 가기 -->
 function login_to_review() {
   $.ajax({
     type: "POST",
