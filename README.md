@@ -55,3 +55,8 @@
 5. JWT(Json Web Token) 방식의 로그인
 6. 서버와 클라이언트간의 통신
 7. jinja2를 활용한 SSR
+
+***
+## 회고록
+
+서민지: https://github.com/ireneeming/sparta99-4/blob/main/README.md
