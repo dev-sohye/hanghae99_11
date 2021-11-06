@@ -54,6 +54,7 @@
                 $('nav, .btn-top').removeClass('active')
             }
         });
+        
         {#   현재 날짜 구하기     #}
         function getTime() {
             let d = new Date();
@@ -77,8 +78,6 @@
         }
 
         {# 리뷰 작성하기 #}
-
-        //리뷰 등록, 유저id 가져오기
         function makeReview() {
     $.ajax({
         type: "GET",
@@ -118,7 +117,7 @@
 }
 
 
-        //삭제창 유무 판별
+       {# 삭제창 유무 판별 #}
         $.ajax({
             type: "GET",
             url: "/api/user",
@@ -131,7 +130,7 @@
         })
         ;
 
-        //리뷰 삭제
+        {# 리뷰 삭제 #}
         function deleteReview() {
             $.ajax({
                 type: "POST",
@@ -149,7 +148,8 @@
     </script>
 </head>
     <body>
-    <!--헤더-->
+    
+        {# nav 메뉴 시작 #}
         <header>
             <nav>
                 <div class="logo">
@@ -178,7 +178,7 @@
         </header>
         {# nav 메뉴 끝 #}
         
-        <!--메인-->
+        {# 메인 #}
         <main>
             {# 상세 section 시작 #}
             <section>
@@ -206,6 +206,8 @@
                 </article>
                {#  전시 상세 레이어 끝 #}
             </section>
+            
+            {# 리뷰 포스팅 박스 시작 #}
             <section class="review-box">
             <div class="review-box">
                 <div class="review_box_wrap">
@@ -231,7 +233,9 @@
                         </p>
                     </div>
                 </div>
-                    {% for review in reviews %}
+                
+            {# 리뷰 박스 시작 #}
+           {% for review in reviews %}
               {% if review.review_exhibition == word %}
                   <div class="review-board" id="{{ review._id }}">
                       <ul>
@@ -253,6 +257,7 @@
               {% endif %}
           {% endfor %}
             </div>
+         {# 리뷰 박스 끝 #}
             </section>
         </main>
         
