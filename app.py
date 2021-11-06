@@ -13,7 +13,6 @@ import jwt, datetime, hashlib
 
 SECRET_KEY = 'okay'
 
-
 # 멀티 페이지 url
 @app.route('/')
 def home():
@@ -22,39 +21,14 @@ def home():
 
     return render_template("index.html", exhibition=exhibition, close_exhi=close_exhi)
 
-    ############## 로그인 여부 확인 ##############
-
-    # token_receive = request.cookies.get('mytoken')
-    # try:
-    #     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    #     user_info = db.user.find_one({"user_id": payload['id']})
-    #     return render_template('index.html', user_id=user_info["user_id"])
-    # except jwt.ExpiredSignatureError:
-    #     return render_template("login.html", msg="다시 로그인 해주세요!")
-    #     # return redirect(url_for("login", msg="다시 로그인"))
-    # except jwt.exceptions.DecodeError:
-    #     return render_template("login.html", msg="로그인 정보 없음!")
-    #     # return redirect(url_for("login", msg="로그인 정보 없음"))
-
-
-@app.route('/exhibition/<keyword>')
-def detail(keyword):
-    contents = list(db.exhibition.find({}, {'_id': False}))
-    reviews = list(db.review.find({}, {'_id': False}).sort('review_time', -1))
-    return render_template("exhibition_view.html", contents=contents, word=keyword, reviews=reviews)
-
-
 @app.route('/login')
 def login():
     return render_template("login.html")
 
-
-# -------수정 중-------리뷰쓰기 통해서 로그인 시 돌아가는 경로
 @app.route('/login_to_review')
 def login_to_review():
     contents = list(db.exhibition.find({}, {'_id': False}))
     return render_template("login_to_review.html", contents=contents)
-
 
 @app.route('/register')
 def register():
@@ -81,7 +55,6 @@ def api_register():
     elif gender_receive == 'no':
         return jsonify({'msg': '성별을 선택해주세요!'})
 
-
 # 로그인 API
 @app.route('/api/login', methods=['POST'])
 def api_login():
@@ -106,7 +79,6 @@ def api_login():
     else:
         return jsonify({'result': 'fail', 'msg': '비밀번호를 확인해주세요!'})
 
-
 # 유저 정보 확인 API
 @app.route('/api/user', methods=['GET'])
 def api_valid():
@@ -122,7 +94,6 @@ def api_valid():
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
-
 
 # 댓글 삭제 유저 정보 확인 API
 @app.route('/api/delete2', methods=['GET'])
@@ -142,7 +113,6 @@ def api_valid2():
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
-
 # 아이디 중복 확인
 @app.route('/sign_up/check_dup', methods=['POST'])
 def check_dup():
@@ -150,6 +120,12 @@ def check_dup():
     exists = bool(db.user.find_one({"user_id": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
 
+## 상세페이지 생성 및 리뷰 불러오기
+@app.route('/exhibition/<keyword>')
+def detail(keyword):
+    contents = list(db.exhibition.find({}, {'_id': False}))
+    reviews = list(db.review.find({}, {'_id': False}).sort('review_time', -1))
+    return render_template("exhibition_view.html", contents=contents, word=keyword, reviews=reviews)
 
 ## 리뷰 작성하기
 @app.route('/api/review', methods=['POST'])
@@ -175,7 +151,7 @@ def write_review():
 
     return jsonify({'msg': '등록이 완료되었습니다.'})
 
-#평점 불러오기
+# 평점 불러오기
 @app.route('/api/review', methods=['GET'])
 def show_grades():
     grades_receive = list(db.review.find({}, {'_id': False}))
@@ -195,29 +171,23 @@ def make_like():
     db.review.update_one({'review_title': review_title_receive}, {'$set': {'like': new_like}})
 
     return jsonify({'msg': current_like})
-# # 리뷰 삭제하기
 
+# 리뷰 삭제하기
 
 #@app.route('/api/delete', methods=['POST'])
 #def delete_reviews():
-#    exhibition_receive = request.form['review_exhibition_give']
-#    db.review.delete_one({'review_exhibition': exhibition_receive})
-#    print(exhibition_receive)
- #   return jsonify({'result': 'success', 'msg': '삭제되었습니다.'})
+#    token_receive = request.cookies.get('mytoken')
+#    userinfo = db.user.find_one({'user_id': payload['id']}, {'_id': 0})
+#    randomId = db.review.find_one({'review_randomId': payload['id']}, {'_id': 0})
+#
+#    try:
+#        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+#        if userinfo
+#   db.review.delete_one({'review_exhibition': exhibition_receive})
+#   print(exhibition_receive)
+#   return jsonify({'result': 'success', 'msg': '삭제되었습니다.'})
 
 
-#     exhibition_receive = request.form['review_exhibition_give']
-#     print(request.form['review_exhibition_give'])
-#     token_receive = request.cookies.get('mytoken')
-#     try:
-#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-#         userid = db.review.find_one({'review_id': payload['id']}, {'_id': 0})
-#         return jsonify({'msg' : '본인의 리뷰만 삭제할 수 있습니다.'})
-#     except:
-#         if userid is exhibition_receive:
-#             db.review.delete_one({'review_exhibition': exhibition_receive})
-#             print(exhibition_receive)
-#             return jsonify({'result': 'success', 'msg': '삭제되었습니다.'})
 # 리뷰 삭제하기
 
 @app.route('/delete/<idx>', methods=['GET'])
@@ -226,7 +196,6 @@ def delete_reviews(idx):
     print(review_comment_receive)
     db.review.delete_one({'review_comment': review_comment_receive})
     return jsonify('msg')
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
