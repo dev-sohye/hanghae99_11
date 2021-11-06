@@ -17,7 +17,7 @@ $.ajax({
   },
 });
 
-//로그인 여부 확인 후 리뷰창 오픈
+//로그인 여부 확인 후 리뷰창 오픈 
 
 let counterLet = 0;
 function dologin() { //리뷰창 카운터
