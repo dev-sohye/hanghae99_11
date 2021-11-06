@@ -96,6 +96,7 @@ def api_login():
     
     
 # 유저 정보 확인 API
+# 토큰 내 유저id와 일치한 db 내 유저id값을 가져옴
 @app.route('/api/user', methods=['GET'])
 def api_valid():
     token_receive = request.cookies.get('mytoken')
@@ -103,7 +104,6 @@ def api_valid():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         userinfo = db.user.find_one({'user_id': payload['id']}, {'_id': 0})
-        review_id = db.review.find_one({'review_id': userinfo['user_id']}, {'_id': 0})
 
         return jsonify({'result': 'success', 'user_id': userinfo['user_id'], 'user_gender': userinfo['user_gender']})
     except jwt.ExpiredSignatureError:
@@ -113,23 +113,11 @@ def api_valid():
     
     
 
-# 댓글 삭제 유저 정보 확인 API
+# 댓글 db 불러오기
 @app.route('/api/delete2', methods=['GET'])
-def api_valid2():
-    token_receive = request.cookies.get('mytoken')
-
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        userinfo = db.user.find_one({'user_id': payload['id']}, {'_id': 0})
-        review_id = list(db.review.find({'review_id': userinfo['user_id']}, {'_id': 0}))
-        for review_id2 in review_id:
-            review_id3 = review_id2
-        # if userinfo['user_id'] == review_id['review_id']:
-        return jsonify({'result': 'success', 'user_id': userinfo['user_id'], 'user_gender': userinfo['user_gender']})
-    except jwt.ExpiredSignatureError:
-        return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
-    except jwt.exceptions.DecodeError:
-        return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+def api_review():
+    reviewinfo = list(db.review.find({}, {'_id': 0}))
+    return jsonify(reviewinfo)
 
     
     
@@ -152,8 +140,8 @@ def write_review():
     grade_receive = int(request.form['review_grade_give'])
     comment_receive = request.form['review_comment_give']
     id_receive = request.form['review_id']
-    time_receive = request.form['review_time']
     like_receive = 0
+    random_id_receive = request.form['random_id']
     doc = {
         'review_exhibition': exhibition_receive,
         'review_grade': grade_receive,
@@ -161,7 +149,7 @@ def write_review():
         'review_like': like_receive,
         'review_date': date_receive,
         'review_id': id_receive,
-        'review_time': time_receive,
+        'review_random_id': random_id_receive
     }
 
     db.review.insert_one(doc)
@@ -195,7 +183,12 @@ def make_like():
 
     return jsonify({'msg': current_like})
 
-
+@app.route('/api/delete', methods=['POST'])
+def delete_reviews():
+    deleteKey = request.form['deleteKey']
+    print(deleteKey)
+    db.review.delete_one({'review_random_id': deleteKey})
+    return jsonify({'result': 'success', 'msg': '삭제되었습니다.'})
 
 # 삭제 기능 구현을 위해 적었던 수스코드입니다 
 # 리뷰 삭제하기 - 1
