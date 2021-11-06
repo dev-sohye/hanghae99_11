@@ -1,3 +1,5 @@
+/* 로그인 페이지 */
+
 main {
   height: 100vh;
   display: flex;
@@ -18,11 +20,14 @@ main {
   align-items: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
+/* 로그인창 로고이미지 */
 .login-container img{
   margin: 0 auto 10px auto;
   height: 25%;
 }
 
+/* 입력창 */
 .input-box input {
   font-family: "KOTRA_GOTHIC";
   outline: 0;
@@ -38,6 +43,8 @@ main {
   margin: 0;
   padding: 0;
 }
+
+/* 로그인버튼 */
 
 .login-button {
   font-family: "KOTRA_GOTHIC";
