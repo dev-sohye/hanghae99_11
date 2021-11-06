@@ -43,8 +43,6 @@
 
 </style>
     <script>
-        $(document).ready(function () {
-        })
 
         //상단 메뉴 고정
         $(window).scroll(function () {
@@ -55,7 +53,7 @@
             }
         });
         
-        {#   현재 날짜 구하기     #}
+        // 현재 날짜 (YY-MM-DD) 형태로 구하기 
         function getTime() {
             let d = new Date();
 
@@ -77,47 +75,47 @@
             return zero + n;
         }
 
-        {# 리뷰 작성하기 #}
+        // 리뷰 작성하기
         function makeReview() {
-    $.ajax({
-        type: "GET",
-        url: "/api/user",
-        data: {},
-        success: function (response) {
-            if (response["result"] == "success") {
-                let username = response["user_id"];
-                let review_date = getTime()
-                let review_time = new Date()
-                let grade = parseInt($('#grade').val())
-                let comment = $('#comment').val()
-                let like = $('#like').val()
-                //db에 데이터 전송
-                $.ajax({
-                    type: "POST",
-                    url: "/api/review",
-                    data: {
-                        review_exhibition_give: {{ word }},
-                        review_grade_give: grade,
-                        review_comment_give: comment,
-                        review_like_give: like,
-                        review_date_give: review_date,
-                        review_id: username,
-                        review_time : review_time,
-                    },
-                    success: function (response) {
-                        alert(response["msg"]);
-                        window.location.href = `/exhibition/{{ word }}`;
+           $.ajax({
+                type: "GET",
+                url: "/api/user",
+                data: {},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        let username = response["user_id"];
+                        let review_date = getTime()
+                        let review_time = new Date()
+                        let grade = parseInt($('#grade').val())
+                        let comment = $('#comment').val()
+                        let like = $('#like').val()
+                        //db에 데이터 전송
+                        $.ajax({
+                            type: "POST",
+                            url: "/api/review",
+                            data: {
+                                review_exhibition_give: {{ word }},
+                                review_grade_give: grade,
+                                review_comment_give: comment,
+                                review_like_give: like,
+                                review_date_give: review_date,
+                                review_id: username,
+                                review_time : review_time,
+                            },
+                            success: function (response) {
+                                alert(response["msg"]);
+                                window.location.href = `/exhibition/{{ word }}`;
+                            }
+                        })
+                    } else {
+                        alert('nooooooo')
                     }
-                })
-            } else {
-                alert('nooooooo')
-            }
-        }
-    })
+                }
+            })
 }
 
 
-       {# 삭제창 유무 판별 #}
+        //삭제창 유무 판별
         $.ajax({
             type: "GET",
             url: "/api/user",
@@ -130,7 +128,7 @@
         })
         ;
 
-        {# 리뷰 삭제 #}
+        // 리뷰 삭제
         function deleteReview() {
             $.ajax({
                 type: "POST",
