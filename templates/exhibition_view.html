@@ -207,8 +207,10 @@
                {#  전시 상세 레이어 끝 #}
             </section>
             
-            {# 리뷰 포스팅 박스 시작 #}
+            {# 리뷰 전체 박스 시작 #}
             <section class="review-box">
+                
+             {# 리뷰 포스팅 박스 시작 #}
             <div class="review-box">
                 <div class="review_box_wrap">
                     <button class="upload-btn" onclick="dologin()">리뷰쓰기</button>
@@ -233,6 +235,7 @@
                         </p>
                     </div>
                 </div>
+               {# 리뷰 포스팅 박스 끝  #}
                 
             {# 리뷰 박스 시작 #}
            {% for review in reviews %}
@@ -260,6 +263,8 @@
          {# 리뷰 박스 끝 #}
             </section>
         </main>
+        {# 리뷰 전체 박스 끝 #}
+        
         
         {# footer - top 버튼 끝 #}
         <footer>
