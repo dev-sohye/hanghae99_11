@@ -93,7 +93,7 @@
               }
       });
 
-      //검색
+      //검색 
       function filter() {
           let value = $('#value').val();
           let listInner = document.getElementsByClassName("search-card");
@@ -111,7 +111,7 @@
           }
       }
 
-      //현재 날짜 구하기
+      //현재 날짜 (YY-MM-DD)형태로 구하기
       function getTime() {
           let today;
           var d = new Date();
@@ -135,8 +135,10 @@
 
           return zero + n;
       }
+      
+      
 
-      //죵료 임박 순
+      //전시 죵료 임박 순
       function closeExhi() {
           let today = getTime();
           let year = today.substr(2, 2);
@@ -159,7 +161,8 @@
 
           }
       }
-
+      
+      // 이미지 슬라이더 (carousel)
       $(document).ready(function(){
           $('.bxslider').bxSlider({
               mode:'horizontal', //horizontal', 'vertical', 'fade'
@@ -204,6 +207,8 @@
       </header>
       {# nav 메뉴 끝 #} {# 종료임박 전시 card carousel - start #}
       <main >
+        
+        {# 종료임박순 캐러셀 레이어 - 현재 jquery 소스랑 충돌이 나서 주석 처리해두었습니다 #}
 {#          <div id="close-exhi">#}
 {#           #}
 {#            <ul class="close-exhi-inner">#}
@@ -220,7 +225,8 @@
 {#              {% endif %} {% endfor %}#}
 {#            </ul>#}
 {#          </div>#}
-          {# 종료임박 전시 card carousel - end #} {# 검색 input - start #}
+          {# 종료임박 전시 card carousel - end #} 
+    
       <section class="endSoon_wrap">
             <div id="close-exhi" class="content_area endSoon">
                 <div class="end_cate">
@@ -243,11 +249,14 @@
                 </div>
             </div>
         </section>
+      {# 검색 input - 시작 #}
           <section class="all_wrap">
               <form>
             <input type="text"  id="value"  onkeyup="filter()"   placeholder="전시회명을 검색해주세요"  />
-          </form>
-          {# 검색 input - end #} {# 전체 전시 - start #}
+            </form> 
+       {# 검색 input 끝 #} 
+            
+       {# 전체 전시 시작 #}
          <div class="content_area">
               <div id="card-box">
             {% for exhi in exhibition %}
@@ -259,16 +268,21 @@
             {% endfor %}
           </div>
          </div>
+        {# 전체 전시 끝 #}
           </section>
         </main>
+
       {# footer - top 버튼 시작 #}
       <footer>
         <a href="#" class="btn-top">
           <i class="fas fa-arrow-up"></i>
         </a>
       </footer>
-      {# footer - top 버튼 끝 #} {# 전체 전시 - end #}
+      {# footer - top 버튼 끝 #} 
 
+  {# 전체 전시 - end #}
+    
+    {#  로그인시 - 리뷰 작성 가능하게 해주는 코드 파일 #}
     <script type="text/javascript" src="../static/exhibition.js"></script>
   </body>
 </html>
