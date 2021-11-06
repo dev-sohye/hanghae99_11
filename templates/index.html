@@ -1,287 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Webpage Title -->
-    <title>메인페이지</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <!-- Font Awesome CDN -->
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    />
-    <!-- Cookie -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&display=swap" rel="stylesheet">
-    <!--------------CSS---------------->
+    <head>
+        <!-- Webpage Title -->
+        <title>메인페이지</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <!-- Font Awesome CDN -->
+        <link
+            rel="stylesheet"
+            href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+        <!-- Cookie -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin="crossorigin">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&display=swap"
+            rel="stylesheet">
+        <!--------------CSS---------------->
 
-    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" />
+        {#    <link rel="stylesheet" href="../static/nav.css" />#}
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}"/>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-    />
-    <!-- bxSlider Javascript file -->
-    <script src="/js/jquery.bxslider.min.js"></script>
-    <!-- bxSlider CSS file -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <link
+            href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"/>
+        <!-- bxSlider Javascript file -->
+        <script src="/js/jquery.bxslider.min.js"></script>
+        <!-- bxSlider CSS file -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
 
+        <style>
+            form {
+                text-align: center;
+                margin: 60px 0 110px;
+                border: 0;
+                outline: none;
+            }
+            input[type="text"] {
+                width: 532px;
+                border: 0;
+                outline: none;
+                padding: 14px 35px;
+                background-color: var(--btn-color);
+                border-radius: 32px;
+            }
+            input::placeholder {
+                color: var(--main-color);
+            }
+        </style>
+        <script>
 
-    <style>
-      form {
-        text-align: center;
-        margin: 60px 0 110px 0;
-        border: 0;
-        outline: none;
-      }
-      input[type="text"] {
-        width: 532px;
-        border: 0;
-        outline: none;
-        padding: 14px 35px;
-        background-color: var(--btn-color);
-        border-radius: 32px;
-      }
-      input::placeholder {
-        color: var(--main-color);
-      }
+            $(document).ready(function () {
+                filter();
+                closeExhi();
+            })
 
+            //상단 메뉴 고정
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 50) {
+                    $('nav, .btn-top').addClass('active')
+                } else {
+                    $('nav, .btn-top').removeClass('active')
+                }
+            });
 
+            //검색
+            function filter() {
+                let value = $('#value').val();
+                let listInner = document.getElementsByClassName("search-card");
+                if (value == " ") {
+                    return window.location.href = `/`;
+                }
 
-    </style>
-    <script>
+                for (let i = 0; i < listInner.length; i++) {
+                    let title = listInner[i].getAttribute('id')
+                    if (title.indexOf(value) > -1) {
+                        listInner[i].style.display = 'flex';
+                    } else {
+                        listInner[i].style.display = 'none';
+                    }
+                }
+            }
 
-      $(document).ready(function () {
-          filter();
-          closeExhi();
-      })
+            //현재 날짜 구하기
+            function getTime() {
+                let today;
+                var d = new Date();
 
+                var s = leadingZeros(d.getFullYear(), 4) + '-' + leadingZeros(
+                    d.getMonth() + 1,
+                    2
+                ) + '-' + leadingZeros(d.getDate(), 2);
 
-      //상단 메뉴 고정
-      $(window).scroll(function () {
-              if ($(window).scrollTop() > 50) {
-                  $('nav, .btn-top').addClass('active')
-              } else {
-                  $('nav, .btn-top').removeClass('active')
-              }
-      });
+                return s;
+            }
 
-      //검색 
-      function filter() {
-          let value = $('#value').val();
-          let listInner = document.getElementsByClassName("search-card");
-          if (value == " ") {
-              return window.location.href = `/`;
-          }
+            function leadingZeros(n, digits) {
+                var zero = '';
+                n = n.toString();
 
-          for (let i = 0; i < listInner.length; i++) {
-              let title = listInner[i].getAttribute('id')
-              if (title.indexOf(value) > -1) {
-                  listInner[i].style.display = 'flex';
-              } else {
-                  listInner[i].style.display = 'none';
-              }
-          }
-      }
+                if (n.length < digits) {
+                    for (i = 0; i < digits - n.length; i++)
+                        zero += '0';
+                    }
 
-      //현재 날짜 (YY-MM-DD)형태로 구하기
-      function getTime() {
-          let today;
-          var d = new Date();
+                return zero + n;
+            }
 
-          var s =
-              leadingZeros(d.getFullYear(), 4) + '-' +
-              leadingZeros(d.getMonth() + 1, 2) + '-' +
-              leadingZeros(d.getDate(), 2);
+            //죵료 임박 순
+            function closeExhi() {
+                let today = getTime();
+                let year = today.substr(2, 2);
+                let mon = today.substr(5, 2);
+                let day = today.substr(8, 2);
 
-          return s;
-      }
+                let exhiPeriod = document.getElementsByClassName("close-exhi-card");
+                for (let i = 0; i < exhiPeriod.length; i++) {
+                    let exhiYe = exhiPeriod[i]
+                        .getAttribute('id')
+                        .substr(0, 2)
+                    let exhiDay = exhiPeriod[i]
+                        .getAttribute('id')
+                        .substr(6, 2)
+                    let exhiMon = exhiPeriod[i]
+                        .getAttribute('id')
+                        .substr(3, 2)
 
-      function leadingZeros(n, digits) {
-          var zero = '';
-          n = n.toString();
+                    if (year == exhiYe && mon == exhiMon && day <= exhiDay) {
+                        {
+                           // exhiPeriod[i].style.display = 'flex';
 
-          if (n.length < digits) {
-              for (i = 0; i < digits - n.length; i++)
-                  zero += '0';
-          }
+                        }
 
-          return zero + n;
-      }
-      
-      
+                    } else {
+                        exhiPeriod[i].style.display = 'none';
+                    }
 
-      //전시 죵료 임박 순
-      function closeExhi() {
-          let today = getTime();
-          let year = today.substr(2, 2);
-          let mon = today.substr(5, 2);
-          let day = today.substr(8, 2);
+                }
+            }
+          // hurry up 전시임박 포스터 슬라이딩 jQuery
+            $(document).ready(function () {
+                $('.bxslider').bxSlider({
+                    mode: 'horizontal', //horizontal', 'vertical', 'fade'
+                    pager: false,
+                    controls: false,
+                    auto: true,
+                    speed: 200,
+                    responsive: true,
+                    randomStart: false
+                });
+            });
+        </script>
+    </head>
 
-          let exhiPeriod = document.getElementsByClassName("close-exhi-card");
-          for (let i = 0; i < exhiPeriod.length; i++) {
-              let exhiYe = exhiPeriod[i].getAttribute('id').substr(0, 2)
-              let exhiDay = exhiPeriod[i].getAttribute('id').substr(6, 2)
-              let exhiMon = exhiPeriod[i].getAttribute('id').substr(3, 2)
+    <body>
 
-              if (year == exhiYe && mon == exhiMon && day <= exhiDay) {
-                  {#exhiPeriod[i].style.display = 'flex';#}
-
-              } else {
-                  exhiPeriod[i].style.display = 'none';
-              }
-
-
-          }
-      }
-      
-      // 이미지 슬라이더 (carousel)
-      $(document).ready(function(){
-          $('.bxslider').bxSlider({
-              mode:'horizontal', //horizontal', 'vertical', 'fade'
-              pager:false,
-              controls:false,
-              auto:true,
-             speed:200,
-              responsive:true,
-              randomStart:false
-          });
-      });
-    </script>
-  </head>
-
-  <body>
-
-      {# nav 메뉴 시작 #}
-      <header>
-        <nav id="nav">
-          <div class="logo">
-            <a href="/">
-              <img src="../static/logo_02.png" alt="logo" />
-            </a>
-          </div>
-          <div class="login-box">
-            <ul class="login-btn-form login-btn">
-              <a href="/login" class="visitor">
-                <li><button class="before-login-btn">로그인</button></li>
-              </a>
-              <a href="/register" class="visitor">
-                <li><button class="before-login-btn">회원가입</button></li>
-              </a>
-            </ul>
-            <ul class="login-btn-form login-btn-active">
-              <li class="customer" id="customer_name">님, 환영합니다!</li>
-              <li class="customer">
-                <button class="logout-btn" onclick="logout()">로그아웃</button>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      {# nav 메뉴 끝 #} 
-      <main >
-        
-        {# 종료 임박 전시 캐러셀 레이어 - 현재 jquery 소스랑 충돌이 나서 주석 처리해두었습니다 #}
-{#          <div id="close-exhi">#}
-{#           #}
-{#            <ul class="close-exhi-inner">#}
-{#              {% for exhi in exhibition %} {% if loop.index <= 33 %}#}
-{#              <li class="close-exhi-card card" id="{{ exhi.period[-8:] }}">#}
-{#                <a href="/exhibition/{{  exhi.id }}">#}
-{#                  <img#}
-{#                    class="card-img-top"#}
-{#                    src="{{ exhi.img_url }}"#}
-{#                    alt="Card imgae cap"#}
-{#                  />#}
-{#                </a>#}
-{#              </li>#}
-{#              {% endif %} {% endfor %}#}
-{#            </ul>#}
-{#          </div>#}
-          {# 종료임박 전시 card carousel - end #} 
-    
-      <section class="endSoon_wrap">
-            <div id="close-exhi" class="content_area endSoon">
-                <div class="end_cate">
-                    <h2>HURRY<br>UP!</h2>
+        {# nav 메뉴 시작 #}
+        <header>
+            <nav id="nav">
+                <div class="logo">
+                    <a href="/">
+                        <img src="../static/logo_02.png" alt="logo"/>
+                    </a>
                 </div>
-                <div class="end_exhi">
-                    <ul class="close-exhi-inner endSoon_list bxslider">
-                        {% for exhi in exhibition %}
-
-                            {% if loop.index <= 40 %}
-                                <li  class="close-exhi-card" >
-                                    <a href="/exhibition/{{  exhi.id }}">
-                                        <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap" />
-                                    </a>
-                                </li>
-                            {% endif %}
-
-                        {% endfor %}
+                <div class="login-box">
+                    <ul class="login-btn-form login-btn">
+                        <a href="/login" class="visitor">
+                            <li>
+                                <button class="before-login-btn">로그인</button>
+                            </li>
+                        </a>
+                        <a href="/register" class="visitor">
+                            <li>
+                                <button class="before-login-btn">회원가입</button>
+                            </li>
+                        </a>
+                    </ul>
+                    <ul class="login-btn-form login-btn-active">
+                        <li class="customer" id="customer_name">님, 환영합니다!</li>
+                        <li class="customer">
+                            <button class="logout-btn" onclick="logout()">로그아웃</button>
+                        </li>
                     </ul>
                 </div>
-            </div>
-        </section>
-      {# 검색 input - 시작 #}
-          <section class="all_wrap">
-              <form>
-            <input type="text"  id="value"  onkeyup="filter()"   placeholder="전시회명을 검색해주세요"  />
-            </form> 
-       {# 검색 input 끝 #} 
-            
-       {# 전체 전시 시작 #}
-         <div class="content_area">
-              <div id="card-box">
-            {% for exhi in exhibition %}
-            <div class="card search-card" id="{{ exhi.title }}">
-              <a href="/exhibition/{{ exhi.id }}">
-                <img  class="card-img-top"  src="{{ exhi.img_url }}" alt="Card image cap"  />
-              </a>
-            </div>
-            {% endfor %}
-          </div>
-         </div>
-        {# 전체 전시 끝 #}
-          </section>
+            </nav>
+        </header>
+        {# nav 메뉴 끝 #}
+        {# 종료임박 전시 card carousel - start #}
+        <main >
+            {#          <div id="close-exhi">#}
+            {#           #}
+            {#            <ul class="close-exhi-inner">#}
+            {#              {% for exhi in exhibition %} {% if loop.index <= 33 %}#}
+            {#              <li class="close-exhi-card card" id="{{ exhi.period[-8:] }}">#}
+            {#                <a href="/exhibition/{{  exhi.id }}">#}
+            {#                  <img#}
+            {#                    class="card-img-top"#}
+            {#                    src="{{ exhi.img_url }}"#}
+            {#                    alt="Card imgae cap"#}
+            {#                  />#}
+            {#                </a>#}
+            {#              </li>#}
+            {#              {% endif %} {% endfor %}#}
+            {#            </ul>#}
+            {#          </div>#}
+            {# 종료임박 전시 card carousel - end #}
+            {# 검색 input - start #}
+            <section class="endSoon_wrap">
+                <div id="close-exhi" class="content_area endSoon">
+                    <div class="end_cate">
+                        <h2>HURRY<br>UP!</h2>
+                    </div>
+                    <div class="end_exhi">
+                        <ul class="close-exhi-inner endSoon_list bxslider">
+                            {% for exhi in exhibition %}
+
+                                {% if loop.index <= 40 %}
+                                    <li class="close-exhi-card">
+                                        <a href="/exhibition/{{  exhi.id }}">
+                                            <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card imgae cap"/>
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section class="all_wrap">
+                <form>
+                    <input type="text" id="value" onkeyup="filter()" placeholder="전시회명을 검색해주세요"/>
+                </form>
+                {# 검색 input - end #}
+                {# 전체 전시 - start #}
+                <div class="content_area">
+                    <div id="card-box">
+                        {% for exhi in exhibition %}
+                            <div class="card search-card" id="{{ exhi.title }}">
+                                <a href="/exhibition/{{ exhi.id }}">
+                                    <img class="card-img-top" src="{{ exhi.img_url }}" alt="Card image cap"/>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
         </main>
+        {# footer - top 버튼 시작 #}
+        <footer>
+            <a href="#" class="btn-top">
+                <i class="fas fa-arrow-up"></i>
+            </a>
+        </footer>
+        {# footer - top 버튼 끝 #}
+        {# 전체 전시 - end #}
 
-      {# footer - top 버튼 시작 #}
-      <footer>
-        <a href="#" class="btn-top">
-          <i class="fas fa-arrow-up"></i>
-        </a>
-      </footer>
-      {# footer - top 버튼 끝 #} 
-
-  {# 전체 전시 - end #}
-    
-    {#  로그인시 - 리뷰 작성 가능하게 해주는 코드 파일 #}
-    <script type="text/javascript" src="../static/exhibition.js"></script>
-  </body>
+        <script type="text/javascript" src="../static/exhibition.js"></script>
+    </body>
 </html>
