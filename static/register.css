@@ -1,9 +1,4 @@
-/* html,
-body {
-  margin: 0px;
-  height: 100%;
-  width: 100vw;
-} */
+/* 회원가입 페이지 */
 
 main {
   height: 100vh;
@@ -97,6 +92,7 @@ main {
   padding: 0;
 }
 
+/* 회원가입 버튼 */
 .register-button {
   font-family: "KOTRA_GOTHIC";
   border: none;
