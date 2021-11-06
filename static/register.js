@@ -2,7 +2,7 @@ let pwchk;
 let pwchkResult;
 let userpwLength;
 
-// 비밀번호 길이 설정
+// 비밀번호 길이 설정 
 
 $("#userpw").focusout(function () {
   if ($("#userpw").val().length < 4) {
