@@ -35,15 +35,12 @@ def register():
     return render_template("register.html")
 
 
-
-
 ## 상세페이지 생성 및 리뷰 불러오기
 @app.route('/exhibition/<keyword>')
 def detail(keyword):
     contents = list(db.exhibition.find({}, {'_id': False}))
     reviews = list(db.review.find({}, {'_id': False}).sort('review_time', -1))
     return render_template("exhibition_view.html", contents=contents, word=keyword, reviews=reviews)
-
 
 
 # 회원가입 API
@@ -116,6 +113,7 @@ def api_valid():
 # 댓글 db 불러오기
 @app.route('/api/delete2', methods=['GET'])
 def api_review():
+    user = db.users.find_one({'name': 'bobby'})
     reviewinfo = list(db.review.find({}, {'_id': 0}))
     return jsonify(reviewinfo)
 
@@ -142,6 +140,7 @@ def write_review():
     id_receive = request.form['review_id']
     like_receive = 0
     random_id_receive = request.form['random_id']
+    review_time_receive = request.form['review_time']
     doc = {
         'review_exhibition': exhibition_receive,
         'review_grade': grade_receive,
@@ -149,7 +148,8 @@ def write_review():
         'review_like': like_receive,
         'review_date': date_receive,
         'review_id': id_receive,
-        'review_random_id': random_id_receive
+        'review_random_id': random_id_receive,
+        'review_time' : review_time_receive
     }
 
     db.review.insert_one(doc)
@@ -183,6 +183,7 @@ def make_like():
 
     return jsonify({'msg': current_like})
 
+# 리뷰 삭제하기
 @app.route('/api/delete', methods=['POST'])
 def delete_reviews():
     deleteKey = request.form['deleteKey']
@@ -190,7 +191,7 @@ def delete_reviews():
     db.review.delete_one({'review_random_id': deleteKey})
     return jsonify({'result': 'success', 'msg': '삭제되었습니다.'})
 
-# 삭제 기능 구현을 위해 적었던 수스코드입니다 
+# 삭제 기능 구현을 위해 적었던 소스코드입니다
 # 리뷰 삭제하기 - 1
 #@app.route('/api/delete', methods=['POST'])
 #def delete_reviews():
