@@ -13,7 +13,6 @@ $("#userpw").focusout(function () {
     userpwLength = false;
   } else {
     userpwLength = true;
-
     $("#help-pw")
       .text("비밀번호 확인란을 입력해주세요^^")
       .removeClass("is-danger")
@@ -111,7 +110,6 @@ function is_nickname(asValue) {
 
 $("#userid").focusout(function () {
   let username = $("#userid").val();
-  console.log(username);
   if (username == "") {
     $("#help-id")
       .text("아이디를 입력해주세요.")
