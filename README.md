@@ -60,4 +60,5 @@
 ***
 ## 회고록
 
-서민지: https://github.com/ireneeming/sparta99-4/blob/main/README.md
+서민지: [Github](https://github.com/ireneeming/sparta99-4/blob/main/README.md)
+이건희: [Velog](https://velog.io/@isthis/WIL-%ED%95%AD%ED%95%B4-1%EC%A3%BC%EC%B0%A8-1%EC%A3%BC%EA%B0%84%EC%9D%98-%ED%9A%8C%EA%B3%A0)
