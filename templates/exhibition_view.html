@@ -1,296 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Webpage Title -->
-    <title>전시 상페페이지</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8"/>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-
-    <!-- Cookie -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-    <!-- Bootstrap CSS -->
-
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous"/>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <head>
+      {% include '/common/head.html' %}
 
     <!--------------CUSTOM CSS---------------->
-    <link rel="stylesheet" href="../static/style.css"/>
+    <link rel="stylesheet" href="../static/style.css" />
 
-
-    <link rel="stylesheet" href="{{ url_for('static',filename='exhibition_view.css') }}"/>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='exhibition_view.css') }}"
+    />
     <script type="text/javascript" src="../static/exhibition.js"></script>
     <script>
-        $(document).ready(function () {
-        })
+      $(document).ready(function () {
+      })
 
-        //상단 메뉴 고정
-        $(window).scroll(function () {
-            if ($(window).scrollTop() > 50) {
-                $('nav, .btn-top').addClass('active')
-            } else {
-                $('nav, .btn-top').removeClass('active')
-            }
-        });
-        {#   현재 날짜 구하기     #}
+      //상단 메뉴 고정
+      $(window).scroll(function () {
+          if ($(window).scrollTop() > 50) {
+              $('nav, .btn-top').addClass('active')
+          } else {
+              $('nav, .btn-top').removeClass('active')
+          }
+      });
+      {#   현재 날짜 구하기     #}
 
-        function getTime() {
-            let d = new Date();
+      function getTime() {
+          let d = new Date();
 
-            let s =
-                leadingZeros(d.getFullYear(), 4) + '-' +
-                leadingZeros(d.getMonth() + 1, 2) + '-' +
-                leadingZeros(d.getDate(), 2);
+          let s =
+              leadingZeros(d.getFullYear(), 4) + '-' +
+              leadingZeros(d.getMonth() + 1, 2) + '-' +
+              leadingZeros(d.getDate(), 2);
 
-            return s;
-        }
+          return s;
+      }
 
-        function leadingZeros(n, digits) {
-            let zero = '';
-            n = n.toString();
+      function leadingZeros(n, digits) {
+          let zero = '';
+          n = n.toString();
 
-            if (n.length < digits) {
-                for (i = 0; i < digits - n.length; i++)
-                    zero += '0';
-            }
-            return zero + n;
-        }
+          if (n.length < digits) {
+              for (i = 0; i < digits - n.length; i++)
+                  zero += '0';
+          }
+          return zero + n;
+      }
 
-        // 리뷰 작성하기
-        function makeReview() {
-            //토큰 내 유저id 가져오기
-            $.ajax({
-                type: "GET",
-                url: "/api/user",
-                data: {},
-                success: function (response) {
-                    if (response["result"] == "success") {
-                        // 리뷰db에 랜덤 값 부여
-                        let randomId = Math.random()
-                        // 리뷰db에 유저 id 부여
-                        let username = response["user_id"]
-                        let review_date = getTime()
-                        let review_time = new Date()
-                        let grade = parseInt($('#grade').val())
-                        let comment = $('#comment').val()
-                        let like = $('#like').val()
-                        //db에 데이터 전송
-                        $.ajax({
-                            type: "POST",
-                            url: "/api/review",
-                            data: {
-                                review_exhibition_give: {{ word }},
-                                review_grade_give: grade,
-                                review_comment_give: comment,
-                                review_like_give: like,
-                                review_date_give: review_date,
-                                review_id: username,
-                                review_time: review_time,
-                                random_id: randomId,
-                            },
-                            success: function (response) {
-                                alert(response["msg"]);
-                                window.location.href = `/exhibition/{{ word }}`;
-                            }
-                        })
-                    } else {
-                        alert('nooooooo')
-                    }
-                }
-            })
-        }
+      // 리뷰 작성하기
+      function makeReview() {
+          //토큰 내 유저id 가져오기
+          $.ajax({
+              type: "GET",
+              url: "/api/user",
+              data: {},
+              success: function (response) {
+                  if (response["result"] == "success") {
+                      // 리뷰db에 랜덤 값 부여
+                      let randomId = Math.random()
+                      // 리뷰db에 유저 id 부여
+                      let username = response["user_id"]
+                      let review_date = getTime()
+                      let review_time = new Date()
+                      let grade = parseInt($('#grade').val())
+                      let comment = $('#comment').val()
+                      let like = $('#like').val()
+                      //db에 데이터 전송
+                      $.ajax({
+                          type: "POST",
+                          url: "/api/review",
+                          data: {
+                              review_exhibition_give: {{ word }},
+                              review_grade_give: grade,
+                              review_comment_give: comment,
+                              review_like_give: like,
+                              review_date_give: review_date,
+                              review_id: username,
+                              review_time: review_time,
+                              random_id: randomId,
+                          },
+                          success: function (response) {
+                              alert(response["msg"]);
+                              window.location.href = `/exhibition/{{ word }}`;
+                          }
+                      })
+                  } else {
+                      alert('nooooooo')
+                  }
+              }
+          })
+      }
 
-        // 리뷰 삭제
-        // 삭제 버튼 클릭 시 해당 리뷰의 랜덤지정값 받아옴
-        // 토큰 내 유저 id와 선택한 리뷰 내 유저 id가  같으면 랜덤지정값(reviewRandomId)이 포함된 리뷰 삭제
+      // 리뷰 삭제 //
+      // 삭제 버튼 클릭 시 해당 리뷰의 랜덤지정값 받아옴
+      // 토큰 내 유저 id와 선택한 리뷰 내 유저 id가  같으면 랜덤지정값(reviewRandomId)이 포함된 리뷰 삭제
 
-        function deleteReview(reviewRandomId) {
-            console.log(reviewRandomId)
-            let userId
-            let review_id
-            //토큰 내 유저 id정보 불러오기
-            $.ajax({
-                type: "GET",
-                url: '/api/user',
-                data: {},
-                success: function (response) {
-                    userId = response['user_id'] //토큰 내 유저 id 변수
-                    console.log(userId)
-                }
-            })
-            //리뷰 db 가져오기
-            $.ajax({
-                type: "GET",
-                url: '/api/delete2',
-                data: {},
-                success: function (response) {
-                    //선택한 리뷰 골라낸 후 유저 id 가져오기
-                    for (i = 0; i < response.length; i++) {
-                        let randomIdKey = response[i]['review_random_id'] //i번째 리뷰의 랜덤값
-                        if (randomIdKey == reviewRandomId) {
-                            review_id = response[i]['review_id'] //선택한 리뷰의 유저id값
-                            console.log(review_id)
-                        }
-                    }
-                    console.log(review_id, userId)
-                    // 선택한 리뷰 삭제하기
-                    if (userId == review_id) {
-                        $.ajax({
-                            type: "POST",
-                            url: '/api/delete',
-                            data: {
-                                deleteKey: reviewRandomId
-                            },
-                            success: function (response) {
-                                alert(response["msg"])
-                                window.location.reload()
-                            }
-                        })
+      function deleteReview(reviewRandomId) {
+          console.log(reviewRandomId);
+          let userId;
+          let reviewId;
+          //토큰 내 유저 id정보 불러오기
+          $.ajax({
+              type: "GET",
+              url: '/api/user',
+              data: {},
+              success: function (response) {
+                  userId = response['user_id'];
+                  console.log(userId);
+              }
+          });
+          //리뷰 db 가져오기
+          $.ajax({
+              type: "GET",
+              url: '/api/delete2',
+              data: {},
+              success: function (response) {
+                  //선택한 리뷰 골라낸 후 유저 id 가져오기
+                  for (i = 0; i < response.length; i++) {
+                      let randomIdKey = response[i]['review_random_id']; //i번째 리뷰의 랜덤값
+                      if (randomIdKey == reviewRandomId) {
+                          reviewId = response[i]['review_id'];
+                          console.log(reviewId);
+                      }
+                      ;
+                  }
+                  ;
+                  console.log(reviewId, userId);
+                  // 선택한 리뷰 삭제하기
+                  if (userId == reviewId) {
+                      $.ajax({
+                          type: "POST",
+                          url: '/api/delete',
+                          data: {
+                              deleteKey: reviewRandomId
+                          },
+                          success: function (response) {
+                              alert(response["msg"]);
+                              window.location.reload();
+                          }
+                      })
 
-                    } else alert("본인이 작성한 리뷰만 삭제할 수 있어요!!")
-                }
-            })
-            console.log(review_id, userId)
-        }
+                  } else alert("본인이 작성한 리뷰만 삭제할 수 있어요!!");
+              }
+          });
+console.log('userId:',userId)
+          let arr = [1, 1, 1, userId]; // 변수 선언 및 배열 참조 할당
+
+          //배열 값 수정 전
+          console.log('배열 값 변경 전 배열:',arr);
+          console.log('배열 값 변경 전 더한 값: ',arr[0] + arr[1] + arr[2])
+          //배열 값 수정
+          arr[0] = 2;
+          arr[1] = 2;
+          arr[2] = 2;
+          //배열 값 수정 후
+          console.log('배열 값 변경 후 배열',arr);
+          console.log('배열 값 변경 후 더한 값: ',arr[0] + arr[1] + arr[2])
+
+          //객체의 값은 계속 업데이트 된다? 아닌듯 로그의 객체 값만 업데이트인듯
+          //이벤트 큐에 있는 이벤트 핸들러를 실행하기 전 값 기준으로 업데이트인듯
+
+      };
+
+      function f(o) {
+          a = '재할당변수' // a 변수 값 재할당
+          o.message = "수정객체"; // 기존에 참조한 객체 수정
+          o = {message: "할당객체"}; //새로운 객체의 참조 할당 -> 기존의 참조된 객체는 사라지나?
+          console.log(a, o.message);
+      }
+      let a = '초기변수' // a 변수 선언 및 값 할당
+      let o = {message: "초기객체"}; // 변수 선언, 객체의 참조 할당
+      console.log(a, o.message);
+      f(o);
+      console.log(a, o.message) // 변수 o 에 참조된 값이 함수 스코프 내에서 할당되기 전 값으로 돌아가는 것?
     </script>
-</head>
-<body>
-
-<header>
-    <nav>
+  </head>
+  <body>
+    <header>
+      <nav>
         <div class="logo">
-            <a href="/">
-                <img src="../static/logo_02.png" alt="logo"/>
-            </a>
+          <a href="/">
+            <img src="../static/logo_02.png" alt="logo" />
+          </a>
         </div>
         <div class="login-box">
-            <ul class="login-btn-form login-btn">
-                <a href="/login" class="visitor">
-                    <li>
-                        <button class="before-login-btn">로그인</button>
-                    </li>
-                </a>
-                <a href="/register" class="visitor">
-                    <li>
-                        <button class="before-login-btn">회원가입</button>
-                    </li>
-                </a>
-            </ul>
-            <ul class="login-btn-form login-btn-active">
-                <li class="customer" id="customer_name">님, 환영합니다!</li>
-                <li class="customer">
-                    <button class="logout-btn" onclick="logout()">로그아웃</button>
-                </li>
-
-            </ul>
+          <ul class="login-btn-form login-btn">
+            <a href="/login" class="visitor">
+              <li>
+                <button class="before-login-btn">로그인</button>
+              </li>
+            </a>
+            <a href="/register" class="visitor">
+              <li>
+                <button class="before-login-btn">회원가입</button>
+              </li>
+            </a>
+          </ul>
+          <ul class="login-btn-form login-btn-active">
+            <li class="customer" id="customer_name">님, 환영합니다!</li>
+            <li class="customer">
+              <button class="logout-btn" onclick="logout()">로그아웃</button>
+            </li>
+          </ul>
         </div>
-    </nav>
-</header>
-{# nav 메뉴 끝 #}
-<main>
-    {# 상세 section 시작 #}
-    <section>
-        {#  전시 상세 레이어 시작 #}
+      </nav>
+    </header>
+    {# nav 메뉴 끝 #}
+    <main>
+      {# 상세 section 시작 #}
+      <section>
+        {# 전시 상세 레이어 시작 #}
         <article class="exhibition">
-            <section class="exhibition-box" id="card-box">
-                {% for content in contents %}
-                    {% if content.id == word %}
-                        <ul class="exhibition-info">
-                            <li class="thumnail"><img src="{{ content.img_url }}"/></li>
-                            <li style="padding-left:30px;width:685px;">
-                                <h1>{{ content.title }}</h1>
-                                <p>날짜 : <span>{{ content.period }}</span></p>
-                                <p>장소 : <span>{{ content.place }}</span></p>
-                                <p>가격 : <span>{{ content.price }}</span> 원</p>
+          <section class="exhibition-box" id="card-box">
+            {% for content in contents %} {% if content.id == word %}
+            <ul class="exhibition-info">
+              <li class="thumnail"><img src="{{ content.img_url }}" /></li>
+              <li style="padding-left: 30px; width: 685px">
+                <h1>{{ content.title }}</h1>
+                <p>날짜 : <span>{{ content.period }}</span></p>
+                <p>장소 : <span>{{ content.place }}</span></p>
+                <p>가격 : <span>{{ content.price }}</span> 원</p>
 
-                                <a href="{{ content.url }}" style="display:block; text-align:center; ">
-                                    <button class="book-btn">예매하러가기</button>
-                                </a>
-                            </li>
-                        </ul>
-                    {% endif %}
-                {% endfor %}
-            </section>
+                <a
+                  href="{{ content.url }}"
+                  style="display: block; text-align: center"
+                >
+                  <button class="book-btn">예매하러가기</button>
+                </a>
+              </li>
+            </ul>
+            {% endif %} {% endfor %}
+          </section>
         </article>
-        {#  전시 상세 레이어 끝 #}
-    </section>
-    <section class="review-box">
+        {# 전시 상세 레이어 끝 #}
+      </section>
+      <section class="review-box">
         <div class="review-box">
-            <div class="review_box_wrap">
-                <button class="upload-btn" onclick="dologin()">리뷰쓰기</button>
-                <div class="reviewWrap" id="reviewform"></div>
+          <div class="review_box_wrap">
+            <button class="upload-btn" onclick="dologin()">리뷰쓰기</button>
+            <div class="reviewWrap" id="reviewform"></div>
 
-                <div class="review-average">
-                    <p>평점 : <span class="average_grade">
-                            {% set score = [] %}
-                        {% for review in reviews %}
-                            {% if review.review_exhibition == word %}
-                                {% if score.append(review.review_grade) %}{% endif %}
-                            {% endif %}
-                        {% endfor %}
-                        {% set num = score | count-1 %}
-                        {% if  score | count == 0 %}
-                            {{ (score|count) | round(2) }}
-                        {% else %}
-                            {% set num  = score | count %}
-                            {{ (score | sum /  num) |round(2) }}
-                        {% endif %}
-                        / 5</span>
-                    </p>
-                </div>
+            <div class="review-average">
+              <p>
+                평점 :
+                <span class="average_grade">
+                  {% set score = [] %} {% for review in reviews %} {% if
+                  review.review_exhibition == word %} {% if
+                  score.append(review.review_grade) %}{% endif %} {% endif %} {%
+                  endfor %} {% set num = score | count-1 %} {% if score | count
+                  == 0 %} {{ (score|count) | round(2) }} {% else %} {% set num =
+                  score | count %} {{ (score | sum / num) |round(2) }} {% endif
+                  %} / 5</span
+                >
+              </p>
             </div>
-            {% for review in reviews %}
-                {% if review.review_exhibition == word %}
-                    <div class="review-board" id="{{ review._id }}">
-                        <ul>
-                            <li>
-                                <ul class="review-wrap">
-                                    <li class="grade">
-                                        <span><b
-                                                style="font-size:25px; ">{{ review.review_grade }} </b> / 5</span><span>{{ review.review_date }} <br>{{ review.review_id }}님 </span>
-                                    </li>
-                                    <li class="comment">
-                                        <p class="text">{{ review.review_comment }}</p>
-                                    </li>
-                                    <li class="like">
-                                        <span><button class="likebtn" onclick="likeup()">❤</button></span><span><button
-                                            class="delbtn"
-                                            onclick="deleteReview('{{ review.review_random_id }}')">삭제</button></span>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                {% endif %}
-            {% endfor %}
+          </div>
+          {% for review in reviews %} {% if review.review_exhibition == word %}
+          <div class="review-board" id="{{ review._id }}">
+            <ul>
+              <li>
+                <ul class="review-wrap">
+                  <li class="grade">
+                    <span
+                      ><b style="font-size: 25px">{{ review.review_grade }} </b>
+                      / 5</span
+                    ><span
+                      >{{ review.review_date }} <br />{{ review.review_id }}님
+                    </span>
+                  </li>
+                  <li class="comment">
+                    <p class="text">{{ review.review_comment }}</p>
+                  </li>
+                  <li class="like">
+                    <span
+                      ><button class="likebtn" onclick="likeup()">
+                        ❤
+                      </button></span
+                    ><span
+                      ><button
+                        class="delbtn"
+                        onclick="deleteReview('{{ review.review_random_id }}')"
+                      >
+                        삭제
+                      </button></span
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          {% endif %} {% endfor %}
         </div>
-    </section>
-</main>
-{# footer - top 버튼 끝 #}
-<footer>
-    <a href="#" class="btn-top">
+      </section>
+    </main>
+    {# footer - top 버튼 끝 #}
+    <footer>
+      <a href="#" class="btn-top">
         <i class="fas fa-arrow-up"></i>
-    </a>
-</footer>
-{# footer - top 버튼  끝  #}
-
-
-</body>
+      </a>
+    </footer>
+    {# footer - top 버튼 끝 #}
+  </body>
 </html>
